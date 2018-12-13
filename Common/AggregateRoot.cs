@@ -8,22 +8,25 @@ namespace Common
     {
         public Guid Id { get; }
         
-        private readonly List<DomainEvent> _domainEvents = new List<DomainEvent>();
-        public IReadOnlyList<DomainEvent> DomainEvents => _domainEvents;
+        private readonly List<IDomainEvent> _domainEvents = new List<IDomainEvent>();
+        public IReadOnlyList<IDomainEvent> DomainEvents => _domainEvents;
 
         protected AggregateRoot(Guid id)
         {
             Id = id;
         }
 
-        public static TK CreateNew<TK>() where TK : AggregateRoot
+        public static T CreateNew<T>() where T : AggregateRoot
+            => (T) CreateNew(typeof(T));
+
+        public static AggregateRoot CreateNew(Type type)
         {
-            var newAggregate = (TK)Activator.CreateInstance(typeof(TK), new object[] { NewGuid() });
-            newAggregate.Add(new AggregateRootCreated(newAggregate.Id, typeof(TK)));
+            var newAggregate = (AggregateRoot)Activator.CreateInstance(type, NewGuid());
+            newAggregate.Add(new AggregateRootCreated(newAggregate.Id, type));
             return newAggregate;
         }
 
-        protected DomainEvent Add(DomainEvent newDomainEvent)
+        protected IDomainEvent Add(IDomainEvent newDomainEvent)
         {
             _domainEvents.Add(newDomainEvent);
             return newDomainEvent;
