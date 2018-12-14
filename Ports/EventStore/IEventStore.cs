@@ -7,6 +7,6 @@ namespace Ports.EventStore
     {
         void Append(IDomainEvent domainEvent);
 
-        IEnumerable<IDomainEvent> LoadAllStartingFrom<T>(int position = 0) where T: AggregateRoot;
+        IEnumerable<IDomainEvent> LoadAllForAggregateStartingFrom<T>(int position = 0) where T: AggregateRoot;
     }
 }

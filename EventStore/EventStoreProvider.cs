@@ -25,7 +25,7 @@ namespace EventStore
                 newEvent).Wait();
         }
 
-        public IEnumerable<IDomainEvent> LoadAllStartingFrom<T>(int position = 0) where T : AggregateRoot
+        public IEnumerable<IDomainEvent> LoadAllForAggregateStartingFrom<T>(int position = 0) where T : AggregateRoot
         {
             for (var slice = KeptConnection.ReadFirstStreamEventsSliceFor<T>();
                 ;

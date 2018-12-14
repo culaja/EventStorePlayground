@@ -14,7 +14,7 @@ namespace InMemory
             _allDomainEvents.Add(domainEvent);
         }
 
-        public IEnumerable<IDomainEvent> LoadAllStartingFrom<T>(int position) where T : AggregateRoot
+        public IEnumerable<IDomainEvent> LoadAllForAggregateStartingFrom<T>(int position) where T : AggregateRoot
         {
             return _allDomainEvents
                 .Where(domainEvent => domainEvent.AggregateRootType == typeof(T)).ToList()
