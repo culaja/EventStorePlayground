@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Common;
 using Ports;
 
@@ -14,9 +14,11 @@ namespace InMemory
             _allDomainEvents.Add(domainEvent);
         }
 
-        public IEnumerable<IDomainEvent> LoadAllStartingFrom(int position)
+        public IEnumerable<IDomainEvent> LoadAllStartingFrom<T>(int position) where T : AggregateRoot
         {
-            return _allDomainEvents.GetRange(position, _allDomainEvents.Count - position);
+            return _allDomainEvents
+                .Where(domainEvent => domainEvent.AggregateRootType == typeof(T)).ToList()
+                .GetRange(position, _allDomainEvents.Count - position);
         }
     }
 }

@@ -7,6 +7,6 @@ namespace Ports
     {
         void Append(IDomainEvent domainEvent);
 
-        IEnumerable<IDomainEvent> LoadAllStartingFrom(int position = 0);
+        IEnumerable<IDomainEvent> LoadAllStartingFrom<T>(int position = 0) where T: AggregateRoot;
     }
 }

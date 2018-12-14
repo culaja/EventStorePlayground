@@ -21,11 +21,8 @@ namespace Tests
             _eventStore.Append(new AggregateRootCreated(studentId, typeof(Student)));
             _eventStore.Append(new StudentMoved(studentId, Belgrade));
             _eventStore.Append(new StudentHired(studentId));
-            
-            foreach (var domainEvent in _eventStore.LoadAllStartingFrom())
-            {
-                _studentRepository.Borrow(domainEvent.AggregateRootId, s => (Student)domainEvent.ApplyTo(s));
-            }
+
+            _eventStore.ApplyAllTo(_studentRepository);
 
             var student = _studentRepository.Borrow(studentId, s => s);
             
