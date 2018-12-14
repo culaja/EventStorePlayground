@@ -10,7 +10,7 @@ namespace Domain
         
         private readonly string _name;
 
-        private City(string name)
+        public City(string name)
         {
             _name = name;
         }

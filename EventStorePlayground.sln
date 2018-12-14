@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Adapters", "Adapters", "{DD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InMemory", "InMemory\InMemory.csproj", "{77542D59-B757-4601-B21D-6E97DB306568}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventStore", "EventStore\EventStore.csproj", "{3086784E-6A46-4E30-A265-45B940A3E243}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,8 +40,13 @@ Global
 		{77542D59-B757-4601-B21D-6E97DB306568}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77542D59-B757-4601-B21D-6E97DB306568}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77542D59-B757-4601-B21D-6E97DB306568}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3086784E-6A46-4E30-A265-45B940A3E243}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3086784E-6A46-4E30-A265-45B940A3E243}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3086784E-6A46-4E30-A265-45B940A3E243}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3086784E-6A46-4E30-A265-45B940A3E243}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{77542D59-B757-4601-B21D-6E97DB306568} = {DD8DC3BF-CDFA-4CF7-AC84-E42947C4AB44}
+		{3086784E-6A46-4E30-A265-45B940A3E243} = {DD8DC3BF-CDFA-4CF7-AC84-E42947C4AB44}
 	EndGlobalSection
 EndGlobal

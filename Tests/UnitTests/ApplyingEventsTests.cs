@@ -1,13 +1,13 @@
+using System;
 using Common;
 using Domain;
 using FluentAssertions;
 using InMemory;
 using Ports;
+using Ports.EventStore;
 using Xunit;
-using static System.Guid;
-using static Domain.City;
 
-namespace Tests
+namespace Tests.UnitTests
 {
     public sealed class ApplyingEventsTests
     {
@@ -17,9 +17,9 @@ namespace Tests
         [Fact]
         public void _1()
         {
-            var studentId = NewGuid();
+            var studentId = Guid.NewGuid();
             _eventStore.Append(new AggregateRootCreated(studentId, typeof(Student)));
-            _eventStore.Append(new StudentMoved(studentId, Belgrade));
+            _eventStore.Append(new StudentMoved(studentId, City.Belgrade));
             _eventStore.Append(new StudentHired(studentId));
 
             _eventStore.ApplyAllTo(_studentRepository);
@@ -27,7 +27,7 @@ namespace Tests
             var student = _studentRepository.Borrow(studentId, s => s);
             
             student.Id.Should().Be(studentId);
-            student.MaybeCity.Should().Be(Belgrade);
+            student.MaybeCity.Should().Be(City.Belgrade);
             student.IsHired.Should().BeTrue();
         }
     }

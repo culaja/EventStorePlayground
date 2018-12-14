@@ -1,5 +1,6 @@
 using System.Linq;
 using Common;
+using Ports.EventStore;
 
 namespace Ports
 {

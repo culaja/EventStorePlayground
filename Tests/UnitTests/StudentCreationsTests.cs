@@ -2,14 +2,12 @@
 using Domain;
 using FluentAssertions;
 using Xunit;
-using static Common.AggregateRoot;
-using static Domain.City;
 
-namespace Tests
+namespace Tests.UnitTests
 {
     public sealed class StudentCreationsTests
     {
-        private readonly Student _newStudent = CreateNew<Student>();
+        private readonly Student _newStudent = AggregateRoot.CreateNew<Student>();
         
         [Fact]
         public void _1() => _newStudent.DomainEvents.Should().Contain(new AggregateRootCreated(
@@ -18,13 +16,13 @@ namespace Tests
 
         [Fact]
         public void _2() => _newStudent
-            .MoveTo(NoviSad)
-            .DomainEvents.Should().Contain(new StudentMoved(_newStudent.Id, NoviSad));
+            .MoveTo(City.NoviSad)
+            .DomainEvents.Should().Contain(new StudentMoved(_newStudent.Id, City.NoviSad));
 
         [Fact]
-        public void _3() => new StudentMoved(_newStudent.Id, NoviSad)
+        public void _3() => new StudentMoved(_newStudent.Id, City.NoviSad)
             .ApplyTo(_newStudent)
-            .MaybeCity.Should().Be(NoviSad);
+            .MaybeCity.Should().Be(City.NoviSad);
 
         [Fact]
         public void _4() => _newStudent

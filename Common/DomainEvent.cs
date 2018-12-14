@@ -15,7 +15,7 @@ namespace Common
             AggregateRootId = aggregateRootId;
         }
 
-        public K ApplyTo<K>(K aggregateRoot) where K : AggregateRoot
+        public TK ApplyTo<TK>(TK aggregateRoot) where TK : AggregateRoot
         {
             var applyMethodInfo = AggregateRootType.GetMethod("Apply", new[] { GetType() });
 

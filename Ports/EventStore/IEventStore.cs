@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Common;
 
-namespace Ports
+namespace Ports.EventStore
 {
     public interface IEventStore
     {
