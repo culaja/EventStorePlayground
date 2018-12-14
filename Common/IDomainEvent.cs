@@ -7,5 +7,7 @@ namespace Common
         Guid AggregateRootId { get; }
 
         Type AggregateRootType { get; }
+
+        AggregateRoot ApplyTo(AggregateRoot aggregateRoot);
     }
 }

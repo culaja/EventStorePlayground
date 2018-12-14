@@ -17,6 +17,11 @@ namespace Common
 
         public T ApplyTo(T aggregateRoot)
         {
+            return (T)ApplyTo((AggregateRoot)aggregateRoot);
+        }
+
+        public AggregateRoot ApplyTo(AggregateRoot aggregateRoot)
+        {
             var applyMethodInfo = AggregateRootType.GetMethod("Apply", new[] { GetType() });
 
             if (applyMethodInfo == null)

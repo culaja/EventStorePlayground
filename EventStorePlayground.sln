@@ -6,6 +6,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{1E314140-B686-416A-B456-7DE278910DB9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ports", "Ports\Ports.csproj", "{D61DEABA-0D3C-434C-9EC1-5E56B860CE10}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Adapters", "Adapters", "{DD8DC3BF-CDFA-4CF7-AC84-E42947C4AB44}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InMemory", "InMemory\InMemory.csproj", "{77542D59-B757-4601-B21D-6E97DB306568}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +30,16 @@ Global
 		{1E314140-B686-416A-B456-7DE278910DB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E314140-B686-416A-B456-7DE278910DB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E314140-B686-416A-B456-7DE278910DB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D61DEABA-0D3C-434C-9EC1-5E56B860CE10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D61DEABA-0D3C-434C-9EC1-5E56B860CE10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D61DEABA-0D3C-434C-9EC1-5E56B860CE10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D61DEABA-0D3C-434C-9EC1-5E56B860CE10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77542D59-B757-4601-B21D-6E97DB306568}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77542D59-B757-4601-B21D-6E97DB306568}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77542D59-B757-4601-B21D-6E97DB306568}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77542D59-B757-4601-B21D-6E97DB306568}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{77542D59-B757-4601-B21D-6E97DB306568} = {DD8DC3BF-CDFA-4CF7-AC84-E42947C4AB44}
 	EndGlobalSection
 EndGlobal

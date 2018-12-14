@@ -17,11 +17,14 @@ namespace Common
         }
 
         public static T CreateNew<T>() where T : AggregateRoot
-            => (T) CreateNew(typeof(T));
+            => CreateNewWith<T>(NewGuid());
+        
+        public static T CreateNewWith<T>(Guid guid) where T : AggregateRoot
+            => (T) CreateNew(typeof(T), guid);
 
-        public static AggregateRoot CreateNew(Type type)
+        public static AggregateRoot CreateNew(Type type, Guid guid)
         {
-            var newAggregate = (AggregateRoot)Activator.CreateInstance(type, NewGuid());
+            var newAggregate = (AggregateRoot)Activator.CreateInstance(type, guid);
             newAggregate.Add(new AggregateRootCreated(newAggregate.Id, type));
             return newAggregate;
         }
