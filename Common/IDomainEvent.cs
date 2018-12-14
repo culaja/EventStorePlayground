@@ -8,6 +8,6 @@ namespace Common
 
         Type AggregateRootType { get; }
 
-        AggregateRoot ApplyTo(AggregateRoot aggregateRoot);
+        T ApplyTo<T>(T aggregateRoot) where T : AggregateRoot;
     }
 }

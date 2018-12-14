@@ -14,7 +14,7 @@ namespace Common
         public Guid AggregateRootId { get; }
         public Type AggregateRootType { get; }
         
-        public AggregateRoot ApplyTo(AggregateRoot aggregateRoot) => aggregateRoot;
+        T IDomainEvent.ApplyTo<T>(T aggregateRoot) => aggregateRoot;
 
         protected override IEnumerable<object> GetEqualityComponents()
         {
