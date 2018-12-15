@@ -1,7 +1,6 @@
 ﻿using System;
-using Common;
 
-namespace Ports
+namespace Common
 {
     public interface IRepository<T> where T : AggregateRoot
     {   

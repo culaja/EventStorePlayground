@@ -1,8 +1,7 @@
 using System.Linq;
 using Common;
-using Ports.EventStore;
 
-namespace Ports
+namespace Ports.EventStore
 {
     public static class EventApplier
     {

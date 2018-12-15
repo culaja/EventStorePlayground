@@ -5,7 +5,7 @@ using static Tests.SomeStudentEvents;
 
 namespace Tests.IntegrationTests.EventStore
 {
-    public class SerializingTests
+    public class EventSerializationTests
     {
         [Fact]
         public void Serializing_StudentHired() =>
