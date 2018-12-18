@@ -1,6 +1,4 @@
 using System;
-using Domain;
-using Domain.StudentDomain;
 using Domain.StudentDomain.Events;
 using static System.Guid;
 using static Domain.City;

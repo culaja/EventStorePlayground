@@ -1,5 +1,4 @@
 ﻿using System;
-using Common;
 using Common.Eventing;
 
 namespace Domain.StudentDomain.Events

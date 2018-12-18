@@ -1,5 +1,4 @@
-﻿using System;
-using Common.Commanding;
+﻿using Common.Commanding;
 
 namespace DomainServicesWrapup
 {

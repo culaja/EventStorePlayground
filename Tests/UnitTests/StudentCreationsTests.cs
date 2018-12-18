@@ -5,13 +5,16 @@ using Domain.StudentDomain;
 using Domain.StudentDomain.Events;
 using FluentAssertions;
 using Xunit;
+using static Common.AggregateRoot;
 using static Domain.EmailAddress;
 
 namespace Tests.UnitTests
 {
     public sealed class StudentCreationsTests
     {
-        private readonly Student _newStudent = new Student(Guid.NewGuid(), EmailAddressFrom("culaja@gmail.com"));
+        private readonly Student _newStudent = CreateNewFrom<Student>(
+            Guid.NewGuid(),
+            EmailAddressFrom("culaja@gmail.com"));
         
         [Fact]
         public void _1() => _newStudent.DomainEvents.Should().Contain(new AggregateRootCreated(

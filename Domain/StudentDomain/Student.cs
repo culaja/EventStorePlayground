@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq.Expressions;
 using Common;
 using Domain.StudentDomain.Events;
 
@@ -12,7 +11,7 @@ namespace Domain.StudentDomain
         public bool IsHired { get; private set; } = false;
         
         public Student(Guid id, EmailAddress emailAddress) 
-            : base(id, emailAddress)
+            : base(id)
         {
             EmailAddress = emailAddress;
         }

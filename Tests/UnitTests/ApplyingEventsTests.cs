@@ -5,7 +5,6 @@ using Domain.StudentDomain;
 using Domain.StudentDomain.Events;
 using FluentAssertions;
 using InMemory;
-using Ports;
 using Ports.EventStore;
 using Xunit;
 using static Domain.EmailAddress;
