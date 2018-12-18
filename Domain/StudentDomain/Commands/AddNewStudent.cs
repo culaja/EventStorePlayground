@@ -1,10 +1,10 @@
+using System;
 using Common;
 using Common.Commanding;
-using Domain.StudentDomain.Specifications;
 
 namespace Domain.StudentDomain.Commands
 {
-    public sealed class AddNewStudent : INewAggregateCommand
+    public sealed class AddNewStudent : INewAggregateRootCommand<Student>
     {
         public EmailAddress EmailAddress { get; }
         public Name Name { get; }
@@ -22,21 +22,15 @@ namespace Domain.StudentDomain.Commands
             MaybeCity = maybeCity;
             IsEmployed = isEmployed;
         }
-    }
 
-    public sealed class MoveStudent : ISpecificationBasedAggregateCommand<Student>
-    {
-        public EmailAddress EmailAddress { get; }
-        public City CityToMoveTo { get; }
-
-        public MoveStudent(
-            EmailAddress emailAddress,
-            City cityToMoveTo)
+        public Student CreateNew()
         {
-            EmailAddress = emailAddress;
-            CityToMoveTo = cityToMoveTo;
+            return AggregateRoot.CreateNewFrom<Student>(
+                Guid.NewGuid(),
+                EmailAddress,
+                Name,
+                MaybeCity,
+                IsEmployed);
         }
-
-        public ISpecification<Student> Specification => new StudentByEmailAddressSpecification(EmailAddress);
     }
 }

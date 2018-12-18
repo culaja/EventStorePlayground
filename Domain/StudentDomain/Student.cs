@@ -1,10 +1,13 @@
 ﻿using System;
 using Common;
+using Common.Commanding;
+using Domain.StudentDomain.Commands;
 using Domain.StudentDomain.Events;
 
 namespace Domain.StudentDomain
 {
-    public class Student : AggregateRoot
+    public class Student : AggregateRoot,
+        IExecuteCommand<MoveStudent, Student>
     {
         public EmailAddress EmailAddress { get; }
         public Maybe<City> MaybeCity { get; private set; } = Maybe<City>.None;
@@ -40,6 +43,11 @@ namespace Domain.StudentDomain
         {
             IsHired = true;
             return this;
+        }
+
+        public Student Execute(MoveStudent command)
+        {
+            return MoveTo(command.CityToMoveTo);
         }
     }
 }

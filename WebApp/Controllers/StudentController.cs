@@ -10,7 +10,7 @@ namespace WebApp.Controllers
     {
         [HttpPost]
         [Route(nameof(AddNew))]
-        public void AddNew([FromBody] NewStudentDto newStudentDto) => CommandBus
+        public void AddNew([FromBody] NewStudentDto newStudentDto) => StudentCommandBus
             .Enqueue(new AddNewStudent(
                 newStudentDto.EmailAddress.ToEmailAddress(),
                 newStudentDto.Name.ToName(),
@@ -19,7 +19,7 @@ namespace WebApp.Controllers
 
         [HttpPost]
         [Route(nameof(MoveTo))]
-        public void MoveTo([FromBody] MoveToDto moveToDto) => CommandBus
+        public void MoveTo([FromBody] MoveToDto moveToDto) => StudentCommandBus
             .Enqueue(new MoveStudent(
                 moveToDto.EmailAddress.ToEmailAddress(),
                 moveToDto.City.ToCity()));

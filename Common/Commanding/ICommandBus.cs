@@ -1,8 +1,8 @@
 namespace Common.Commanding
 {
-    public interface ICommandBus
+    public interface ICommandBus<T> where T : AggregateRoot
     {
-        void Enqueue(INewAggregateCommand newAggregateCommand);
-        void Enqueue<T>(ISpecificationBasedAggregateCommand<T> specificationBasedAggregateCommand) where T : AggregateRoot;
+        void Enqueue(INewAggregateRootCommand<T> newAggregateRootCommand);
+        void Enqueue(IAggregateRootCommand<T> aggregateRootCommand);
     }
 }
