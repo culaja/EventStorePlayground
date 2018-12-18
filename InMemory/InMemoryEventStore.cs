@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Common;
+using Common.Eventing;
 using Ports.EventStore;
 
 namespace InMemory

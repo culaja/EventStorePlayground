@@ -1,15 +1,20 @@
 ﻿using System;
+using System.Linq.Expressions;
 using Common;
+using Domain.StudentDomain.Events;
 
-namespace Domain
+namespace Domain.StudentDomain
 {
     public class Student : AggregateRoot
     {
+        public EmailAddress EmailAddress { get; }
         public Maybe<City> MaybeCity { get; private set; } = Maybe<City>.None;
         public bool IsHired { get; private set; } = false;
         
-        public Student(Guid id) : base(id)
+        public Student(Guid id, EmailAddress emailAddress) 
+            : base(id, emailAddress)
         {
+            EmailAddress = emailAddress;
         }
 
         public Student MoveTo(City city)

@@ -6,10 +6,8 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Common\Common.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <PackageReference Include="NullGuard.Fody" Version="1.8.5" />
+      <ProjectReference Include="..\DomainServices\DomainServices.csproj" />
+      <ProjectReference Include="..\Domain\Domain.csproj" />
     </ItemGroup>
 
 </Project>

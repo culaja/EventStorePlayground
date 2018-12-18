@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Common
+namespace Common.Eventing
 {
     public abstract class DomainEvent<T> : ValueObject<DomainEvent<T>>, IDomainEvent
         where T : AggregateRoot

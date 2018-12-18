@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Common.Eventing;
 using static System.Guid;
 
 namespace Common
@@ -10,22 +11,16 @@ namespace Common
         
         private readonly List<IDomainEvent> _domainEvents = new List<IDomainEvent>();
         public IReadOnlyList<IDomainEvent> DomainEvents => _domainEvents;
-
-        protected AggregateRoot(Guid id)
-        {
-            Id = id;
-        }
-
-        public static T CreateNew<T>() where T : AggregateRoot
-            => CreateNewWith<T>(NewGuid());
         
-        public static T CreateNewWith<T>(Guid guid) where T : AggregateRoot
-            => (T) CreateNew(typeof(T), guid);
-
-        public static AggregateRoot CreateNew(Type type, Guid guid)
+        protected AggregateRoot(params object[] aggregateRootParameters)
         {
-            var newAggregate = (AggregateRoot)Activator.CreateInstance(type, guid);
-            newAggregate.Add(new AggregateRootCreated(newAggregate.Id, type));
+            Id = (Guid)aggregateRootParameters[0];
+            Add(new AggregateRootCreated(GetType(), aggregateRootParameters));
+        }
+        
+        public static T CreateNewWith<T>(params object[] aggregateRootParameters) where T : AggregateRoot
+        {
+            var newAggregate = (T)Activator.CreateInstance(typeof(T), aggregateRootParameters);
             return newAggregate;
         }
 

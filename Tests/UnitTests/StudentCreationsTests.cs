@@ -1,18 +1,23 @@
-﻿using Common;
+﻿using System;
+using Common;
 using Domain;
+using Domain.StudentDomain;
+using Domain.StudentDomain.Events;
 using FluentAssertions;
 using Xunit;
+using static Domain.EmailAddress;
 
 namespace Tests.UnitTests
 {
     public sealed class StudentCreationsTests
     {
-        private readonly Student _newStudent = AggregateRoot.CreateNew<Student>();
+        private readonly Student _newStudent = new Student(Guid.NewGuid(), EmailAddressFrom("culaja@gmail.com"));
         
         [Fact]
         public void _1() => _newStudent.DomainEvents.Should().Contain(new AggregateRootCreated(
+            typeof(Student),
             _newStudent.Id,
-            typeof(Student)));
+            EmailAddressFrom("culaja@gmail.com")));
 
         [Fact]
         public void _2() => _newStudent

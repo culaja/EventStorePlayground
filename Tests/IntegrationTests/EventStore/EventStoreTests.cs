@@ -1,6 +1,7 @@
 using System.Linq;
 using Common;
 using Domain;
+using Domain.StudentDomain;
 using EventStore;
 using FluentAssertions;
 using Ports.EventStore;

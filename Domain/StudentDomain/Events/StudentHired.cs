@@ -1,7 +1,8 @@
 ﻿using System;
 using Common;
+using Common.Eventing;
 
-namespace Domain
+namespace Domain.StudentDomain.Events
 {
     public sealed class StudentHired : DomainEvent<Student>
     {

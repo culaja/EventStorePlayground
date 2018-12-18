@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Common;
 
 namespace Domain
@@ -14,6 +15,12 @@ namespace Domain
         {
             _name = name;
         }
+        
+        public static City CityFrom(Maybe<string> maybeName) => maybeName
+            .Ensure(m => m.HasValue, () => throw new ArgumentNullException($"{nameof(City)} can't be empty.", nameof(maybeName)))
+            .Ensure(m => !string.IsNullOrWhiteSpace(m.Value), () => throw new ArgumentNullException($"{nameof(City)} can't be empty.", nameof(maybeName)))
+            .Map(name => new City(name))
+            .Value;
 
         public override string ToString() => _name;
 

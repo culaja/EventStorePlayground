@@ -1,11 +1,14 @@
 using System;
 using Common;
 using Domain;
+using Domain.StudentDomain;
+using Domain.StudentDomain.Events;
 using FluentAssertions;
 using InMemory;
 using Ports;
 using Ports.EventStore;
 using Xunit;
+using static Domain.EmailAddress;
 
 namespace Tests.UnitTests
 {
@@ -18,7 +21,7 @@ namespace Tests.UnitTests
         public void _1()
         {
             var studentId = Guid.NewGuid();
-            _eventStore.Append(new AggregateRootCreated(studentId, typeof(Student)));
+            _eventStore.Append(new AggregateRootCreated(typeof(Student), studentId, EmailAddressFrom("culaja@gmail.com")));
             _eventStore.Append(new StudentMoved(studentId, City.Belgrade));
             _eventStore.Append(new StudentHired(studentId));
 
