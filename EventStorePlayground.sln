@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainServices", "DomainSer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainServicesWrapup", "DomainServicesWrapup\DomainServicesWrapup.csproj", "{DAD252F2-7048-44F3-8653-67B321379149}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessagingInfrastructure", "MessagingInfrastructure\MessagingInfrastructure.csproj", "{D4CE1E08-D997-4D60-8BE7-631245322046}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +64,10 @@ Global
 		{DAD252F2-7048-44F3-8653-67B321379149}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DAD252F2-7048-44F3-8653-67B321379149}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DAD252F2-7048-44F3-8653-67B321379149}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4CE1E08-D997-4D60-8BE7-631245322046}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4CE1E08-D997-4D60-8BE7-631245322046}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4CE1E08-D997-4D60-8BE7-631245322046}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4CE1E08-D997-4D60-8BE7-631245322046}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{77542D59-B757-4601-B21D-6E97DB306568} = {DD8DC3BF-CDFA-4CF7-AC84-E42947C4AB44}

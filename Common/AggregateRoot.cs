@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Common.Commanding;
 using Common.Eventing;
 
 namespace Common
@@ -39,5 +40,19 @@ namespace Common
         {
             _domainEvents.Clear();
         }
+
+        public T Execute<T>(IAggregateRootCommand<T> command) where T : AggregateRoot
+        {
+            var executeCommandMethodInfo = typeof(T)
+                .GetMethod("Execute", new[] { command.GetType(), typeof(T) });
+            
+            if (executeCommandMethodInfo == null)
+            {
+                throw new InvalidOperationException($"Command {command} can't be executed by aggregate type {typeof(T).Name}.");
+            }
+            
+            return (T)executeCommandMethodInfo.Invoke(this, new object[] {command});
+        }
+        
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Common;
+using Common.Commanding;
 
 namespace InMemory
 {
@@ -20,9 +21,9 @@ namespace InMemory
         }
 
         public T Borrow(Guid aggregateRootId, Func<T, T> transformer) =>
-            transformer(ReadAggregateOrAddNewToDictionary(aggregateRootId));
+            transformer(ReadAggregateOrThrowIfDoesntExist(aggregateRootId));
 
-        private T ReadAggregateOrAddNewToDictionary(Guid aggregateRootId)
+        private T ReadAggregateOrThrowIfDoesntExist(Guid aggregateRootId)
         {
             if (!_cache.TryGetValue(aggregateRootId, out var aggregateRoot))
             {
@@ -30,6 +31,11 @@ namespace InMemory
             }
 
             return aggregateRoot;
+        }
+        
+        public T BorrowEachFor(ISpecification<T> specification, Func<T, T> transformer)
+        {
+            specification.IsSatisfied().Parameters[0].
         }
     }
 }
