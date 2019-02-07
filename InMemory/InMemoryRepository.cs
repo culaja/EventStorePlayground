@@ -1,13 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using Common;
-using Common.Commanding;
 
 namespace InMemory
 {
-    public sealed class InMemoryRepository<T> : IRepository<T> where T: AggregateRoot
+    public abstract class InMemoryRepository<T> : IRepository<T> where T: AggregateRoot
     {
         private readonly Dictionary<Guid, T> _cache = new Dictionary<Guid, T>();
+        private readonly UniqueIndexing<T> _uniqueIndexes = new UniqueIndexing<T>();
+
+        protected void AddNewIndex(object key, T value) => _uniqueIndexes.AddIndex(key, value);
+        
+        protected Maybe<T> ReadIndex(object key) => _uniqueIndexes.GetValueFor(key);
+
+        protected virtual void AddedNew(T aggregateRoot)
+        {
+        }
 
         public T AddNew(T aggregateRoot)
         {
@@ -17,6 +25,7 @@ namespace InMemory
             }
             
             _cache.Add(aggregateRoot.Id, aggregateRoot);
+            AddedNew(aggregateRoot);
             return aggregateRoot;
         }
 
@@ -31,11 +40,6 @@ namespace InMemory
             }
 
             return aggregateRoot;
-        }
-        
-        public T BorrowEachFor(ISpecification<T> specification, Func<T, T> transformer)
-        {
-            specification.IsSatisfied().Parameters[0].
         }
     }
 }

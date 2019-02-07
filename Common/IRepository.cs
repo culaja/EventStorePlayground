@@ -8,7 +8,5 @@ namespace Common
         T AddNew(T aggregateRoot);
         
         T Borrow(Guid aggregateRootId, Func<T, T> transformer);
-
-        T BorrowEachFor(ISpecification<T> specification, Func<T, T> transformer);
     }
 }

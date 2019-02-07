@@ -1,7 +1,7 @@
 using FluentAssertions;
 using Xunit;
 using static EventStore.DomainEventSerializer;
-using static Tests.SomeStudentEvents;
+using static Tests.StudentsValues;
 
 namespace Tests.IntegrationTests.EventStore
 {

@@ -5,7 +5,7 @@ using FluentAssertions;
 using Ports.EventStore;
 using Xunit;
 using static System.Guid;
-using static Tests.SomeStudentEvents;
+using static Tests.StudentsValues;
 
 namespace Tests.IntegrationTests.EventStore
 {

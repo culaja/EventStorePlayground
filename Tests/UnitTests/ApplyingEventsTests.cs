@@ -14,7 +14,7 @@ namespace Tests.UnitTests
     public sealed class ApplyingEventsTests
     {
         private readonly IEventStore _eventStore = new InMemoryEventStore();
-        private readonly IRepository<Student> _studentRepository = new InMemoryRepository<Student>();
+        private readonly IRepository<Student> _studentRepository = new StudentInMemoryRepository();
 
         [Fact]
         public void _1()
