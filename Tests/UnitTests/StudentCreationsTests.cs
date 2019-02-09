@@ -6,7 +6,9 @@ using Domain.StudentDomain.Events;
 using FluentAssertions;
 using Xunit;
 using static Common.AggregateRoot;
+using static Domain.City;
 using static Domain.EmailAddress;
+using static Domain.Name;
 
 namespace Tests.UnitTests
 {
@@ -14,23 +16,29 @@ namespace Tests.UnitTests
     {
         private readonly Student _newStudent = CreateNewFrom<Student>(
             Guid.NewGuid(),
-            EmailAddressFrom("culaja@gmail.com"));
+            NameFrom("Stanko Culaja"),
+            EmailAddressFrom("culaja@gmail.com"),
+            Maybe<City>.From(NoviSad),
+            false);
         
         [Fact]
         public void _1() => _newStudent.DomainEvents.Should().Contain(new AggregateRootCreated(
             typeof(Student),
             _newStudent.Id,
-            EmailAddressFrom("culaja@gmail.com")));
+            NameFrom("Stanko Culaja"),
+            EmailAddressFrom("culaja@gmail.com"),
+            Maybe<City>.From(NoviSad),
+            false));
 
         [Fact]
         public void _2() => _newStudent
-            .MoveTo(City.NoviSad)
-            .DomainEvents.Should().Contain(new StudentMoved(_newStudent.Id, City.NoviSad));
+            .MoveTo(NoviSad)
+            .DomainEvents.Should().Contain(new StudentMoved(_newStudent.Id, NoviSad));
 
         [Fact]
-        public void _3() => new StudentMoved(_newStudent.Id, City.NoviSad)
+        public void _3() => new StudentMoved(_newStudent.Id, NoviSad)
             .ApplyTo(_newStudent)
-            .MaybeCity.Should().Be(City.NoviSad);
+            .MaybeCity.Should().Be(NoviSad);
 
         [Fact]
         public void _4() => _newStudent

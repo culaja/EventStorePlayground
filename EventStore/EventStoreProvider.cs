@@ -20,7 +20,7 @@ namespace EventStore
             _eventStoreUniverse = eventStoreUniverse;
         }
         
-        public void Append(IDomainEvent domainEvent)
+        public IDomainEvent Append(IDomainEvent domainEvent)
         {
             var newEvent = new EventData(
                 NewGuid(),
@@ -33,6 +33,8 @@ namespace EventStore
                 ResolveStreamNameFrom(_eventStoreUniverse, domainEvent.AggregateRootType),
                 ExpectedVersion.Any,
                 newEvent).Wait();
+
+            return domainEvent;
         }
 
         internal static string ResolveStreamNameFrom(

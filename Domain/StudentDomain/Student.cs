@@ -6,14 +6,24 @@ namespace Domain.StudentDomain
 {
     public class Student : AggregateRoot
     {
+        public Name Name { get; }
+        
         public EmailAddress EmailAddress { get; }
         public Maybe<City> MaybeCity { get; private set; } = Maybe<City>.None;
         public bool IsHired { get; private set; } = false;
         
-        public Student(Guid id, EmailAddress emailAddress) 
+        public Student(
+            Guid id,
+            Name name,
+            EmailAddress emailAddress,
+            Maybe<City> maybeCity,
+            bool isHired) 
             : base(id)
         {
+            Name = name;
             EmailAddress = emailAddress;
+            MaybeCity = maybeCity;
+            IsHired = isHired;
         }
 
         public Student MoveTo(City city)

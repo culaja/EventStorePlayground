@@ -1,45 +1,73 @@
 ﻿using System;
 using System.Collections.Generic;
 using Common;
+using Common.Messaging;
+using static Common.Result;
 
 namespace InMemory
 {
     public abstract class InMemoryRepository<T> : IRepository<T> where T: AggregateRoot
     {
+        private readonly IMessageBus _messageBus;
+        
         private readonly Dictionary<Guid, T> _cache = new Dictionary<Guid, T>();
         private readonly UniqueIndexing<T> _uniqueIndexes = new UniqueIndexing<T>();
 
+        public InMemoryRepository(IMessageBus messageBus)
+        {
+            _messageBus = messageBus;
+        }
+
+        protected bool ContainsIndex(object key) => _uniqueIndexes.ContainsIndex(key);
+
         protected void AddNewIndex(object key, T value) => _uniqueIndexes.AddIndex(key, value);
         
-        protected Maybe<T> MaybeReadIndex(object key) => _uniqueIndexes.GetValueFor(key);
+        protected Result<T> MaybeReadIndex(object key) => _uniqueIndexes.GetValueFor(key)
+            .Unwrap(
+                Ok,
+                () => Fail<T>($"Can't find '{typeof(T).Name}' with key '{key}'"));
+
+        protected virtual bool ContainsKey(T aggregateRoot)
+        {
+            return false;
+        }
 
         protected virtual void AddedNew(T aggregateRoot)
         {
         }
 
-        public T AddNew(T aggregateRoot)
+        public Result<T> AddNew(T aggregateRoot)
         {
-            if (_cache.ContainsKey(aggregateRoot.Id))
+            if (_cache.ContainsKey(aggregateRoot.Id) || ContainsKey(aggregateRoot))
             {
-                throw new AggregateRootWithSameIdAlreadyExists<T>(aggregateRoot.Id);
+                return Fail<T>($"AggregateRoot with id '{aggregateRoot.Id}' already exists in Aggregate '{typeof(T).Name}'.");
             }
             
             _cache.Add(aggregateRoot.Id, aggregateRoot);
             AddedNew(aggregateRoot);
-            return aggregateRoot;
+            return Ok(aggregateRoot);
         }
 
-        public T Borrow(Guid aggregateRootId, Func<T, T> transformer) =>
-            transformer(ReadAggregateOrThrowIfDoesntExist(aggregateRootId));
+        public Result<T> BorrowBy(Guid aggregateRootId, Func<T, T> transformer) => ReadAggregateFromCash(aggregateRootId)
+            .OnSuccess(transformer)
+            .OnSuccess(t => PurgeAllEvents(t));
 
-        private T ReadAggregateOrThrowIfDoesntExist(Guid aggregateRootId)
+        private Result<T> ReadAggregateFromCash(Guid aggregateRootId)
         {
             if (!_cache.TryGetValue(aggregateRootId, out var aggregateRoot))
             {
-                throw new AggregateRootDoesntExistInRepositoryException<T>(aggregateRootId);
+                return Fail<T>($"AggregateRoot with id '{aggregateRootId}' doesn't exist in Aggregate '{typeof(T).Name}'.");
             }
 
+            return Ok(aggregateRoot);
+        }
+
+        private T PurgeAllEvents(T aggregateRoot)
+        {
+            _messageBus.DispatchAll(aggregateRoot.DomainEvents);
+            aggregateRoot.ClearDomainEvents();
             return aggregateRoot;
         }
+        
     }
 }

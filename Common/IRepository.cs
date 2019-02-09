@@ -4,8 +4,8 @@ namespace Common
 {
     public interface IRepository<T> where T : AggregateRoot
     {
-        T AddNew(T aggregateRoot);
+        Result<T> AddNew(T aggregateRoot);
         
-        T Borrow(Guid aggregateRootId, Func<T, T> transformer);
+        Result<T> BorrowBy(Guid aggregateRootId, Func<T, T> transformer);
     }
 }

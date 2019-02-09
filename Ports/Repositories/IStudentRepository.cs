@@ -7,6 +7,6 @@ namespace Ports.Repositories
 {
     public interface IStudentRepository : IRepository<Student>
     {
-        Student BorrowBy(EmailAddress emailAddress,Func<Student, Student> transformer);
+        Result<Student> BorrowBy(EmailAddress emailAddress, Func<Student, Student> transformer);
     }
 }

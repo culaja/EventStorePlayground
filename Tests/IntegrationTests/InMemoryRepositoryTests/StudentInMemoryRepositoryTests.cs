@@ -10,7 +10,7 @@ namespace Tests.IntegrationTests.InMemoryRepositoryTests
 {
     public sealed class StudentInMemoryRepositoryTests
     {
-        private readonly IStudentRepository _studentRepository = new StudentInMemoryRepository();
+        private readonly IStudentRepository _studentRepository = new StudentInMemoryRepository(new NoOpMessageBus());
         
         [Fact]
         public void borrow_can_find_added_student()
@@ -18,8 +18,8 @@ namespace Tests.IntegrationTests.InMemoryRepositoryTests
             _studentRepository.AddNew(StankoStudent);
             _studentRepository.AddNew(MilenkoStudent);
             
-            _studentRepository.BorrowBy(StankoEmailAddress, s => s).Id.Should().Be(StankoId);
-            _studentRepository.BorrowBy(MilenkoEmailAddress, s => s).Id.Should().Be(MilenkoId);
+            _studentRepository.BorrowBy(StankoEmailAddress, s => s).Value.Id.Should().Be(StankoId);
+            _studentRepository.BorrowBy(MilenkoEmailAddress, s => s).Value.Id.Should().Be(MilenkoId);
         }
 
         [Fact]
@@ -27,8 +27,7 @@ namespace Tests.IntegrationTests.InMemoryRepositoryTests
         {
             _studentRepository.AddNew(MilenkoStudent);
 
-            Assert.Throws<AggregateRootDoesntExistForKeyInRepositoryException<Student>>(() =>
-                _studentRepository.BorrowBy(StankoEmailAddress, s => s));
+            _studentRepository.BorrowBy(StankoEmailAddress, s => s).IsFailure.Should().BeTrue();
         }
     }
 }

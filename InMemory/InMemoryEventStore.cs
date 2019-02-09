@@ -10,9 +10,10 @@ namespace InMemory
     {
         private readonly List<IDomainEvent> _allDomainEvents = new List<IDomainEvent>();
         
-        public void Append(IDomainEvent domainEvent)
+        public IDomainEvent Append(IDomainEvent domainEvent)
         {
             _allDomainEvents.Add(domainEvent);
+            return domainEvent;
         }
 
         public IEnumerable<IDomainEvent> LoadAllForAggregateStartingFrom<T>(int position) where T : AggregateRoot

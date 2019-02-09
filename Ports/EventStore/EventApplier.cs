@@ -22,7 +22,7 @@ namespace Ports.EventStore
                         AggregateRoot.RestoreFrom<T>(aggregateRootCreated.AggregateRootCreationParameters));
                     break;
                 default:
-                    repository.Borrow(
+                    repository.BorrowBy(
                         domainEvent.AggregateRootId,
                         domainEvent.ApplyTo);
                     break;
