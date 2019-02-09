@@ -45,7 +45,7 @@ namespace InMemory
             
             _cache.Add(aggregateRoot.Id, aggregateRoot);
             AddedNew(aggregateRoot);
-            return Ok(aggregateRoot);
+            return Ok(PurgeAllEvents(aggregateRoot));
         }
 
         public Result<T> BorrowBy(Guid aggregateRootId, Func<T, T> transformer) => ReadAggregateFromCash(aggregateRootId)
