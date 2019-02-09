@@ -1,7 +1,6 @@
 namespace Common.Commanding
 {
-    public interface IAggregateRootCommand<T> where T : AggregateRoot
+    public interface IAggregateRootCommand
     {
-        ISpecification<T> Specification { get; }
     }
 }

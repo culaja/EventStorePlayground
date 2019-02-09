@@ -4,7 +4,7 @@ using Common.Commanding;
 
 namespace Domain.StudentDomain.Commands
 {
-    public sealed class AddNewStudent : INewAggregateRootCommand<Student>
+    public sealed class AddNewStudent : IAggregateRootCommand
     {
         public EmailAddress EmailAddress { get; }
         public Name Name { get; }
@@ -21,16 +21,6 @@ namespace Domain.StudentDomain.Commands
             Name = name;
             MaybeCity = maybeCity;
             IsEmployed = isEmployed;
-        }
-
-        public Student CreateNew()
-        {
-            return AggregateRoot.CreateNewFrom<Student>(
-                Guid.NewGuid(),
-                EmailAddress,
-                Name,
-                MaybeCity,
-                IsEmployed);
         }
     }
 }

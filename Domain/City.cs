@@ -9,11 +9,11 @@ namespace Domain
         public static City NoviSad = new City("Novi Sad");
         public static City Belgrade = new City("Belgrade");
         
-        private readonly string _name;
+        public string Name { get; }
 
         public City(string name)
         {
-            _name = name;
+            Name = name;
         }
         
         public static City CityFrom(Maybe<string> maybeName) => maybeName
@@ -22,11 +22,11 @@ namespace Domain
             .Map(name => new City(name))
             .Value;
 
-        public override string ToString() => _name;
+        public override string ToString() => Name;
 
         protected override IEnumerable<object> GetEqualityComponents()
         {
-            yield return _name;
+            yield return Name;
         }
     }
 }

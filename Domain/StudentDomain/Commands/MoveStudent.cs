@@ -1,9 +1,8 @@
 using Common.Commanding;
-using Domain.StudentDomain.Specifications;
 
 namespace Domain.StudentDomain.Commands
 {
-    public sealed class MoveStudent : IAggregateRootCommand<Student>
+    public sealed class MoveStudent : IAggregateRootCommand
     {
         public EmailAddress EmailAddress { get; }
         public City CityToMoveTo { get; }
@@ -15,7 +14,5 @@ namespace Domain.StudentDomain.Commands
             EmailAddress = emailAddress;
             CityToMoveTo = cityToMoveTo;
         }
-
-        public ISpecification<Student> Specification => new StudentByEmailAddressSpecification(EmailAddress);
     }
 }
