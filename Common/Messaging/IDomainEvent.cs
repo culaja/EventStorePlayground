@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Common.Eventing
+namespace Common.Messaging
 {
     public interface IDomainEvent
     {

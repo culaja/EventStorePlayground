@@ -1,10 +1,10 @@
 using System;
 using Common;
-using Common.Commanding;
+using Common.Messaging;
 
 namespace Domain.StudentDomain.Commands
 {
-    public sealed class AddNewStudent : IAggregateRootCommand
+    public sealed class AddNewStudent : ICommand
     {
         public EmailAddress EmailAddress { get; }
         public Name Name { get; }

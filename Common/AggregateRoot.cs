@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Common.Commanding;
-using Common.Eventing;
+using Common.Messaging;
 
 namespace Common
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Common;
-using Common.Eventing;
+using Common.Messaging;
 using EventStore.ClientAPI;
 using Ports.EventStore;
 using static System.Guid;

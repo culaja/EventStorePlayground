@@ -1,7 +1,5 @@
 ﻿using System;
 using Common;
-using Common.Commanding;
-using Domain.StudentDomain.Commands;
 using Domain.StudentDomain.Events;
 
 namespace Domain.StudentDomain

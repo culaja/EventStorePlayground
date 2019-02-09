@@ -1,5 +1,5 @@
 ﻿using System;
-using Common.Eventing;
+using Common.Messaging;
 
 namespace Domain.StudentDomain.Events
 {

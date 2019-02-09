@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Common;
-using Common.Eventing;
+using Common.Messaging;
 
 namespace Ports.EventStore
 {
