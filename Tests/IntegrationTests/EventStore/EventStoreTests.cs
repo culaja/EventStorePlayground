@@ -16,11 +16,11 @@ namespace Tests.IntegrationTests.EventStore
         [Fact]
         public void _1()
         {
-            _eventStore.Append(StankoMoved);
+            _eventStore.Append(StankoMovedToNoviSad);
 
             var lastAddedEvent =  _eventStore.LoadAllForAggregateStartingFrom<Student>().Last();
 
-            lastAddedEvent.Should().Be(StankoMoved);
+            lastAddedEvent.Should().Be(StankoMovedToNoviSad);
         }
     }
 }

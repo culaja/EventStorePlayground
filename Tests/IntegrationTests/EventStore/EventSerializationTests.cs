@@ -13,6 +13,6 @@ namespace Tests.IntegrationTests.EventStore
         
         [Fact]
         public void Serializing_StudentMoved() =>
-            DeserializeToDomainEvent(Serialize(StankoMoved)).Should().Be(StankoMoved);
+            DeserializeToDomainEvent(Serialize(StankoMovedToNoviSad)).Should().Be(StankoMovedToNoviSad);
     }
 }

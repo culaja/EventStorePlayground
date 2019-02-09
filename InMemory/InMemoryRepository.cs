@@ -11,7 +11,7 @@ namespace InMemory
 
         protected void AddNewIndex(object key, T value) => _uniqueIndexes.AddIndex(key, value);
         
-        protected Maybe<T> ReadIndex(object key) => _uniqueIndexes.GetValueFor(key);
+        protected Maybe<T> MaybeReadIndex(object key) => _uniqueIndexes.GetValueFor(key);
 
         protected virtual void AddedNew(T aggregateRoot)
         {
