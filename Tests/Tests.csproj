@@ -16,7 +16,6 @@
       <ProjectReference Include="..\Domain\Domain.csproj" />
       <ProjectReference Include="..\EventStore\EventStore.csproj" />
       <ProjectReference Include="..\InMemory\InMemory.csproj" />
-      <ProjectReference Include="..\MessagingInfrastructure\MessagingInfrastructure.csproj" />
       <ProjectReference Include="..\Ports\Ports.csproj" />
     </ItemGroup>
 

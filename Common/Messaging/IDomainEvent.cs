@@ -2,7 +2,7 @@
 
 namespace Common.Messaging
 {
-    public interface IDomainEvent
+    public interface IDomainEvent : IMessage
     {
         Guid AggregateRootId { get; }
 
