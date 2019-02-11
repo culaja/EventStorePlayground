@@ -3,8 +3,8 @@ using System.Reflection;
 using Autofac;
 using AutofacMessageBus;
 using Common.Messaging;
+using CommonServices;
 using Domain.StudentDomain;
-using DomainServices;
 using DomainServices.StudentHandlers.Commands;
 using Module = Autofac.Module;
 
@@ -22,6 +22,7 @@ namespace AutofacApplicationWrapUp
                 },
                 new List<Assembly>()
                 {
+                    typeof(DomainEventPersistenceHandler).Assembly,
                     typeof(AddNewStudentHandler).Assembly
                 }));
         }
