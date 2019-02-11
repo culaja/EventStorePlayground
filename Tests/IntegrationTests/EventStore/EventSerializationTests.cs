@@ -1,3 +1,4 @@
+using System.Linq;
 using FluentAssertions;
 using Xunit;
 using static EventStore.DomainEventSerializer;
@@ -7,6 +8,10 @@ namespace Tests.IntegrationTests.EventStore
 {
     public class EventSerializationTests
     {
+        [Fact]
+        public void Serializing_AggregateRootCreated() =>
+            DeserializeToDomainEvent(Serialize(StankoStudent.DomainEvents.First())).Should().Be(StankoStudent.DomainEvents.First());
+        
         [Fact]
         public void Serializing_StudentHired() =>
             DeserializeToDomainEvent(Serialize(StankoHired)).Should().Be(StankoHired);

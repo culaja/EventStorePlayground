@@ -1,4 +1,5 @@
 using Autofac;
+using EventStore;
 using InMemory;
 using Ports.EventStore;
 
@@ -8,7 +9,7 @@ namespace AutofacApplicationWrapUp
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<InMemoryEventStore>().As<IEventStore>().SingleInstance();
+            builder.RegisterInstance(new EventStoreProvider("Culaja1")).As<IEventStore>().SingleInstance();
         }
     }
 }

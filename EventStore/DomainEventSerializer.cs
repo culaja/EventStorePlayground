@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Text;
 using Common.Messaging;
 using Newtonsoft.Json;
@@ -9,7 +10,8 @@ namespace EventStore
     {
         private static readonly JsonSerializerSettings Settings = new JsonSerializerSettings()
         {
-            TypeNameHandling = TypeNameHandling.All
+            TypeNameHandling = TypeNameHandling.All,
+            Converters = new List<JsonConverter>() {new MaybeCitySerializer()}
         };
         
         public static byte[] Serialize(IDomainEvent domainEvent) => Encoding.ASCII.GetBytes(
