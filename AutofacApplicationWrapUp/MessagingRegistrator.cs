@@ -22,7 +22,7 @@ namespace AutofacApplicationWrapUp
                 },
                 new List<Assembly>()
                 {
-                    typeof(DomainEventPersistenceHandler).Assembly,
+                    typeof(AggregateRootCreatedPersistenceHandler).Assembly,
                     typeof(AddNewStudentHandler).Assembly
                 }));
         }

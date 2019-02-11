@@ -68,6 +68,5 @@ namespace InMemory
             aggregateRoot.ClearDomainEvents();
             return aggregateRoot;
         }
-        
     }
 }
