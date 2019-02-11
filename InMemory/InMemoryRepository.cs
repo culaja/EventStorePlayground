@@ -49,8 +49,14 @@ namespace InMemory
         }
 
         public Result<T> BorrowBy(Guid aggregateRootId, Func<T, T> transformer) => ReadAggregateFromCash(aggregateRootId)
-            .OnSuccess(transformer)
-            .OnSuccess(t => PurgeAllEvents(t));
+            .OnSuccess(t => ExecuteTransformerAndPurgeEvents(t, transformer));
+
+        protected T ExecuteTransformerAndPurgeEvents(T aggregateRoot, Func<T, T> transformer)
+        {
+            transformer(aggregateRoot);
+            PurgeAllEvents(aggregateRoot);
+            return aggregateRoot;
+        }
 
         private Result<T> ReadAggregateFromCash(Guid aggregateRootId)
         {

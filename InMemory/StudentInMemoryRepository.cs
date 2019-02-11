@@ -18,6 +18,6 @@ namespace InMemory
         protected override bool ContainsKey(Student aggregateRoot) => ContainsIndex(aggregateRoot.EmailAddress);
 
         public Result<Student> BorrowBy(EmailAddress emailAddress, Func<Student, Student> transformer) => MaybeReadIndex(emailAddress)
-            .OnSuccess(transformer);
+            .OnSuccess(t=> ExecuteTransformerAndPurgeEvents(t, transformer));
     }
 }

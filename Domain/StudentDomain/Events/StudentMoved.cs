@@ -3,7 +3,7 @@ using Common.Messaging;
 
 namespace Domain.StudentDomain.Events
 {
-    public sealed class StudentMoved : DomainEvent<Student>
+    public sealed class StudentMoved : StudentEvent
     {
         public City City { get; }
 
