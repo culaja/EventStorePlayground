@@ -2,6 +2,7 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using AutofacApplicationWrapUp;
+using DomainServices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -30,6 +31,7 @@ namespace WebApp
             containerBuilder.RegisterModule(new MainRegistrator());
             containerBuilder.Populate(services);
             var container = containerBuilder.Build();
+            ReConstructAllAggregates(container);
             
             return new AutofacServiceProvider(container);
         }
@@ -48,6 +50,12 @@ namespace WebApp
 
             app.UseHttpsRedirection();
             app.UseMvc();
+        }
+
+        private static void ReConstructAllAggregates(IContainer container)
+        {
+            var aggregateConstructor = container.Resolve<AggregateConstructor>();
+            aggregateConstructor.ReconstructAllAggregates();
         }
     }
 }

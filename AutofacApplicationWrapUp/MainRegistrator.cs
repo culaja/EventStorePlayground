@@ -8,7 +8,7 @@ namespace AutofacApplicationWrapUp
         protected override void Load(ContainerBuilder builder)
         {
             base.Load(builder);
-            builder.RegisterModule<MessagingRegistrator>();
+            builder.RegisterModule<DomainServicesRegistrator>();
             builder.RegisterModule<EventStoreRegistrator>();
             builder.RegisterModule<RepositoryRegistrator>();
         }

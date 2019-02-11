@@ -33,6 +33,8 @@ namespace WebApp.Controllers
                 moveToDto.EmailAddress.ToEmailAddress(),
                 moveToDto.City.ToCity()));
 
+        [HttpPost]
+        [Route(nameof(Hire))]
         public void Hire(string emailAddress) => _messageBus
             .Dispatch(new HireStudent(EmailAddressFrom(emailAddress)));
     }
