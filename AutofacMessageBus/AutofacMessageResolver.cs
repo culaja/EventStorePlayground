@@ -33,13 +33,13 @@ namespace AutofacMessageBus
 			return appendList;
 		}
 
-		private IReadOnlyList<IMessageHandler> GetMessageHandlersForType(Type type)
+		private IEnumerable<IMessageHandler> GetMessageHandlersForType(Type type)
 		{
 			var genericMessageHandlerType = typeof(IMessageHandler<>).MakeGenericType(type);
 			var genericMessageHandlerEnumerableType = typeof(IEnumerable<>).MakeGenericType(genericMessageHandlerType);
 			return ((IEnumerable)_componentContext.Resolve(genericMessageHandlerEnumerableType))
 				.Cast<IMessageHandler>()
-				.ToList();
+				.Distinct(new MessageHandlerComparer());
 		}
 	}
 }
