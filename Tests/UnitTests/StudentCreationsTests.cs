@@ -26,7 +26,6 @@ namespace Tests.UnitTests
         public void _1() => _newStudent.DomainEvents.Should().Contain(new StudentCreated(
             _newStudent.Id,
             typeof(Student),
-            0,
             NameFrom("Stanko Culaja"),
             EmailAddressFrom("culaja@gmail.com"),
             Maybe<City>.From(NoviSad),
@@ -35,21 +34,21 @@ namespace Tests.UnitTests
         [Fact]
         public void _2() => _newStudent
             .MoveTo(NoviSad)
-            .DomainEvents.Should().Contain(new StudentMoved(_newStudent.Id, 1, NoviSad));
+            .DomainEvents.Should().Contain(new StudentMoved(_newStudent.Id, NoviSad).SetVersion(_newStudent.Version));
 
         [Fact]
         public void _3() => _newStudent
-            .ApplyFrom(new StudentMoved(_newStudent.Id, 1, NoviSad)).To<Student>()
+            .ApplyFrom(new StudentMoved(_newStudent.Id, NoviSad).SetVersion(2)).To<Student>()
             .MaybeCity.Should().Be(NoviSad);
 
         [Fact]
         public void _4() => _newStudent
             .GetAJob()
-            .DomainEvents.Should().Contain(new StudentHired(_newStudent.Id, 1));
+            .DomainEvents.Should().Contain(new StudentHired(_newStudent.Id).SetVersion(_newStudent.Version));
 
         [Fact]
         public void _5() => _newStudent
-            .ApplyFrom(new StudentHired(_newStudent.Id, 1)).To<Student>()
+            .ApplyFrom(new StudentHired(_newStudent.Id).SetVersion(2)).To<Student>()
             .IsHired.Should().BeTrue();
     }
 }

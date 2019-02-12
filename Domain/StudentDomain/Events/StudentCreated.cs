@@ -14,11 +14,10 @@ namespace Domain.StudentDomain.Events
         public StudentCreated(
             Guid aggregateRootId,
             Type aggregateRootType,
-            ulong version,
             Name name,
             EmailAddress emailAddress,
             Maybe<City> maybeCity,
-            bool isHired) : base(aggregateRootId, aggregateRootType, version)
+            bool isHired) : base(aggregateRootId, aggregateRootType)
         {
             Name = name;
             EmailAddress = emailAddress;

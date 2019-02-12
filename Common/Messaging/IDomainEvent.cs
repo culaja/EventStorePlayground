@@ -9,5 +9,7 @@ namespace Common.Messaging
         Type AggregateRootType { get; }
         
         ulong Version { get; }
+
+        IDomainEvent SetVersion(ulong version);
     }
 }

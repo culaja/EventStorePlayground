@@ -30,11 +30,10 @@ namespace MongoDbEventStore.Mapping.StudentEvents
             IsHired = e.IsHired;
         }
 
-        public override IDomainEvent ToDomainEvent() =>
+        protected override IDomainEvent ConvertDomainEvent() =>
             new StudentCreated(
                 Guid.Parse(AggregateRootId),
                 typeof(Student),
-                Version,
                 new Name(Name),
                 new EmailAddress(EmailAddress), 
                 Maybe<string>.From(City).Map(c => new City(c)),

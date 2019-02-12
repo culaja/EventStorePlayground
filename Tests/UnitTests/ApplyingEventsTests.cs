@@ -20,9 +20,9 @@ namespace Tests.UnitTests
         [Fact]
         public void _1()
         {
-            _eventStore.Append(StankoCreated);
-            _eventStore.Append(StankoMovedToNoviSad);
-            _eventStore.Append(StankoHired);
+            _eventStore.Append(StankoCreated.SetVersion(1));
+            _eventStore.Append(StankoMovedToNoviSad.SetVersion(2));
+            _eventStore.Append(StankoHired.SetVersion(3));
 
             _eventStore.ApplyAllTo(_studentRepository);
 

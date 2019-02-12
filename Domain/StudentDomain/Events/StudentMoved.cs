@@ -9,8 +9,7 @@ namespace Domain.StudentDomain.Events
 
         public StudentMoved(
             Guid aggregateRootId,
-            ulong version,
-            City city) : base(aggregateRootId, version)
+            City city) : base(aggregateRootId)
         {
             City = city;
         }

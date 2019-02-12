@@ -46,7 +46,6 @@ namespace Domain.StudentDomain
             student.ApplyChange(new StudentCreated(
                 student.Id,
                 typeof(Student),
-                student.Version,
                 student.Name,
                 student.EmailAddress,
                 student.MaybeCity,
@@ -56,7 +55,7 @@ namespace Domain.StudentDomain
 
         public Student MoveTo(City city)
         {
-            ApplyChange(new StudentMoved(Id, IncrementedVersion(), city));
+            ApplyChange(new StudentMoved(Id, city));
             return this;
         }
 
@@ -74,7 +73,7 @@ namespace Domain.StudentDomain
 
         public Student GetAJob()
         {
-            ApplyChange(new StudentHired(Id, IncrementedVersion()));
+            ApplyChange(new StudentHired(Id));
             return this;
         }
 

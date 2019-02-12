@@ -30,6 +30,8 @@ namespace MongoDbEventStore.Mapping
             Version = domainEvent.Version;
         }
 
-        public abstract IDomainEvent ToDomainEvent();
+        public IDomainEvent ToDomainEvent() => ConvertDomainEvent().SetVersion(Version);
+        
+        protected abstract IDomainEvent ConvertDomainEvent();
     }
 }

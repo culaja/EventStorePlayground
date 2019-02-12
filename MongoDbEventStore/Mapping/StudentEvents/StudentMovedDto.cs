@@ -16,10 +16,9 @@ namespace MongoDbEventStore.Mapping.StudentEvents
             City = e.City.ToString();
         }
 
-        public override IDomainEvent ToDomainEvent()
+        protected override IDomainEvent ConvertDomainEvent()
             => new StudentMoved(
                 Guid.Parse(AggregateRootId),
-                Version,
                 new City(City));
     }
 }

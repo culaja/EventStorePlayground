@@ -14,9 +14,8 @@ namespace MongoDbEventStore.Mapping.StudentEvents
         {
         }
 
-        public override IDomainEvent ToDomainEvent()
+        protected override IDomainEvent ConvertDomainEvent()
             => new StudentHired(
-                Guid.Parse(AggregateRootId),
-                Version);
+                Guid.Parse(AggregateRootId));
     }
 }
