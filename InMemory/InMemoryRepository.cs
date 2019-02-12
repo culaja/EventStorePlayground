@@ -6,7 +6,9 @@ using static Common.Result;
 
 namespace InMemory
 {
-    public abstract class InMemoryRepository<T> : IRepository<T> where T: AggregateRoot
+    public abstract class InMemoryRepository<T, Tk> : IRepository<T, Tk> 
+        where T: AggregateRoot
+        where Tk: AggregateRootCreated
     {
         private readonly IMessageBus _messageBus;
         
@@ -27,6 +29,8 @@ namespace InMemory
                 Ok,
                 () => Fail<T>($"Can't find '{typeof(T).Name}' with key '{key}'"));
 
+        protected abstract T CreateInternalFrom(Tk aggregateRootCreated);
+
         protected virtual bool ContainsKey(T aggregateRoot)
         {
             return false;
@@ -34,6 +38,12 @@ namespace InMemory
 
         protected virtual void AddedNew(T aggregateRoot)
         {
+        }
+
+        public Result<T> CreateFrom(Tk aggregateRootCreated)
+        {
+            var aggregateRoot = CreateInternalFrom(aggregateRootCreated);
+            return AddNew(aggregateRoot);
         }
 
         public Result<T> AddNew(T aggregateRoot)

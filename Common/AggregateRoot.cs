@@ -16,19 +16,6 @@ namespace Common
             Id = id;
         }
         
-        public static T CreateNewFrom<T>(params object[] aggregateRootParameters) where T : AggregateRoot
-        {
-            var newAggregate = (T)Activator.CreateInstance(typeof(T), aggregateRootParameters);
-            newAggregate.Add(new AggregateRootCreated(typeof(T), aggregateRootParameters));
-            return newAggregate;
-        }
-        
-        public static T RestoreFrom<T>(params object[] aggregateRootParameters) where T : AggregateRoot
-        {
-            var newAggregate = (T)Activator.CreateInstance(typeof(T), aggregateRootParameters);
-            return newAggregate;
-        }
-
         protected IDomainEvent Add(IDomainEvent newDomainEvent)
         {
             _domainEvents.Add(newDomainEvent);

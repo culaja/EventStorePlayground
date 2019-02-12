@@ -1,6 +1,7 @@
 ﻿using System;
 using Common;
 using Domain.StudentDomain.Events;
+using static System.Guid;
 
 namespace Domain.StudentDomain
 {
@@ -24,6 +25,29 @@ namespace Domain.StudentDomain
             EmailAddress = emailAddress;
             MaybeCity = maybeCity;
             IsHired = isHired;
+        }
+
+        public static Student NewStudentFrom(
+            Guid id,
+            Name name,
+            EmailAddress emailAddress,
+            Maybe<City> maybeCity,
+            bool isHired)
+        {
+            var student = new Student(
+                id,
+                name,
+                emailAddress,
+                maybeCity,
+                isHired);
+            student.Add(new StudentCreated(
+                student.Id,
+                typeof(Student),
+                student.Name,
+                student.EmailAddress,
+                student.MaybeCity,
+                student.IsHired));
+            return student;
         }
 
         public Student MoveTo(City city)

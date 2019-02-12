@@ -1,4 +1,3 @@
-using System;
 using Common;
 using Domain;
 using Domain.StudentDomain;
@@ -9,7 +8,6 @@ using Ports.EventStore;
 using Tests.IntegrationTests;
 using Xunit;
 using static Domain.City;
-using static Domain.EmailAddress;
 using static Tests.StudentsValues;
 
 namespace Tests.UnitTests
@@ -17,13 +15,14 @@ namespace Tests.UnitTests
     public sealed class ApplyingEventsTests
     {
         private readonly IEventStore _eventStore = new InMemoryEventStore();
-        private readonly IRepository<Student> _studentRepository = new StudentInMemoryRepository(new NoOpMessageBus());
+        private readonly IRepository<Student, StudentCreated> _studentRepository = new StudentInMemoryRepository(new NoOpMessageBus());
 
         [Fact]
         public void _1()
         {
-            _eventStore.Append(new AggregateRootCreated(typeof(Student), 
+            _eventStore.Append(new StudentCreated(
                 StankoId,
+                typeof(Student),
                 StankoName,
                 StankoEmailAddress,
                 Maybe<City>.None,

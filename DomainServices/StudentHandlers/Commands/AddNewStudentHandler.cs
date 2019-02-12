@@ -1,9 +1,9 @@
-using System;
 using Common;
 using Common.Messaging;
-using Domain.StudentDomain;
 using Domain.StudentDomain.Commands;
 using Ports.Repositories;
+using static System.Guid;
+using static Domain.StudentDomain.Student;
 
 namespace DomainServices.StudentHandlers.Commands
 {
@@ -17,8 +17,8 @@ namespace DomainServices.StudentHandlers.Commands
         }
 
         public override Result Handle(AddNewStudent c) => _studentRepository
-            .AddNew(AggregateRoot.CreateNewFrom<Student>(
-                Guid.NewGuid(),
+            .AddNew(NewStudentFrom(
+                NewGuid(),
                 c.Name,
                 c.EmailAddress,
                 c.MaybeCity,

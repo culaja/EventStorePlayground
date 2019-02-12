@@ -9,12 +9,13 @@ using static Common.AggregateRoot;
 using static Domain.City;
 using static Domain.EmailAddress;
 using static Domain.Name;
+using static Domain.StudentDomain.Student;
 
 namespace Tests.UnitTests
 {
     public sealed class StudentCreationsTests
     {
-        private readonly Student _newStudent = CreateNewFrom<Student>(
+        private readonly Student _newStudent = NewStudentFrom(
             Guid.NewGuid(),
             NameFrom("Stanko Culaja"),
             EmailAddressFrom("culaja@gmail.com"),
@@ -22,9 +23,9 @@ namespace Tests.UnitTests
             false);
         
         [Fact]
-        public void _1() => _newStudent.DomainEvents.Should().Contain(new AggregateRootCreated(
-            typeof(Student),
+        public void _1() => _newStudent.DomainEvents.Should().Contain(new StudentCreated(
             _newStudent.Id,
+            typeof(Student),
             NameFrom("Stanko Culaja"),
             EmailAddressFrom("culaja@gmail.com"),
             Maybe<City>.From(NoviSad),

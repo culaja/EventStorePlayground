@@ -1,17 +1,27 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using Common;
 using Common.Messaging;
 using Domain;
 using Domain.StudentDomain;
+using Domain.StudentDomain.Events;
 using Ports.Repositories;
 
 namespace InMemory
 {
-    public sealed class StudentInMemoryRepository : InMemoryRepository<Student>, IStudentRepository
+    public sealed class StudentInMemoryRepository : InMemoryRepository<Student, StudentCreated>, IStudentRepository
     {
         public StudentInMemoryRepository(IMessageBus messageBus) : base(messageBus)
         {
         }
+
+        protected override Student CreateInternalFrom(StudentCreated studentCreated) =>
+            new Student(
+                studentCreated.AggregateRootId,
+                studentCreated.Name,
+                studentCreated.EmailAddress,
+                studentCreated.MaybeCity,
+                studentCreated.IsHired);
 
         protected override void AddedNew(Student aggregateRoot) => AddNewIndex(aggregateRoot.EmailAddress, aggregateRoot);
 
