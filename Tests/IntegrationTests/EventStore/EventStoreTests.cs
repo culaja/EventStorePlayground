@@ -18,7 +18,7 @@ namespace Tests.IntegrationTests.EventStore
         {
             _eventStore.Append(StankoMovedToNoviSad);
 
-            var lastAddedEvent =  _eventStore.LoadAllForAggregateStartingFrom<Student>().Last();
+            var lastAddedEvent =  _eventStore.LoadAllFor<Student>().Last();
 
             lastAddedEvent.Should().Be(StankoMovedToNoviSad);
         }

@@ -16,11 +16,10 @@ namespace InMemory
             return domainEvent;
         }
 
-        public IEnumerable<IDomainEvent> LoadAllForAggregateStartingFrom<T>(int position) where T : AggregateRoot
+        public IEnumerable<IDomainEvent> LoadAllFor<T>() where T : AggregateRoot
         {
             return _allDomainEvents
-                .Where(domainEvent => domainEvent.AggregateRootType == typeof(T)).ToList()
-                .GetRange(position, _allDomainEvents.Count - position);
+                .Where(domainEvent => domainEvent.AggregateRootType == typeof(T)).ToList();
         }
     }
 }

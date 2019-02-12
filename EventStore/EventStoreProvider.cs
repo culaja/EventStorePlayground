@@ -42,7 +42,7 @@ namespace EventStore
             Type aggregateRootType) =>
             $"{eventStoreUniverse}_{aggregateRootType.Name}";
 
-        public IEnumerable<IDomainEvent> LoadAllForAggregateStartingFrom<T>(int position = 0) where T : AggregateRoot
+        public IEnumerable<IDomainEvent> LoadAllFor<T>() where T : AggregateRoot
         {
             for (var slice = KeptConnection.ReadFirstStreamEventsSliceFor<T>(_eventStoreUniverse);
                 ;

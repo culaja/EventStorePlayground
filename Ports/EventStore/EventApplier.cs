@@ -9,7 +9,7 @@ namespace Ports.EventStore
         public static int ApplyAllTo<T, Tk>(this IEventStore eventStore, IRepository<T, Tk> repository) 
             where T : AggregateRoot 
             where Tk: AggregateRootCreated => eventStore
-            .LoadAllForAggregateStartingFrom<T>(0)
+            .LoadAllFor<T>()
             .Select(domainEvent => HandleBasedOnType(domainEvent, repository))
             .Count();
 
