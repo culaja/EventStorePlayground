@@ -1,3 +1,4 @@
+using System;
 using Ports.EventStore;
 using Ports.Repositories;
 
@@ -18,7 +19,9 @@ namespace DomainServices
 
         public void ReconstructAllAggregates()
         {
+            Console.WriteLine("Started applying events " + DateTime.Now);
             _eventStore.ApplyAllTo(_studentRepository);
+            Console.WriteLine("Finished applying events " + DateTime.Now);
         }
     }
 }
