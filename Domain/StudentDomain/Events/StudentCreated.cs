@@ -26,11 +26,6 @@ namespace Domain.StudentDomain.Events
             IsHired = isHired;
         }
 
-        public override T ApplyTo<T>(T aggregateRoot)
-        {
-            throw new NotImplementedException();
-        }
-
         protected override IEnumerable<object> GetEqualityComponents()
         {
             foreach (var item in base.GetEqualityComponents()) yield return item;

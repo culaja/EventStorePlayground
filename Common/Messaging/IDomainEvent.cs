@@ -9,7 +9,5 @@ namespace Common.Messaging
         Type AggregateRootType { get; }
         
         ulong Version { get; }
-
-        T ApplyTo<T>(T aggregateRoot) where T : AggregateRoot;
     }
 }

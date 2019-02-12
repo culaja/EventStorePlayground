@@ -38,8 +38,8 @@ namespace Tests.UnitTests
             .DomainEvents.Should().Contain(new StudentMoved(_newStudent.Id, 1, NoviSad));
 
         [Fact]
-        public void _3() => new StudentMoved(_newStudent.Id, 1, NoviSad)
-            .ApplyTo(_newStudent)
+        public void _3() => _newStudent
+            .ApplyFrom(new StudentMoved(_newStudent.Id, 1, NoviSad)).To<Student>()
             .MaybeCity.Should().Be(NoviSad);
 
         [Fact]
@@ -48,8 +48,8 @@ namespace Tests.UnitTests
             .DomainEvents.Should().Contain(new StudentHired(_newStudent.Id, 1));
 
         [Fact]
-        public void _5() => new StudentHired(_newStudent.Id, 1)
-            .ApplyTo(_newStudent)
+        public void _5() => _newStudent
+            .ApplyFrom(new StudentHired(_newStudent.Id, 1)).To<Student>()
             .IsHired.Should().BeTrue();
     }
 }

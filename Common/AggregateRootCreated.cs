@@ -20,8 +20,6 @@ namespace Common
             Version = version;
         }
 
-        public abstract T ApplyTo<T>(T aggregateRoot) where T : AggregateRoot;
-
         protected override IEnumerable<object> GetEqualityComponents()
         {
             yield return AggregateRootId;

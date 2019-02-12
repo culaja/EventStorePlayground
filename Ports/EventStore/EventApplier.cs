@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Threading.Tasks;
 using Common;
 using Common.Messaging;
 
@@ -27,11 +28,17 @@ namespace Ports.EventStore
                 default:
                     repository.BorrowBy(
                         domainEvent.AggregateRootId,
-                        domainEvent.ApplyTo);
+                        t => ApplyToAggregate(t, domainEvent));
                     break;
             }
 
             return domainEvent;
+        }
+
+        private static T ApplyToAggregate<T>(T aggregateRoot, IDomainEvent e) where T : AggregateRoot
+        {
+            aggregateRoot.ApplyFrom(e);
+            return aggregateRoot;
         }
     }
 }

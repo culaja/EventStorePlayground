@@ -43,7 +43,7 @@ namespace Domain.StudentDomain
                 emailAddress,
                 maybeCity,
                 isHired);
-            student.Add(new StudentCreated(
+            student.ApplyChange(new StudentCreated(
                 student.Id,
                 typeof(Student),
                 student.Version,
@@ -56,10 +56,15 @@ namespace Domain.StudentDomain
 
         public Student MoveTo(City city)
         {
-            MaybeCity = city;
-            Add(new StudentMoved(Id, IncrementedVersion(), city));
+            ApplyChange(new StudentMoved(Id, IncrementedVersion(), city));
             return this;
         }
+
+        public Student Apply(StudentCreated _)
+        {
+            return this;
+        }
+        
 
         public Student Apply(StudentMoved studentMoved)
         {
@@ -69,8 +74,7 @@ namespace Domain.StudentDomain
 
         public Student GetAJob()
         {
-            IsHired = true;
-            Add(new StudentHired(Id, IncrementedVersion()));
+            ApplyChange(new StudentHired(Id, IncrementedVersion()));
             return this;
         }
 
