@@ -8,6 +8,7 @@
       <PackageReference Include="Autofac" Version="4.9.0" />
       <PackageReference Include="FluentAssertions" Version="5.5.3" />
       <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.0-preview-20181205-02" />
+      <PackageReference Include="Mongo2Go" Version="2.2.9" />
       <PackageReference Include="xunit" Version="2.4.1" />
       <PackageReference Include="xunit.runner.console" Version="2.4.1" />
       <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
@@ -19,7 +20,6 @@
       <ProjectReference Include="..\CommonServices\CommonServices.csproj" />
       <ProjectReference Include="..\DomainServices\DomainServices.csproj" />
       <ProjectReference Include="..\Domain\Domain.csproj" />
-      <ProjectReference Include="..\EventStore\EventStore.csproj" />
       <ProjectReference Include="..\InMemory\InMemory.csproj" />
       <ProjectReference Include="..\Ports\Ports.csproj" />
     </ItemGroup>

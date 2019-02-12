@@ -1,6 +1,5 @@
 using Autofac;
-using EventStore;
-using InMemory;
+using MongoDbEventStore;
 using Ports.EventStore;
 
 namespace AutofacApplicationWrapUp
@@ -9,7 +8,8 @@ namespace AutofacApplicationWrapUp
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterInstance(new EventStoreProvider("Culaja2")).As<IEventStore>().SingleInstance();
+            builder.RegisterInstance(new DatabaseContext("mongodb://localhost:27017/", "EventStore1")).SingleInstance();
+            builder.RegisterType<EventStore>().As<IEventStore>().SingleInstance();
         }
     }
 }

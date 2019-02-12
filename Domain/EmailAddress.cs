@@ -12,7 +12,7 @@ namespace Domain
         private const string MatchEmailAddressPattern =
             "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$";
 
-        internal string EmailAddressAsString { get; }
+        public string EmailAddressAsString { get; }
 
         public EmailAddress(string emailAddressString)
         {
