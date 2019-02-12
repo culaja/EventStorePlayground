@@ -45,12 +45,20 @@ namespace Tests
         public static readonly StudentHired MilenkoHired = new StudentHired(MilenkoId);
         
         public static readonly EmailAddress MilenkoEmailAddress = EmailAddressFrom("j.milenko@gmail.com");
+        
+        public static readonly StudentCreated MilenkoCreated = new StudentCreated(
+            StankoId,
+            typeof(Student),
+            StankoName,
+            StankoEmailAddress,
+            Belgrade, 
+            false);
 
         public static readonly Student MilenkoStudent = NewStudentFrom(
             MilenkoId,
             MilenkoName,
             MilenkoEmailAddress,
-            Maybe<City>.None,
+            Belgrade,
             false);
     }
 }

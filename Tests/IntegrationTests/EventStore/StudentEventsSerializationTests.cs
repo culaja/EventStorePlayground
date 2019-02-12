@@ -9,8 +9,12 @@ namespace Tests.IntegrationTests.EventStore
     public class StudentEventsSerializationTests
     {
         [Fact]
-        public void Serializing_AggregateRootCreated() => 
+        public void Serializing_StudentCreated1() => 
             DeserializeToDomainEvent(Serialize(StankoCreated)).Should().Be(StankoCreated);
+        
+        [Fact]
+        public void Serializing_StudentCreated2() => 
+            DeserializeToDomainEvent(Serialize(MilenkoCreated)).Should().Be(MilenkoCreated);
 
         [Fact]
         public void Serializing_StudentHired() =>

@@ -1,6 +1,7 @@
 using System;
 using Domain;
 using Newtonsoft.Json;
+using static Domain.City;
 
 namespace EventStore.CustomSerializers
 {
@@ -10,6 +11,6 @@ namespace EventStore.CustomSerializers
             writer.WriteValue(value.ToString());
 
         public override City ReadJson(JsonReader reader, Type objectType, City existingValue, bool hasExistingValue, JsonSerializer serializer) =>
-            City.CityFrom((string)reader.Value);
+            CityFrom((string)reader.Value);
     }
 }

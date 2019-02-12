@@ -18,7 +18,7 @@ namespace EventStore
                 new NameSerializer(),
                 new EmailAddressSerializer(),
                 new CitySerializer(),
-                new MaybeSerializer<City>()
+                new MaybeCitySerializer()
             }
         };
         
