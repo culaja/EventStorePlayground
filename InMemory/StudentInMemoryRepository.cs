@@ -18,6 +18,7 @@ namespace InMemory
         protected override Student CreateInternalFrom(StudentCreated studentCreated) =>
             new Student(
                 studentCreated.AggregateRootId,
+                studentCreated.Version,
                 studentCreated.Name,
                 studentCreated.EmailAddress,
                 studentCreated.MaybeCity,

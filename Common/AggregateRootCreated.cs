@@ -8,11 +8,16 @@ namespace Common
     {
         public Guid AggregateRootId { get; }
         public Type AggregateRootType { get; }
+        public ulong Version { get; }
 
-        protected AggregateRootCreated(Guid aggregateRootId, Type aggregateRootType)
+        protected AggregateRootCreated(
+            Guid aggregateRootId,
+            Type aggregateRootType,
+            ulong version)
         {
             AggregateRootId = aggregateRootId;
             AggregateRootType = aggregateRootType;
+            Version = version;
         }
 
         public abstract T ApplyTo<T>(T aggregateRoot) where T : AggregateRoot;
@@ -21,6 +26,7 @@ namespace Common
         {
             yield return AggregateRootId;
             yield return AggregateRootType;
+            yield return Version;
         }
     }
 }

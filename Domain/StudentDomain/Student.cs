@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using Common;
 using Domain.StudentDomain.Events;
 using static System.Guid;
@@ -15,11 +16,12 @@ namespace Domain.StudentDomain
         
         public Student(
             Guid id,
+            ulong version,
             Name name,
             EmailAddress emailAddress,
             Maybe<City> maybeCity,
             bool isHired) 
-            : base(id)
+            : base(id, version)
         {
             Name = name;
             EmailAddress = emailAddress;
@@ -36,6 +38,7 @@ namespace Domain.StudentDomain
         {
             var student = new Student(
                 id,
+                0,
                 name,
                 emailAddress,
                 maybeCity,
@@ -43,6 +46,7 @@ namespace Domain.StudentDomain
             student.Add(new StudentCreated(
                 student.Id,
                 typeof(Student),
+                student.Version,
                 student.Name,
                 student.EmailAddress,
                 student.MaybeCity,
@@ -53,7 +57,7 @@ namespace Domain.StudentDomain
         public Student MoveTo(City city)
         {
             MaybeCity = city;
-            Add(new StudentMoved(Id, city));
+            Add(new StudentMoved(Id, IncrementedVersion(), city));
             return this;
         }
 
@@ -66,7 +70,7 @@ namespace Domain.StudentDomain
         public Student GetAJob()
         {
             IsHired = true;
-            Add(new StudentHired(Id));
+            Add(new StudentHired(Id, IncrementedVersion()));
             return this;
         }
 

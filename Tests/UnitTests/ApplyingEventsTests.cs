@@ -20,13 +20,7 @@ namespace Tests.UnitTests
         [Fact]
         public void _1()
         {
-            _eventStore.Append(new StudentCreated(
-                StankoId,
-                typeof(Student),
-                StankoName,
-                StankoEmailAddress,
-                Maybe<City>.None,
-                false));
+            _eventStore.Append(StankoCreated);
             _eventStore.Append(StankoMovedToNoviSad);
             _eventStore.Append(StankoHired);
 

@@ -9,7 +9,7 @@ namespace AutofacApplicationWrapUp
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterInstance(new EventStoreProvider("Culaja1")).As<IEventStore>().SingleInstance();
+            builder.RegisterInstance(new EventStoreProvider("Culaja2")).As<IEventStore>().SingleInstance();
         }
     }
 }

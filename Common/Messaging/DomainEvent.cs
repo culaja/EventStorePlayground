@@ -7,12 +7,14 @@ namespace Common.Messaging
         where T : AggregateRoot
     {
         public Guid AggregateRootId { get; }
+        public ulong Version { get; }
 
         public Type AggregateRootType => typeof(T);
 
-        protected DomainEvent(Guid aggregateRootId)
+        protected DomainEvent(Guid aggregateRootId, ulong version)
         {
             AggregateRootId = aggregateRootId;
+            Version = version;
         }
 
         public TK ApplyTo<TK>(TK aggregateRoot) where TK : AggregateRoot
@@ -33,6 +35,7 @@ namespace Common.Messaging
         {
             yield return AggregateRootId;
             yield return AggregateRootType;
+            yield return Version;
         }
     }
 }
