@@ -10,8 +10,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Common\Common.csproj" />
-      <ProjectReference Include="..\Ports\Ports.csproj" />
+      <ProjectReference Include="..\..\Common\Common.csproj" />
+      <ProjectReference Include="..\..\Ports\Ports.csproj" />
     </ItemGroup>
 
 </Project>
