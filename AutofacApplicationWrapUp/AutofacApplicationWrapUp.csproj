@@ -16,6 +16,7 @@
       <ProjectReference Include="..\Domain\Domain.csproj" />
       <ProjectReference Include="..\InMemory\InMemory.csproj" />
       <ProjectReference Include="..\MongoDbEventStore\MongoDbEventStore.csproj" />
+      <ProjectReference Include="..\RabbitMqMessageBus\RabbitMqMessageBus.csproj" />
     </ItemGroup>
 
 </Project>

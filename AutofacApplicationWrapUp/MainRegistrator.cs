@@ -11,6 +11,7 @@ namespace AutofacApplicationWrapUp
             builder.RegisterModule<DomainServicesRegistrator>();
             builder.RegisterModule<EventStoreRegistrator>();
             builder.RegisterModule<RepositoryRegistrator>();
+            builder.RegisterModule<RemoteMessagingRegistrator>();
         }
     }
 }
