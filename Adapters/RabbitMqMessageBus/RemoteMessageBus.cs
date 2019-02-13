@@ -23,9 +23,9 @@ namespace RabbitMqMessageBus
         
         public IDomainEvent Send(IDomainEvent e)
         {
-            _channel.ExchangeDeclare(e.AggregateRootType.ToString(), "topic", true);
+            _channel.ExchangeDeclare(e.AggregateRootType.FullName, "topic", true);
             _channel.BasicPublish(
-                e.AggregateRootType.ToString(),
+                e.AggregateRootType.FullName,
                 Empty,
                 null,
                 e.Serialize());
@@ -36,7 +36,7 @@ namespace RabbitMqMessageBus
             where T : AggregateRoot
             where TK : IDomainEvent
         {
-            _channel.ExchangeDeclare(typeof(T).FullName, "topic");
+            _channel.ExchangeDeclare(typeof(T).FullName, "topic", true);
             var queueName = _channel.QueueDeclare().QueueName;
             _channel.QueueBind(queueName, typeof(T).FullName, "");
             var consumer = new EventingBasicConsumer(_channel);
@@ -47,6 +47,8 @@ namespace RabbitMqMessageBus
                     .OnSuccess(domainEvent => messageReceivedHandler((TK)domainEvent))
                     .OnFailure(error => Console.Write($"Error deserializing received message: {error}"));
             };
+
+            _channel.BasicConsume(queueName, true, consumer);
 
             return this;
         }

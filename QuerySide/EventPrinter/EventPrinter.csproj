@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp2.1</TargetFramework>
+        <OutputType>Exe</OutputType>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Adapters\RabbitMqMessageBus\RabbitMqMessageBus.csproj" />
+      <ProjectReference Include="..\..\Common\Common.csproj" />
+      <ProjectReference Include="..\..\Ports\Ports.csproj" />
+    </ItemGroup>
+
+</Project>
