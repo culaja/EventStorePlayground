@@ -1,9 +1,10 @@
 using System;
+using Aggregate.Student.Shared;
 using Common.Messaging;
 
 namespace RabbitMqMessageBus.Mappings
 {
-    public abstract class DomainEventDto
+    public abstract class DomainEventDto : IDomainEventDto
     {
         public Guid AggregateRootId { get; set; }
         public ulong Version { get; set; }

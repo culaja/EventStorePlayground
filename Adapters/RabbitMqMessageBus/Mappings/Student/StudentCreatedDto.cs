@@ -1,3 +1,4 @@
+using Aggregate.Student.Shared;
 using Common;
 using Common.Messaging;
 using Domain.StudentDomain.Events;
@@ -8,7 +9,7 @@ using static Domain.City;
 
 namespace RabbitMqMessageBus.Mappings.Student
 {
-    public sealed class StudentCreatedDto : DomainEventDto
+    public sealed class StudentCreatedDto : DomainEventDto, IStudentCreatedDto
     {
         public string Name { get; set; }
         public string EmailAddress { get; set; }
