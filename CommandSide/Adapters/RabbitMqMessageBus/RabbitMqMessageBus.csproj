@@ -5,9 +5,14 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+      <PackageReference Include="RabbitMQ.Client" Version="6.0.0-pre3" />
+    </ItemGroup>
+
+    <ItemGroup>
       <ProjectReference Include="..\..\Common\Common.csproj" />
-      <ProjectReference Include="..\..\CommandSide\Domain\Domain.csproj" />
       <ProjectReference Include="..\..\Ports\Ports.csproj" />
+      <ProjectReference Include="..\..\..\Shared.Aggregate.Student\Shared.Aggregate.Student.csproj" />
     </ItemGroup>
 
 </Project>

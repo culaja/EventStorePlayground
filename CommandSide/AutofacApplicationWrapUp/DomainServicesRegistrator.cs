@@ -37,7 +37,6 @@ namespace AutofacApplicationWrapUp
         private void RegisterOtherDomainServices(ContainerBuilder containerBuilder)
         {
             containerBuilder.RegisterType<AggregateConstructor>();
-            containerBuilder.RegisterType<RemoteMessageSubscriber>();
         }
     }
 }

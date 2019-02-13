@@ -1,7 +1,6 @@
 ﻿using System;
-using Domain.StudentDomain;
-using Domain.StudentDomain.Events;
-using RabbitMqMessageBus;
+using Aggregate.Student.Shared;
+using RabbitMqAdapter;
 
 namespace EventPrinter
 {
@@ -9,8 +8,8 @@ namespace EventPrinter
     {
         public static void Main(string[] args)
         {
-            var eventSubscriber = new RemoteMessageBus(new RabbitMqServerConfiguration("localhost"));
-            eventSubscriber.SubscribeTo<Student, StudentEvent>(e => Console.WriteLine($"Received: {e}"));
+            var eventSubscriber = new RabbitMqSubscriber("localhost");
+            eventSubscriber.Register<StudentEventSubscription>(e => Console.WriteLine($"Received: {e}"));
             Console.ReadLine();
         }
     }

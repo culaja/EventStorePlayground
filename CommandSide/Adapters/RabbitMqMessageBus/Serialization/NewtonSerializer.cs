@@ -1,9 +1,9 @@
 using System.Text;
 using Common;
 using Newtonsoft.Json;
-using static Newtonsoft.Json.JsonConvert;
+using Shared.Common;
 
-namespace RabbitMqMessageBus.Mappings
+namespace RabbitMqMessageBus.Serialization
 {
     public static class NewtonSerializer
     {
@@ -12,14 +12,14 @@ namespace RabbitMqMessageBus.Mappings
             TypeNameHandling = TypeNameHandling.All
         };
         
-        public static byte[] Serialize(this DomainEventDto e) => Encoding.ASCII.GetBytes(
-            SerializeObject(e, Settings));
+        public static byte[] Serialize(this SharedEvent e) => Encoding.ASCII.GetBytes(
+            JsonConvert.SerializeObject(e, Settings));
 
-        public static Result<DomainEventDto> DeserializeArray(this byte[] array)
+        public static Result<SharedEvent> DeserializeArray(this byte[] array)
         {
             try
             {
-                var domainEventDto = (DomainEventDto)DeserializeObject(
+                var domainEventDto = (SharedEvent)JsonConvert.DeserializeObject(
                     Encoding.ASCII.GetString(array),
                     Settings);
 
@@ -27,7 +27,7 @@ namespace RabbitMqMessageBus.Mappings
             }
             catch (JsonReaderException e)
             {
-                return Result.Fail<DomainEventDto>(e.Message);
+                return Result.Fail<SharedEvent>(e.Message);
             }
         }
     }

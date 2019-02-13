@@ -33,7 +33,6 @@ namespace WebApp
             var container = containerBuilder.Build();
             
             ReConstructAllAggregates(container);
-            SubscribeToRemoteMessages(container);
             
             return new AutofacServiceProvider(container);
         }
@@ -58,11 +57,6 @@ namespace WebApp
         {
             container.Resolve<AggregateConstructor>().ReconstructAllAggregates();
             
-        }
-
-        private static void SubscribeToRemoteMessages(IContainer container)
-        {
-            container.Resolve<RemoteMessageSubscriber>().SubscribeToRemoteMessages();
         }
     }
 }

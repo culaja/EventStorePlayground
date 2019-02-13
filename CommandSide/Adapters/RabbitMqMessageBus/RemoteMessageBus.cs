@@ -2,9 +2,10 @@
 using Common;
 using Common.Messaging;
 using Ports.Messaging;
-using RabbitMqMessageBus.Mappings;
+using RabbitMqMessageBus.Serialization;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using Shared.Common;
 using static System.String;
 using static RabbitMqMessageBus.RabbitMqConnectionProvider;
 
@@ -30,27 +31,6 @@ namespace RabbitMqMessageBus
                 null,
                 e.Serialize());
             return e;
-        }
-
-        public IRemoteMessageBus SubscribeTo<T, TK>(Action<TK> messageReceivedHandler)
-            where T : AggregateRoot
-            where TK : IDomainEvent
-        {
-            _channel.ExchangeDeclare(typeof(T).FullName, "topic", true);
-            var queueName = _channel.QueueDeclare().QueueName;
-            _channel.QueueBind(queueName, typeof(T).FullName, "");
-            var consumer = new EventingBasicConsumer(_channel);
-            consumer.Received += (model, ea) =>
-            {
-                var message = ea.Body;
-                message.Deserialize()
-                    .OnSuccess(domainEvent => messageReceivedHandler((TK)domainEvent))
-                    .OnFailure(error => Console.Write($"Error deserializing received message: {error}"));
-            };
-
-            _channel.BasicConsume(queueName, true, consumer);
-
-            return this;
         }
 
         public void Dispose()

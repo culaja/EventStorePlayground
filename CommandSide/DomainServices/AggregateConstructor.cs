@@ -28,22 +28,4 @@ namespace DomainServices
             Console.WriteLine("Finished applying events " + DateTime.Now);
         }
     }
-
-    public sealed class RemoteMessageSubscriber
-    {
-        private readonly IRemoteMessageBus _remoteMessageBus;
-        private readonly ILocalMessageBus _localMessageBus;
-
-        public RemoteMessageSubscriber(
-            IRemoteMessageBus remoteMessageBus,
-            ILocalMessageBus localMessageBus)
-        {
-            _remoteMessageBus = remoteMessageBus;
-            _localMessageBus = localMessageBus;
-        }
-
-        public void SubscribeToRemoteMessages()
-        {
-        }
-    }
 }
