@@ -1,4 +1,3 @@
-using Common;
 using MongoDB.Driver;
 
 namespace MongoDbEventStore

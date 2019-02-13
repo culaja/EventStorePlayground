@@ -1,11 +1,9 @@
 using System;
-using System.Configuration;
 using Common;
 using Domain;
 using Domain.StudentDomain;
 using Domain.StudentDomain.Events;
 using static System.Guid;
-using static Common.AggregateRoot;
 using static Domain.City;
 using static Domain.EmailAddress;
 using static Domain.Name;
@@ -25,7 +23,6 @@ namespace Tests
         
         public static readonly StudentCreated StankoCreated = new StudentCreated(
             StankoId,
-            typeof(Student),
             StankoName,
             StankoEmailAddress,
             Maybe<City>.None, 
@@ -48,7 +45,6 @@ namespace Tests
         
         public static readonly StudentCreated MilenkoCreated = new StudentCreated(
             StankoId,
-            typeof(Student),
             StankoName,
             StankoEmailAddress,
             Belgrade, 

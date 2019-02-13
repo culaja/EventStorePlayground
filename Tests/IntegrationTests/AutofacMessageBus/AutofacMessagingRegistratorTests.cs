@@ -25,13 +25,5 @@ namespace Tests.IntegrationTests.AutofacMessageBus
             .GetMessageHandlersFor(StankoMovedToNoviSad)
                 .Select(h => h.GetType())
                 .Should().OnlyHaveUniqueItems();
-
-        [Fact]
-        public void _2()
-        {
-            var list = new AutofacMessageResolver(_container)
-                .GetMessageHandlersFor(StankoMovedToNoviSad).ToList();
-            list.Should().ContainItemsAssignableTo<StudentPersistenceHandler>();
-        }
     }
 }

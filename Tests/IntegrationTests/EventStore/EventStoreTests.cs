@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using Autofac.Core;
 using Domain.StudentDomain;
 using FluentAssertions;
 using Mongo2Go;

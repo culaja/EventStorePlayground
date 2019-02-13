@@ -5,7 +5,6 @@ using Domain.StudentDomain;
 using Domain.StudentDomain.Events;
 using FluentAssertions;
 using Xunit;
-using static Common.AggregateRoot;
 using static Domain.City;
 using static Domain.EmailAddress;
 using static Domain.Name;
@@ -25,7 +24,6 @@ namespace Tests.UnitTests
         [Fact]
         public void _1() => _newStudent.DomainEvents.Should().Contain(new StudentCreated(
             _newStudent.Id,
-            typeof(Student),
             NameFrom("Stanko Culaja"),
             EmailAddressFrom("culaja@gmail.com"),
             Maybe<City>.From(NoviSad),

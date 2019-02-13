@@ -1,5 +1,4 @@
-﻿using System;
-using Common.Messaging;
+﻿using Common.Messaging;
 using Domain.StudentDomain.Commands;
 using Microsoft.AspNetCore.Mvc;
 using static Domain.EmailAddress;

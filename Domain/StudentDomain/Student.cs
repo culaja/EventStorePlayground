@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 using Common;
 using Domain.StudentDomain.Events;
-using static System.Guid;
 
 namespace Domain.StudentDomain
 {
@@ -45,7 +43,6 @@ namespace Domain.StudentDomain
                 isHired);
             student.ApplyChange(new StudentCreated(
                 student.Id,
-                typeof(Student),
                 student.Name,
                 student.EmailAddress,
                 student.MaybeCity,

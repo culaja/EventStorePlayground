@@ -5,9 +5,8 @@ namespace RabbitMqMessageBus.Mappings
 {
     public static class DomainEventDeserializer
     {
-        public static Result<IDomainEvent> Deserialize(this byte[] array)
-        {
-            return Result.Fail<IDomainEvent>("Nothing");
-        }
+        public static Result<IDomainEvent> Deserialize(this byte[] array) => array
+            .DeserializeArray()
+            .OnSuccess(domainEventDto => domainEventDto.ToDomainEvent());
     }
 }

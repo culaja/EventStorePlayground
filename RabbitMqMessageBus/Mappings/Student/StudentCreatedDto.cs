@@ -1,25 +1,23 @@
-using System;
 using Common;
 using Common.Messaging;
-using Domain;
 using Domain.StudentDomain.Events;
-using MongoDB.Bson.Serialization.Attributes;
+using static Common.Maybe<string>;
+using static Domain.Name;
+using static Domain.EmailAddress;
+using static Domain.City;
 
-namespace MongoDbEventStore.Mapping.StudentEvents
+namespace RabbitMqMessageBus.Mappings.Student
 {
     public sealed class StudentCreatedDto : DomainEventDto
     {
-        [BsonElement]
         public string Name { get; set; }
-        
-        [BsonElement]
         public string EmailAddress { get; set; }
-        
-        [BsonElement]
         public string City { get; set; }
-        
-        [BsonElement]
         public bool IsHired { get; set; }
+
+        public StudentCreatedDto()
+        {
+        }
         
         public StudentCreatedDto(StudentCreated e) : base(e)
         {
@@ -29,12 +27,12 @@ namespace MongoDbEventStore.Mapping.StudentEvents
             IsHired = e.IsHired;
         }
 
-        protected override IDomainEvent ConvertDomainEvent() =>
+        protected override IDomainEvent ToDomainEventInternal() =>
             new StudentCreated(
-                Guid.Parse(AggregateRootId),
-                new Name(Name),
-                new EmailAddress(EmailAddress), 
-                Maybe<string>.From(City).Map(c => new City(c)),
+                AggregateRootId,
+                NameFrom(Name), 
+                EmailAddressFrom(EmailAddress),
+                From(City).Map(s => CityFrom(s)),
                 IsHired);
     }
 }

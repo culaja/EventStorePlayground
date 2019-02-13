@@ -1,12 +1,10 @@
-using Common;
-using Domain.StudentDomain;
 using FluentAssertions;
 using InMemory;
 using Ports.Repositories;
 using Xunit;
 using static Tests.StudentsValues;
 
-namespace Tests.IntegrationTests.InMemoryRepositoryTests
+namespace Tests.IntegrationTests.InMemoryRepository
 {
     public sealed class StudentInMemoryRepositoryTests
     {

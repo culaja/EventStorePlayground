@@ -1,4 +1,3 @@
-using System;
 using Common.Messaging;
 using MongoDbEventStore.Mapping.StudentEvents;
 using MongoDB.Bson;

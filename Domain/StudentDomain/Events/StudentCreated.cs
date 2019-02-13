@@ -13,11 +13,10 @@ namespace Domain.StudentDomain.Events
 
         public StudentCreated(
             Guid aggregateRootId,
-            Type aggregateRootType,
             Name name,
             EmailAddress emailAddress,
             Maybe<City> maybeCity,
-            bool isHired) : base(aggregateRootId, aggregateRootType)
+            bool isHired) : base(aggregateRootId, typeof(Student))
         {
             Name = name;
             EmailAddress = emailAddress;

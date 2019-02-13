@@ -1,5 +1,4 @@
 using Common;
-using Domain;
 using Domain.StudentDomain;
 using Domain.StudentDomain.Events;
 using FluentAssertions;
