@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Common.Messaging
 {
-    public interface IMessageBus
+    public interface ILocalMessageBus
     {
         IReadOnlyList<IMessage> DispatchAll(IReadOnlyList<IMessage> messages);
 

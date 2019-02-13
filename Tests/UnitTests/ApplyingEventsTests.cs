@@ -14,7 +14,7 @@ namespace Tests.UnitTests
     public sealed class ApplyingEventsTests
     {
         private readonly IEventStore _eventStore = new InMemoryEventStore();
-        private readonly IRepository<Student, StudentCreated> _studentRepository = new StudentInMemoryRepository(new NoOpMessageBus());
+        private readonly IRepository<Student, StudentCreated> _studentRepository = new StudentInMemoryRepository(new NoOpLocalMessageBus());
 
         [Fact]
         public void _1()

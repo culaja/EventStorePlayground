@@ -8,7 +8,7 @@ namespace Tests.IntegrationTests.InMemoryRepository
 {
     public sealed class StudentInMemoryRepositoryTests
     {
-        private readonly IStudentRepository _studentRepository = new StudentInMemoryRepository(new NoOpMessageBus());
+        private readonly IStudentRepository _studentRepository = new StudentInMemoryRepository(new NoOpLocalMessageBus());
         
         [Fact]
         public void borrow_can_find_added_student()

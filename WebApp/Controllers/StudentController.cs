@@ -9,16 +9,16 @@ namespace WebApp.Controllers
     [ApiController]
     public class StudentController : ControllerBase
     {
-        private readonly IMessageBus _messageBus;
+        private readonly ILocalMessageBus _localMessageBus;
 
-        public StudentController(IMessageBus messageBus)
+        public StudentController(ILocalMessageBus localMessageBus)
         {
-            _messageBus = messageBus;
+            _localMessageBus = localMessageBus;
         }
         
         [HttpPost]
         [Route(nameof(AddNew))]
-        public void AddNew([FromBody] NewStudentDto newStudentDto) => _messageBus
+        public void AddNew([FromBody] NewStudentDto newStudentDto) => _localMessageBus
             .Dispatch(new AddNewStudent(
                 newStudentDto.EmailAddress.ToEmailAddress(),
                 newStudentDto.Name.ToName(),
@@ -27,14 +27,14 @@ namespace WebApp.Controllers
 
         [HttpPost]
         [Route(nameof(MoveTo))]
-        public void MoveTo([FromBody] MoveToDto moveToDto) => _messageBus
+        public void MoveTo([FromBody] MoveToDto moveToDto) => _localMessageBus
             .Dispatch(new MoveStudent(
                 moveToDto.EmailAddress.ToEmailAddress(),
                 moveToDto.City.ToCity()));
 
         [HttpPost]
         [Route(nameof(Hire))]
-        public void Hire(string emailAddress) => _messageBus
+        public void Hire(string emailAddress) => _localMessageBus
             .Dispatch(new HireStudent(EmailAddressFrom(emailAddress)));
     }
 }

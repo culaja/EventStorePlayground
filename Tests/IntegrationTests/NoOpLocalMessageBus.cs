@@ -3,7 +3,7 @@ using Common.Messaging;
 
 namespace Tests.IntegrationTests
 {
-    public sealed class NoOpMessageBus : IMessageBus
+    public sealed class NoOpLocalMessageBus : ILocalMessageBus
     {
         public IReadOnlyList<IMessage> DispatchAll(IReadOnlyList<IMessage> messages)
         {

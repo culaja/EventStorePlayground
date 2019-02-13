@@ -9,14 +9,14 @@ using Common.Messaging;
 
 namespace AutofacMessageBus
 {
-    public sealed class AutofacMessageBus : IMessageBus, IDisposable
+    public sealed class AutofacLocalMessageBus : ILocalMessageBus, IDisposable
 	{
 		private readonly BlockingCollection<IMessage> _messagesBlockingCollection = new BlockingCollection<IMessage>();
 		private readonly AutofacMessageResolver _messageResolver;
 		private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 		private readonly Thread _workerThread;
 
-		public AutofacMessageBus(
+		public AutofacLocalMessageBus(
 			IComponentContext componentContext)
 		{
 			_messageResolver = new AutofacMessageResolver(componentContext);

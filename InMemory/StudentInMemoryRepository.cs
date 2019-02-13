@@ -10,7 +10,7 @@ namespace InMemory
 {
     public sealed class StudentInMemoryRepository : InMemoryRepository<Student, StudentCreated>, IStudentRepository
     {
-        public StudentInMemoryRepository(IMessageBus messageBus) : base(messageBus)
+        public StudentInMemoryRepository(ILocalMessageBus localMessageBus) : base(localMessageBus)
         {
         }
 
