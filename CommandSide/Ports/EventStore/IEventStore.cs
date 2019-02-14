@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using Common;
 using Common.Messaging;
+using Shared.Common;
 
 namespace Ports.EventStore
 {
@@ -8,6 +8,6 @@ namespace Ports.EventStore
     {
         IDomainEvent Append(IDomainEvent domainEvent);
 
-        IEnumerable<IDomainEvent> LoadAllFor<T>() where T: AggregateRoot;
+        IEnumerable<IDomainEvent> LoadAllFor<T>() where T: IAggregateEventSubscription, new();
     }
 }

@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using Common;
 using Common.Messaging;
+using Shared.Common;
 using static Common.Result;
 
 namespace InMemory
 {
     public abstract class InMemoryRepository<T, Tk> : IRepository<T, Tk> 
         where T: AggregateRoot
-        where Tk: AggregateRootCreated
+        where Tk: IAggregateRootCreated
     {
         private readonly ILocalMessageBus _localMessageBus;
         

@@ -1,8 +1,7 @@
 using System;
+using Aggregate.Student.Shared;
 using Common;
 using Common.Messaging;
-using Domain;
-using Domain.StudentDomain.Events;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace MongoDbEventStore.Mapping.StudentEvents
@@ -25,16 +24,16 @@ namespace MongoDbEventStore.Mapping.StudentEvents
         {
             Name = e.Name.ToString();
             EmailAddress = e.EmailAddress;
-            City = e.MaybeCity.Map(c => c.ToString()).Unwrap();
+            City = e.MaybeCity.Unwrap();
             IsHired = e.IsHired;
         }
 
         protected override IDomainEvent ConvertDomainEvent() =>
             new StudentCreated(
                 Guid.Parse(AggregateRootId),
-                new Name(Name),
-                new EmailAddress(EmailAddress), 
-                Maybe<string>.From(City).Map(c => new City(c)),
+                Name,
+                EmailAddress, 
+                Maybe<string>.From(City),
                 IsHired);
     }
 }

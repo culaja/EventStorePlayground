@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace Domain.StudentDomain.Events
+namespace Aggregate.Student.Shared
 {
     public sealed class StudentHired : StudentEvent
     {

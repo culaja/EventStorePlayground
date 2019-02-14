@@ -25,7 +25,7 @@ namespace MongoDbEventStore.Mapping
         {
             Id = ObjectId.GenerateNewId();
             AggregateRootId = domainEvent.AggregateRootId.ToString();
-            AggregateRootType = domainEvent.AggregateRootType.FullName;
+            AggregateRootType = domainEvent.AggregateName;
             Version = domainEvent.Version;
         }
 

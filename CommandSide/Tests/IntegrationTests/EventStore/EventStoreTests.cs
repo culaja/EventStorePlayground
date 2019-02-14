@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using Domain.StudentDomain;
+using Aggregate.Student.Shared;
 using FluentAssertions;
 using Mongo2Go;
 using MongoDbEventStore;
@@ -34,7 +34,7 @@ namespace Tests.IntegrationTests.EventStore
             _eventStore.Append(StankoMovedToNoviSad);
             _eventStore.Append(StankoHired);
 
-            var allEvents =  _eventStore.LoadAllFor<Student>().ToList();
+            var allEvents =  _eventStore.LoadAllFor<StudentEventSubscription>().ToList();
 
             allEvents.Should().BeEquivalentTo(
                 StankoCreated,

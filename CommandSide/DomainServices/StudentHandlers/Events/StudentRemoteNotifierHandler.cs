@@ -1,6 +1,6 @@
+using Aggregate.Student.Shared;
 using Common;
 using Common.Messaging;
-using Domain.StudentDomain.Events;
 using Ports.Messaging;
 
 namespace DomainServices.StudentHandlers.Events

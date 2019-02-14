@@ -6,7 +6,7 @@ namespace Common.Messaging
     {
         Guid AggregateRootId { get; }
 
-        Type AggregateRootType { get; }
+        string AggregateName { get; }
         
         ulong Version { get; }
 

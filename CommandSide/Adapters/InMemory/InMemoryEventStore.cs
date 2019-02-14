@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Common;
 using Common.Messaging;
 using Ports.EventStore;
+using Shared.Common;
 
 namespace InMemory
 {
@@ -16,10 +16,11 @@ namespace InMemory
             return domainEvent;
         }
 
-        public IEnumerable<IDomainEvent> LoadAllFor<T>() where T : AggregateRoot
+        public IEnumerable<IDomainEvent> LoadAllFor<T>() where T : IAggregateEventSubscription, new()
         {
+            var aggregateEventSubscription = new T();
             return _allDomainEvents
-                .Where(domainEvent => domainEvent.AggregateRootType == typeof(T)).ToList();
+                .Where(domainEvent => domainEvent.AggregateName == aggregateEventSubscription.AggregateTopicName).ToList();
         }
     }
 }

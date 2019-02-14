@@ -1,6 +1,6 @@
 using System;
+using Aggregate.Student.Shared;
 using Common.Messaging;
-using Domain.StudentDomain.Events;
 using MongoDbEventStore.Mapping.StudentEvents;
 
 namespace MongoDbEventStore.Mapping

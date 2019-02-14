@@ -1,15 +1,17 @@
 using System.Linq;
 using Common;
 using Common.Messaging;
+using Shared.Common;
 
 namespace Ports.EventStore
 {
     public static class EventApplier
     {
-        public static int ApplyAllTo<T, Tk>(this IEventStore eventStore, IRepository<T, Tk> repository) 
+        public static int ApplyAllTo<T, TK, TL>(this IEventStore eventStore, IRepository<T, TK> repository) 
             where T : AggregateRoot 
-            where Tk: AggregateRootCreated => eventStore
-            .LoadAllFor<T>()
+            where TK : IAggregateRootCreated 
+            where TL : IAggregateEventSubscription, new() => eventStore
+            .LoadAllFor<TL>()
             .Select(domainEvent => HandleBasedOnType(domainEvent, repository))
             .Count();
 
@@ -17,7 +19,7 @@ namespace Ports.EventStore
             IDomainEvent domainEvent,
             IRepository<T, Tk> repository) 
             where T : AggregateRoot
-            where Tk: AggregateRootCreated
+            where Tk: IAggregateRootCreated
         {
             switch (domainEvent)
             {

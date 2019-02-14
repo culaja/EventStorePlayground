@@ -1,8 +1,8 @@
 using System;
+using Aggregate.Student.Shared;
 using Common;
 using Domain;
 using Domain.StudentDomain;
-using Domain.StudentDomain.Events;
 
 namespace Ports.Repositories
 {

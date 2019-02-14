@@ -1,12 +1,13 @@
 ﻿using System;
+using Shared.Common;
 
 namespace Common
 {
-    public interface IRepository<T, Tk>
+    public interface IRepository<T, in TK>
         where T : AggregateRoot
-        where Tk: AggregateRootCreated
+        where TK: IAggregateRootCreated
     {
-        Result<T> CreateFrom(Tk aggregateRootCreated);
+        Result<T> CreateFrom(TK aggregateRootCreated);
 
         Result<T> AddNew(T aggregateRoot);
         

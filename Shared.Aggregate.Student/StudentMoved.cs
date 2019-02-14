@@ -1,14 +1,14 @@
-﻿using System;
+using System;
 
-namespace Domain.StudentDomain.Events
+namespace Aggregate.Student.Shared
 {
     public sealed class StudentMoved : StudentEvent
     {
-        public City City { get; }
+        public string City { get; }
 
         public StudentMoved(
             Guid aggregateRootId,
-            City city) : base(aggregateRootId)
+            string city) : base(aggregateRootId)
         {
             City = city;
         }

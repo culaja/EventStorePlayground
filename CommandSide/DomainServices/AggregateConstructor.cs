@@ -1,9 +1,7 @@
 using System;
-using Common.Messaging;
+using Aggregate.Student.Shared;
 using Domain.StudentDomain;
-using Domain.StudentDomain.Events;
 using Ports.EventStore;
-using Ports.Messaging;
 using Ports.Repositories;
 
 namespace DomainServices
@@ -24,7 +22,7 @@ namespace DomainServices
         public void ReconstructAllAggregates()
         {
             Console.WriteLine("Started applying events " + DateTime.Now);
-            _eventStore.ApplyAllTo(_studentRepository);
+            _eventStore.ApplyAllTo<Student, StudentCreated, StudentEventSubscription>(_studentRepository);
             Console.WriteLine("Finished applying events " + DateTime.Now);
         }
     }

@@ -1,7 +1,6 @@
 using System;
+using Aggregate.Student.Shared;
 using Common.Messaging;
-using Domain;
-using Domain.StudentDomain.Events;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace MongoDbEventStore.Mapping.StudentEvents
@@ -19,6 +18,6 @@ namespace MongoDbEventStore.Mapping.StudentEvents
         protected override IDomainEvent ConvertDomainEvent()
             => new StudentMoved(
                 Guid.Parse(AggregateRootId),
-                new City(City));
+                City);
     }
 }

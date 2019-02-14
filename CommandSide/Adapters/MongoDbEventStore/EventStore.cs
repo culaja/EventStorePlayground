@@ -1,11 +1,11 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
-using Common;
 using Common.Messaging;
 using MongoDbEventStore.Mapping;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using Ports.EventStore;
+using Shared.Common;
 
 namespace MongoDbEventStore
 {
@@ -26,8 +26,12 @@ namespace MongoDbEventStore
             return e;
         }
 
-        public IEnumerable<IDomainEvent> LoadAllFor<T>() where T : AggregateRoot => _mongoCollection.AsQueryable()
-            .Where(e => e.AggregateRootType == typeof(T).ToString()).ToList()
-            .Select(e => e.ToDomainEvent());
+        public IEnumerable<IDomainEvent> LoadAllFor<T>() where T : IAggregateEventSubscription, new()
+        {
+            var aggregateEventSubscription = new T();
+            return _mongoCollection.AsQueryable()
+                .Where(e => e.AggregateRootType == aggregateEventSubscription.AggregateTopicName).ToList()
+                .Select(e => e.ToDomainEvent());
+        }
     }
 }

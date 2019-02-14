@@ -1,8 +1,8 @@
 ﻿using System;
+using Aggregate.Student.Shared;
 using Common;
 using Domain;
 using Domain.StudentDomain;
-using Domain.StudentDomain.Events;
 using FluentAssertions;
 using Xunit;
 using static Domain.City;
@@ -24,9 +24,9 @@ namespace Tests.UnitTests
         [Fact]
         public void _1() => _newStudent.DomainEvents.Should().Contain(new StudentCreated(
             _newStudent.Id,
-            NameFrom("Stanko Culaja"),
-            EmailAddressFrom("culaja@gmail.com"),
-            Maybe<City>.From(NoviSad),
+            "Stanko Culaja",
+            "culaja@gmail.com",
+            NoviSad.ToMaybe().Map(c => c.ToString()),
             false));
 
         [Fact]

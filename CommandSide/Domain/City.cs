@@ -28,5 +28,7 @@ namespace Domain
         {
             yield return Name;
         }
+        
+        public static implicit operator string(City city) => city.Name;
     }
 }

@@ -1,8 +1,8 @@
 using System;
+using Aggregate.Student.Shared;
 using Common;
 using Domain;
 using Domain.StudentDomain;
-using Domain.StudentDomain.Events;
 using static System.Guid;
 using static Domain.City;
 using static Domain.EmailAddress;
@@ -25,7 +25,7 @@ namespace Tests
             StankoId,
             StankoName,
             StankoEmailAddress,
-            Maybe<City>.None, 
+            Maybe<string>.None, 
             false);
 
         public static readonly Student StankoStudent = NewStudentFrom(
@@ -47,7 +47,7 @@ namespace Tests
             StankoId,
             StankoName,
             StankoEmailAddress,
-            Belgrade, 
+            Belgrade.ToString(), 
             false);
 
         public static readonly Student MilenkoStudent = NewStudentFrom(

@@ -1,4 +1,5 @@
 ﻿using System;
+using Common.Messaging;
 using Ports;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
@@ -17,7 +18,7 @@ namespace RabbitMqAdapter
             _channel = _connection.CreateModel();
         }
         
-        public IRemoteEventSubscriber Register<T>(Action<SharedEvent> messageReceivedHandler) where T : IAggregateEventSubscription, new()
+        public IRemoteEventSubscriber Register<T>(Action<IDomainEvent> messageReceivedHandler) where T : IAggregateEventSubscription, new()
         {
             var aggregateEventSubscription = new T();
             _channel.ExchangeDeclare(aggregateEventSubscription.AggregateTopicName, "topic", true);

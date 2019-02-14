@@ -25,5 +25,7 @@ namespace Domain
         {
             yield return NameAsString;
         }
+
+        public static implicit operator string(Name name) => name.NameAsString;
     }
 }

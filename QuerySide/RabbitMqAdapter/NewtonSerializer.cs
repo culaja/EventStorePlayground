@@ -1,6 +1,6 @@
 using System.Text;
+using Common.Messaging;
 using Newtonsoft.Json;
-using Shared.Common;
 
 namespace RabbitMqAdapter
 {
@@ -11,9 +11,9 @@ namespace RabbitMqAdapter
             TypeNameHandling = TypeNameHandling.All
         };
         
-        public static SharedEvent DeserializeArray(this byte[] array)
+        public static IDomainEvent DeserializeArray(this byte[] array)
         {
-            var domainEventDto = (SharedEvent)JsonConvert.DeserializeObject(
+            var domainEventDto = (IDomainEvent)JsonConvert.DeserializeObject(
                 Encoding.ASCII.GetString(array),
                 Settings);
 

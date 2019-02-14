@@ -1,11 +1,8 @@
 ﻿using System;
-using Common;
 using Common.Messaging;
 using Ports.Messaging;
 using RabbitMqMessageBus.Serialization;
 using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
-using Shared.Common;
 using static System.String;
 using static RabbitMqMessageBus.RabbitMqConnectionProvider;
 
@@ -24,9 +21,9 @@ namespace RabbitMqMessageBus
         
         public IDomainEvent Send(IDomainEvent e)
         {
-            _channel.ExchangeDeclare(e.AggregateRootType.FullName, "topic", true);
+            _channel.ExchangeDeclare(e.AggregateName, "topic", true);
             _channel.BasicPublish(
-                e.AggregateRootType.FullName,
+                e.AggregateName,
                 Empty,
                 null,
                 e.Serialize());

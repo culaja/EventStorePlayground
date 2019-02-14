@@ -3,17 +3,17 @@ using System.Collections.Generic;
 
 namespace Common.Messaging
 {
-    public abstract class DomainEvent<T> : ValueObject<DomainEvent<T>>, IDomainEvent
-        where T : AggregateRoot
+    public abstract class DomainEvent : ValueObject<DomainEvent>, IDomainEvent
     {
         public Guid AggregateRootId { get; }
+        public string AggregateName { get; }
         public ulong Version { get; private set; }
 
-        public Type AggregateRootType => typeof(T);
 
-        protected DomainEvent(Guid aggregateRootId)
+        protected DomainEvent(Guid aggregateRootId, string aggregateName)
         {
             AggregateRootId = aggregateRootId;
+            AggregateName = aggregateName;
         }
         
         public IDomainEvent SetVersion(ulong version)
@@ -28,7 +28,7 @@ namespace Common.Messaging
         protected override IEnumerable<object> GetEqualityComponents()
         {
             yield return AggregateRootId;
-            yield return AggregateRootType;
+            yield return AggregateName;
         }
     }
 }

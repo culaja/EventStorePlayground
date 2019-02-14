@@ -1,6 +1,6 @@
+using Aggregate.Student.Shared;
 using Common;
 using Domain.StudentDomain;
-using Domain.StudentDomain.Events;
 using FluentAssertions;
 using InMemory;
 using Ports.EventStore;
@@ -23,7 +23,7 @@ namespace Tests.UnitTests
             _eventStore.Append(StankoMovedToNoviSad.SetVersion(2));
             _eventStore.Append(StankoHired.SetVersion(3));
 
-            _eventStore.ApplyAllTo(_studentRepository);
+            _eventStore.ApplyAllTo<Student, StudentCreated, StudentEventSubscription>(_studentRepository);
 
             var student = _studentRepository.BorrowBy(StankoId, s => s).Value;
             

@@ -7,7 +7,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\Shared.Aggregate.Student\Shared.Aggregate.Student.csproj" />
-      <ProjectReference Include="..\..\Shared.Common\Shared.Common.csproj" />
       <ProjectReference Include="..\Ports\Ports.csproj" />
       <ProjectReference Include="..\RabbitMqAdapter\RabbitMqAdapter.csproj" />
     </ItemGroup>

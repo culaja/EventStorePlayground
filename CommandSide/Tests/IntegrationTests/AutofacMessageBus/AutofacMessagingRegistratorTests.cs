@@ -2,7 +2,6 @@ using System.Linq;
 using Autofac;
 using AutofacApplicationWrapUp;
 using AutofacMessageBus;
-using DomainServices.StudentHandlers.Events;
 using FluentAssertions;
 using Xunit;
 using static Tests.StudentsValues;

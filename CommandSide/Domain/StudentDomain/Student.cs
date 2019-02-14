@@ -1,6 +1,6 @@
 ﻿using System;
+using Aggregate.Student.Shared;
 using Common;
-using Domain.StudentDomain.Events;
 
 namespace Domain.StudentDomain
 {
@@ -9,7 +9,7 @@ namespace Domain.StudentDomain
         public Name Name { get; }
         
         public EmailAddress EmailAddress { get; }
-        public Maybe<City> MaybeCity { get; private set; } = Maybe<City>.None;
+        public Maybe<City> MaybeCity { get; private set; }
         public bool IsHired { get; private set; } = false;
         
         public Student(
@@ -45,7 +45,7 @@ namespace Domain.StudentDomain
                 student.Id,
                 student.Name,
                 student.EmailAddress,
-                student.MaybeCity,
+                student.MaybeCity.ToMaybeString(),
                 student.IsHired));
             return student;
         }
@@ -64,7 +64,7 @@ namespace Domain.StudentDomain
 
         public Student Apply(StudentMoved studentMoved)
         {
-            MaybeCity = studentMoved.City;
+            MaybeCity = studentMoved.City.ToCity();
             return this;
         }
 

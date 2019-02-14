@@ -1,9 +1,9 @@
 ﻿using System;
+using Aggregate.Student.Shared;
 using Common;
 using Common.Messaging;
 using Domain;
 using Domain.StudentDomain;
-using Domain.StudentDomain.Events;
 using Ports.Repositories;
 
 namespace InMemory
@@ -18,9 +18,9 @@ namespace InMemory
             new Student(
                 studentCreated.AggregateRootId,
                 studentCreated.Version,
-                studentCreated.Name,
-                studentCreated.EmailAddress,
-                studentCreated.MaybeCity,
+                studentCreated.Name.ToName(),
+                studentCreated.EmailAddress.ToEmailAddress(),
+                studentCreated.MaybeCity.Map(s => s.ToCity()),
                 studentCreated.IsHired);
 
         protected override void AddedNew(Student aggregateRoot) => AddNewIndex(aggregateRoot.EmailAddress, aggregateRoot);
