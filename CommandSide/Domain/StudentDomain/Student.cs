@@ -52,7 +52,7 @@ namespace Domain.StudentDomain
 
         public Student MoveTo(City city)
         {
-            ApplyChange(new StudentMoved(Id, city));
+            ApplyChange(new StudentMoved(Id, MaybeCity.ToMaybeString(), city));
             return this;
         }
 
@@ -64,7 +64,7 @@ namespace Domain.StudentDomain
 
         public Student Apply(StudentMoved studentMoved)
         {
-            MaybeCity = studentMoved.City.ToCity();
+            MaybeCity = studentMoved.MovedToCity.ToCity();
             return this;
         }
 

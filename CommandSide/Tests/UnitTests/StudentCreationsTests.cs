@@ -31,13 +31,13 @@ namespace Tests.UnitTests
 
         [Fact]
         public void _2() => _newStudent
-            .MoveTo(NoviSad)
-            .DomainEvents.Should().Contain(new StudentMoved(_newStudent.Id, NoviSad).SetVersion(_newStudent.Version));
+            .MoveTo(Belgrade)
+            .DomainEvents.Should().Contain(new StudentMoved(_newStudent.Id, NoviSad.ToString(), Belgrade).SetVersion(_newStudent.Version));
 
         [Fact]
         public void _3() => _newStudent
-            .ApplyFrom(new StudentMoved(_newStudent.Id, NoviSad).SetVersion(2)).To<Student>()
-            .MaybeCity.Should().Be(NoviSad);
+            .ApplyFrom(new StudentMoved(_newStudent.Id, NoviSad.ToString(), Belgrade).SetVersion(2)).To<Student>()
+            .MaybeCity.Should().Be(Belgrade);
 
         [Fact]
         public void _4() => _newStudent
