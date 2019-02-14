@@ -8,6 +8,8 @@ namespace Common.Messaging
         public Guid AggregateRootId { get; set; }
         public string AggregateName { get; set; }
         public ulong Version { get; set; }
+        
+        public ulong Number { get; set; }
 
 
         protected DomainEvent(Guid aggregateRootId, string aggregateName)
@@ -20,7 +22,16 @@ namespace Common.Messaging
         {
             (Version == 0).OnBoth(
                 () => Version = version,
-                () => throw new InvalidOperationException($"Version already set to {Version} and you want it to set it to {version}"));
+                () => throw new InvalidOperationException($"Version already set to {Version} and you want to set it to {version}"));
+
+            return this;
+        }
+
+        public IDomainEvent SetNumber(ulong number)
+        {
+            (Number == 0).OnBoth(
+                () => Number = number,
+                () => throw new InvalidOperationException($"Number already set to {Number} and you want to set it to {number}"));
 
             return this;
         }

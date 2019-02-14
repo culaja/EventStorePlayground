@@ -10,6 +10,10 @@ namespace Common.Messaging
         
         ulong Version { get; }
 
+        ulong Number { get; }
+
         IDomainEvent SetVersion(ulong version);
+
+        IDomainEvent SetNumber(ulong number);
     }
 }

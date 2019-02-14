@@ -12,6 +12,8 @@ namespace MongoDbEventStore
     {
         private readonly DatabaseContext _databaseContext;
         private readonly IMongoCollection<PersistedEvent> _mongoCollection;
+        
+        private readonly AggregateEventNumberTracker _aggregateEventNumberTracker = new AggregateEventNumberTracker();
 
         public EventStore(DatabaseContext databaseContext)
         {
@@ -21,6 +23,7 @@ namespace MongoDbEventStore
         
         public IDomainEvent Append(IDomainEvent e)
         {
+            e.SetNumber(_aggregateEventNumberTracker.AllocateNextEventNumberFor(e.AggregateName));
             _mongoCollection.InsertOne(new PersistedEvent(e));
             return e;
         }
@@ -31,10 +34,17 @@ namespace MongoDbEventStore
             return _mongoCollection.AsQueryable()
                 .Where(e => e.AggregateName == aggregateEventSubscription.AggregateTopicName)
                 .ToEnumerable()
-                .Select(ConvertPersistedEventToDomainEventWithoutErrorCheck);
-        }
-
+                .Select(ConvertPersistedEventToDomainEventWithoutErrorCheck)
+                .Select(UpdateEventNumberForEventAggregate);
+        } 
+        
         private static IDomainEvent ConvertPersistedEventToDomainEventWithoutErrorCheck(PersistedEvent pe) =>
             (IDomainEvent)pe.Payload.Deserialize().Value;
+
+        private IDomainEvent UpdateEventNumberForEventAggregate(IDomainEvent e)
+        {
+            _aggregateEventNumberTracker.UpdateEventNumberFor(e.AggregateName, e.Number);
+            return e;
+        }
     }
 }
