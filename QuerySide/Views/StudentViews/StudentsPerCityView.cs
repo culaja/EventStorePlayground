@@ -62,6 +62,9 @@ namespace StudentViews
                 builder.AppendLine();
             }
 
+            builder.AppendLine("*************************************************************");
+            builder.AppendLine();
+
             return builder.ToString();
         }
     }

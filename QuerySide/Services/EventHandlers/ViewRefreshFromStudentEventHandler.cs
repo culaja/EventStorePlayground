@@ -17,7 +17,7 @@ namespace Services.EventHandlers
         public override Result Handle(StudentEvent e)
         {
             _studentsPerCityView.Apply(e);
-            Console.WriteLine(e);
+            Console.WriteLine(_studentsPerCityView);
             return Result.Ok();
         }
     }
