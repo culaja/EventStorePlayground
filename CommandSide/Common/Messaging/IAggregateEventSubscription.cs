@@ -1,4 +1,4 @@
-namespace Shared.Common
+namespace Common.Messaging
 {
     public interface IAggregateEventSubscription
     {

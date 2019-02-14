@@ -1,4 +1,4 @@
-using Shared.Common;
+using Common.Messaging;
 
 namespace Aggregate.Student.Shared
 {

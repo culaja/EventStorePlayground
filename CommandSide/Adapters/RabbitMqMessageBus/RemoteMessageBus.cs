@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Text;
 using Common.Messaging;
+using Common.Messaging.Serialization;
 using Ports.Messaging;
-using RabbitMqMessageBus.Serialization;
 using RabbitMQ.Client;
 using static System.String;
 using static RabbitMqMessageBus.RabbitMqConnectionProvider;
@@ -26,7 +27,7 @@ namespace RabbitMqMessageBus
                 e.AggregateName,
                 Empty,
                 null,
-                e.Serialize());
+                Encoding.ASCII.GetBytes(e.Serialize()));
             return e;
         }
 

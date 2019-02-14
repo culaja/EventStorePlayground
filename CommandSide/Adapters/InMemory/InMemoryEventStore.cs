@@ -2,7 +2,6 @@
 using System.Linq;
 using Common.Messaging;
 using Ports.EventStore;
-using Shared.Common;
 
 namespace InMemory
 {

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Aggregate.Student.Shared
 {
@@ -11,6 +12,12 @@ namespace Aggregate.Student.Shared
             string city) : base(aggregateRootId)
         {
             City = city;
+        }
+        
+        protected override IEnumerable<object> GetEqualityComponents()
+        {
+            foreach (var item in base.GetEqualityComponents()) yield return item;
+            yield return City;
         }
     }
 }

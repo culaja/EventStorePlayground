@@ -1,6 +1,6 @@
 using System.Linq;
 using Autofac;
-using AutofacApplicationWrapUp;
+using AutofacApplicationWrapup;
 using AutofacMessageBus;
 using FluentAssertions;
 using Xunit;

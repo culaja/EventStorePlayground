@@ -8,7 +8,7 @@ using DomainServices;
 using DomainServices.StudentHandlers.Commands;
 using Module = Autofac.Module;
 
-namespace AutofacApplicationWrapUp
+namespace AutofacApplicationWrapup
 {
     public class DomainServicesRegistrator : Module
     {

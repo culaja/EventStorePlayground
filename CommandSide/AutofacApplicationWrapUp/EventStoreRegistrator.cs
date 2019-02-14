@@ -2,7 +2,7 @@ using Autofac;
 using MongoDbEventStore;
 using Ports.EventStore;
 
-namespace AutofacApplicationWrapUp
+namespace AutofacApplicationWrapup
 {
     public sealed class EventStoreRegistrator : Module
     {

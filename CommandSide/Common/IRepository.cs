@@ -1,5 +1,5 @@
 ﻿using System;
-using Shared.Common;
+using Common.Messaging;
 
 namespace Common
 {

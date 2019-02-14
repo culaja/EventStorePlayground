@@ -1,6 +1,7 @@
 using System;
+using System.Collections.Generic;
 using Common;
-using Shared.Common;
+using Common.Messaging;
 
 namespace Aggregate.Student.Shared
 {
@@ -22,6 +23,15 @@ namespace Aggregate.Student.Shared
             EmailAddress = emailAddress;
             MaybeCity = maybeCity;
             IsHired = isHired;
+        }
+
+        protected override IEnumerable<object> GetEqualityComponents()
+        {
+            foreach (var item in base.GetEqualityComponents()) yield return item;
+            yield return Name;
+            yield return EmailAddress;
+            yield return MaybeCity;
+            yield return IsHired;
         }
     }
 }

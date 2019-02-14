@@ -2,7 +2,7 @@ using Autofac;
 using InMemory;
 using Ports.Repositories;
 
-namespace AutofacApplicationWrapUp
+namespace AutofacApplicationWrapup
 {
     public sealed class RepositoryRegistrator : Module
     {

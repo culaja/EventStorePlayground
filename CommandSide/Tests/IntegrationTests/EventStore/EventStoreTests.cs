@@ -19,7 +19,8 @@ namespace Tests.IntegrationTests.EventStore
         public EventStoreTests()
         {
             var connectionString = _runner.ConnectionString;
-            _eventStore = new MongoDbEventStore.EventStore(new DatabaseContext(connectionString, NewGuid().ToString()));
+            var databaseName = NewGuid().ToString();
+            _eventStore = new MongoDbEventStore.EventStore(new DatabaseContext(connectionString, databaseName));
         }
 
         public void Dispose()

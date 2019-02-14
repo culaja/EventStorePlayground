@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Common;
 using Common.Messaging;
-using Shared.Common;
 using static Common.Result;
 
 namespace InMemory

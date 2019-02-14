@@ -1,6 +1,5 @@
 ﻿using System;
 using Common.Messaging;
-using Shared.Common;
 
 namespace Ports
 {

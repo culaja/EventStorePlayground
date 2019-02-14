@@ -1,7 +1,7 @@
 using Autofac;
 using Module = Autofac.Module;
 
-namespace AutofacApplicationWrapUp
+namespace AutofacApplicationWrapup
 {
     public sealed class MainRegistrator : Module
     {

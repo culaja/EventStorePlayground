@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Text;
+using Common;
 using Common.Messaging;
+using Common.Messaging.Serialization;
 using Ports;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using Shared.Common;
 
 namespace RabbitMqAdapter
 {
@@ -27,8 +29,10 @@ namespace RabbitMqAdapter
             var consumer = new EventingBasicConsumer(_channel);
             consumer.Received += (model, ea) =>
             {
-                var message = ea.Body;
-                messageReceivedHandler(message.DeserializeArray());
+                var messageAsString = Encoding.ASCII.GetString(ea.Body);
+                messageAsString.Deserialize()
+                    .OnSuccess(message => messageReceivedHandler(message as IDomainEvent))
+                    .OnFailure(error => Console.WriteLine($"Failed to deserialize received message: {error}"));
             };
 
             _channel.BasicConsume(queueName, true, consumer);

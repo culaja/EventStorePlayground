@@ -1,7 +1,6 @@
 using System.Linq;
 using Common;
 using Common.Messaging;
-using Shared.Common;
 
 namespace Ports.EventStore
 {

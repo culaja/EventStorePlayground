@@ -1,7 +1,7 @@
 ﻿using System;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using AutofacApplicationWrapUp;
+using AutofacApplicationWrapup;
 using DomainServices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

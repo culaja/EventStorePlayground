@@ -2,7 +2,7 @@ using Autofac;
 using Ports.Messaging;
 using RabbitMqMessageBus;
 
-namespace AutofacApplicationWrapUp
+namespace AutofacApplicationWrapup
 {
     public sealed class RemoteMessagingRegistrator : Module
     {

@@ -5,9 +5,9 @@ namespace Common.Messaging
 {
     public abstract class DomainEvent : ValueObject<DomainEvent>, IDomainEvent
     {
-        public Guid AggregateRootId { get; }
-        public string AggregateName { get; }
-        public ulong Version { get; private set; }
+        public Guid AggregateRootId { get; set; }
+        public string AggregateName { get; set; }
+        public ulong Version { get; set; }
 
 
         protected DomainEvent(Guid aggregateRootId, string aggregateName)
