@@ -1,6 +1,6 @@
 using MongoDB.Driver;
 
-namespace MongoDbEventStore
+namespace EventStore
 {
     public sealed class DatabaseContext
     {
