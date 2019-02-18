@@ -56,13 +56,13 @@ namespace Domain.StudentDomain
             return this;
         }
 
-        public Student Apply(StudentCreated _)
+        private Student Apply(StudentCreated _)
         {
             return this;
         }
         
 
-        public Student Apply(StudentMoved studentMoved)
+        private Student Apply(StudentMoved studentMoved)
         {
             MaybeCity = studentMoved.MovedToCity.ToCity();
             return this;
@@ -74,7 +74,7 @@ namespace Domain.StudentDomain
             return this;
         }
 
-        public Student Apply(StudentHired studentHired)
+        private Student Apply(StudentHired studentHired)
         {
             IsHired = true;
             return this;

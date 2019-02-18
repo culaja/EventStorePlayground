@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Common.Messaging;
 
 namespace Common
@@ -42,7 +43,7 @@ namespace Common
                 throw new InvalidOperationException($"Inconsistent state since aggregate root '{GetType().Name}' with ID '{Id} 'expected to apply event '{e.GetType().Name}' version {expectedVersion} but version {e.Version} is applied instead.");
             }
         
-            var applyMethodInfo = GetType().GetMethod("Apply", new[] { e.GetType() });
+            var applyMethodInfo = GetType().GetMethod("Apply", BindingFlags.NonPublic | BindingFlags.Instance, null,  new[] { e.GetType() }, null);
 
             if (applyMethodInfo == null)
             {
