@@ -7,16 +7,15 @@ namespace Common
 {
     public abstract class AggregateRoot
     {
-        public Guid Id { get; }
-        public ulong Version { get; private set; }
+        public AggregateId Id { get; }
+        public long Version { get; private set; }
         
         private readonly List<IDomainEvent> _domainEvents = new List<IDomainEvent>();
         public IReadOnlyList<IDomainEvent> DomainEvents => _domainEvents;
         
-        protected AggregateRoot(Guid id, ulong version)
+        protected AggregateRoot(AggregateId id)
         {
             Id = id;
-            Version = version;
         }
 
         public void ClearDomainEvents()

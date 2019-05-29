@@ -1,19 +1,9 @@
-﻿using System;
-
-namespace Common.Messaging
+﻿namespace Common.Messaging
 {
     public interface IDomainEvent : IMessage
     {
-        Guid AggregateRootId { get; }
+        long Version { get; }
 
-        string AggregateName { get; }
-        
-        ulong Version { get; }
-
-        ulong Number { get; }
-
-        IDomainEvent SetVersion(ulong version);
-
-        IDomainEvent SetNumber(ulong number);
+        IDomainEvent SetVersion(long version);
     }
 }
