@@ -14,9 +14,9 @@ namespace EventStoreAdapter
             StreamEventsSlice streamEventsSlice;
             do
             {
-                streamEventsSlice = await eventStoreConnection.ReadStreamEventsForwardAsync(streamName, 0, 10000, false);
+                streamEventsSlice = await eventStoreConnection.ReadStreamEventsForwardAsync(streamName, 0, 4096, false);
                 resolvedEvents.AddRange(streamEventsSlice.Events);
-            } while (streamEventsSlice.IsEndOfStream);
+            } while (!streamEventsSlice.IsEndOfStream);
 
             return resolvedEvents;
         }

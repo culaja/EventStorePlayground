@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Common;
 using EventStore.ClientAPI;
@@ -19,7 +20,7 @@ namespace EventStoreAdapter
                 {
                     if (_eventStoreConnectionInstance.HasNoValue)
                     {
-                        _eventStoreConnectionInstance = From(EventStoreConnection.Create(connectionString));
+                        _eventStoreConnectionInstance = From(EventStoreConnection.Create(GetConnectionBuilder(), new Uri(connectionString)));
                         return _eventStoreConnectionInstance.Value.ConnectAsync()
                             .ContinueWith(t => _eventStoreConnectionInstance.Value);
                     }
@@ -27,6 +28,13 @@ namespace EventStoreAdapter
             }
 
             return FromResult(_eventStoreConnectionInstance.Value);
+        }
+        
+        private static ConnectionSettings GetConnectionBuilder()
+        {
+            var settings = ConnectionSettings.Create()
+                .KeepReconnecting();
+            return settings;
         }
     }
 }

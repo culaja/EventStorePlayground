@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 using Common;
 using Common.Messaging;
-using EventStore.ClientAPI;
 using EventStoreAdapter.Serialization;
 using Ports;
 using static Common.Nothing;
+using static EventStore.ClientAPI.ConditionalWriteStatus;
 using static EventStoreAdapter.EventStoreConnectionProvider;
 
 namespace EventStoreAdapter
@@ -35,10 +33,24 @@ namespace EventStoreAdapter
             if (domainEvents.Count > 0)
             {
                 var connection = await GrabSingleEventStoreConnectionFor(_connectionString);
-                await connection.ConditionalAppendToStreamAsync(
+
+                var expectedVersion = domainEvents.First().Version - 1;
+                var results = await connection.ConditionalAppendToStreamAsync(
                     aggregateId.ToStreamName(),
-                    domainEvents.First().Version,
+                    expectedVersion,
                     domainEvents.Select(e => e.Serialize()));
+
+                switch (results.Status)
+                {
+                    case Succeeded:
+                        return NotAtAll;
+                    case VersionMismatch:
+                        throw new VersionMismatchException(aggregateId, expectedVersion, results.NextExpectedVersion);
+                    case StreamDeleted:
+                        throw new StreamDeletedException(aggregateId);
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
             }
             
             return NotAtAll;
