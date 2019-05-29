@@ -34,7 +34,6 @@ namespace EventStoreAdapter
         {
             if (domainEvents.Count > 0)
             {
-                ValidateThatAllEventsShareSameVersion(domainEvents);
                 var connection = await GrabSingleEventStoreConnectionFor(_connectionString);
                 await connection.ConditionalAppendToStreamAsync(
                     aggregateId.ToStreamName(),
@@ -43,14 +42,6 @@ namespace EventStoreAdapter
             }
             
             return NotAtAll;
-        }
-
-        private void ValidateThatAllEventsShareSameVersion(IReadOnlyList<IDomainEvent> domainEvents)
-        {
-            if (domainEvents.Distinct().Count() > 1)
-            {
-                throw new UncommittedDomainEventsNeedToShareSameVersionException(domainEvents);
-            };
         }
     }
 }

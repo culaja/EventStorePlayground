@@ -9,9 +9,6 @@ namespace Ports
     {
         Task<IReadOnlyList<IDomainEvent>> LoadAllEventsForAsync(AggregateId aggregateId);
 
-        Task<Nothing> AppendAsync(
-            AggregateId aggregateId, 
-            long expectedVersion, 
-            IReadOnlyList<IDomainEvent> domainEvents);
+        Task<Nothing> AppendAsync(AggregateId aggregateId, IReadOnlyList<IDomainEvent> domainEvents);
     }
 }
