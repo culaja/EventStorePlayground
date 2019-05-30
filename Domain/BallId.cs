@@ -19,8 +19,11 @@ namespace Domain
             yield return _name;
         }
 
-        public override string ToString() => $"Ball_{_name}";
+        public override string ToString() => _name;
+
+        public override string AggregateName => nameof(Ball);
 
         public static implicit operator string(BallId ballId) => ballId.ToString();
+        
     }
 }

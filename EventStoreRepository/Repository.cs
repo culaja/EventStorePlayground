@@ -34,9 +34,15 @@ namespace EventStoreRepository
         public async Task<Result> BorrowBy<T>(AggregateId aggregateId, Func<T, Result<T>> aggregateTransformer) where T : AggregateRoot, new()
         {
             var aggregateEvents = await _eventStore.LoadAllEventsForAsync(aggregateId);
-            var aggregateRoot = ReconstructAggregateFrom<T>(aggregateEvents);
-            return await aggregateTransformer(aggregateRoot)
-                .OnSuccess(a => CommitUncommittedDomainEventsFrom(a));
+
+            if (aggregateEvents.Count > 0)
+            {
+                var aggregateRoot = ReconstructAggregateFrom<T>(aggregateEvents);
+                return await aggregateTransformer(aggregateRoot)
+                    .OnSuccess(a => CommitUncommittedDomainEventsFrom(a));
+            }
+
+            return Fail($"Aggregate {typeof(T).Name} with Id '{aggregateId}' doesn't exist.");
         }
 
         private static T ReconstructAggregateFrom<T>(IReadOnlyList<IDomainEvent> domainEvents) where T : AggregateRoot, new()
@@ -53,7 +59,7 @@ namespace EventStoreRepository
                 await _eventStore.AppendAsync(
                     aggregateRoot.Id,
                     aggregateRoot.DomainEvents,
-                    aggregateRoot.Version);
+                    aggregateRoot.OriginalVersion);
                 return Ok();
             }
             catch (VersionMismatchException e)

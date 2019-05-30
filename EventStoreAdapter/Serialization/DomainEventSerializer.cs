@@ -11,7 +11,7 @@ namespace EventStoreAdapter.Serialization
         public static EventData Serialize(this IDomainEvent e) =>
             new EventData(
                 Guid.NewGuid(), 
-                e.GetType().FullName,
+                e.GetType().AssemblyQualifiedName,
                 true,
                 Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(e)),
                 null);

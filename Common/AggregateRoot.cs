@@ -15,6 +15,8 @@ namespace Common
             .Value;
         
         public long Version { get; private set; } = -1;
+
+        public long OriginalVersion => Version - DomainEvents.Count;
         
         private readonly List<IDomainEvent> _domainEvents = new List<IDomainEvent>();
         public IReadOnlyList<IDomainEvent> DomainEvents => _domainEvents;
@@ -40,9 +42,10 @@ namespace Common
             return this;
         }
         
-        protected void ApplyChange(IDomainEvent e)
+        protected AggregateRoot ApplyChange(IDomainEvent e)
         {
             ApplyChange(e, true);
+            return this;
         }
         
         private void ApplyChange(IDomainEvent e, bool isNew)
