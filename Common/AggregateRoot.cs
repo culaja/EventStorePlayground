@@ -7,16 +7,23 @@ namespace Common
 {
     public abstract class AggregateRoot
     {
-        public AggregateId Id { get; }
+        private Maybe<AggregateId> _maybeAggregateId = Maybe<AggregateId>.None;
+
+        public AggregateId Id => _maybeAggregateId
+            .Ensure(m => m.HasValue,
+                () => throw new InvalidOperationException("Aggregate Id needs to be set during object creation in order to use the aggregate."))
+            .Value;
+        
         public long Version { get; private set; } = -1;
         
         private readonly List<IDomainEvent> _domainEvents = new List<IDomainEvent>();
         public IReadOnlyList<IDomainEvent> DomainEvents => _domainEvents;
         
-        protected AggregateRoot(AggregateId id)
+        protected AggregateRoot()
         {
-            Id = id;
         }
+
+        protected void SetAggregateId(AggregateId aggregateId) => _maybeAggregateId = aggregateId;
 
         public void ClearDomainEvents()
         {

@@ -9,6 +9,7 @@
       <ProjectReference Include="..\BallEvents\BallEvents.csproj" />
       <ProjectReference Include="..\Domain\Domain.csproj" />
       <ProjectReference Include="..\EventStoreAdapter\EventStoreAdapter.csproj" />
+      <ProjectReference Include="..\EventStoreRepository\EventStoreRepository.csproj" />
     </ItemGroup>
 
 </Project>
