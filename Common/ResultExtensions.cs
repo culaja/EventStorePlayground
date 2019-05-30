@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Common
 {
@@ -103,6 +104,14 @@ namespace Common
                 return result;
 
             return func();
+        }
+
+        public static Task<Result> OnSuccess<T>(this Result<T> result, Func<T, Task<Result>> func)
+        {
+            if (result.IsFailure)
+                return Task.FromResult((Result)result);
+            
+            return func(result.Value);
         }
 
         public static Result<TValue, TError> Ensure<TValue, TError>(this Result<TValue, TError> result,

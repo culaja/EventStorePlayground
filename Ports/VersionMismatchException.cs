@@ -1,7 +1,7 @@
 using System;
 using Common;
 
-namespace EventStoreAdapter
+namespace Ports
 {
     public sealed class VersionMismatchException : Exception
     {

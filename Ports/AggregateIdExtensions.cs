@@ -1,6 +1,6 @@
 using Common;
 
-namespace EventStoreAdapter
+namespace Ports
 {
     public static class AggregateIdExtensions
     {

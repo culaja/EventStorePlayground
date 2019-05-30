@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Common.Messaging
+﻿namespace Common.Messaging
 {
     public abstract class DomainEvent : ValueObject<DomainEvent>, IDomainEvent
     {
