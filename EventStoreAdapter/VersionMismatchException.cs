@@ -5,8 +5,8 @@ namespace EventStoreAdapter
 {
     public sealed class VersionMismatchException : Exception
     {
-        public VersionMismatchException(AggregateId id, long expectedVersion, long? nextExpectedVersion)
-            : base($"Expected version for aggregate '{id.ToStreamName()}' was {expectedVersion}, but version {nextExpectedVersion} is actually expected.")
+        public VersionMismatchException(AggregateId id, string eventStoreName, long expectedVersion)
+            : base($"Expected version for aggregate '{id.ToStreamName(eventStoreName)}' is {expectedVersion}, but there is more events in the stream.")
         {
         }
     }

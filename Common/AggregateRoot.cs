@@ -36,12 +36,6 @@ namespace Common
         
         private void ApplyChange(IDomainEvent e, bool isNew)
         {
-            var expectedVersion = Version + 1;
-            if (!isNew && expectedVersion != e.Version)
-            {
-                throw new InvalidOperationException($"Inconsistent state since aggregate root '{GetType().Name}' with ID '{Id} 'expected to apply event '{e.GetType().Name}' version {expectedVersion} but version {e.Version} is applied instead.");
-            }
-        
             var applyMethodInfo = GetType().GetMethod("Apply", BindingFlags.NonPublic | BindingFlags.Instance, null,  new[] { e.GetType() }, null);
 
             if (applyMethodInfo == null)
@@ -54,7 +48,6 @@ namespace Common
             IncrementedVersion();
             if (isNew)
             {
-                e.SetVersion(Version);
                 _domainEvents.Add(e);
             }
         }

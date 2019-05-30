@@ -5,8 +5,8 @@ namespace EventStoreAdapter
 {
     public sealed class StreamDeletedException : Exception
     {
-        public StreamDeletedException(AggregateId id)
-            : base($"Stream deleted for aggregate '{id.ToStreamName()}'")
+        public StreamDeletedException(AggregateId id, string eventStoreName)
+            : base($"Stream deleted for aggregate '{id.ToStreamName(eventStoreName)}'")
         {
         }
     }
