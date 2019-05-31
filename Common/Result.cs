@@ -225,9 +225,9 @@ namespace Common
                 return Result.Fail(result.Error);
         }
 		
-        public override string ToString() => IsSuccess.OnBoth(
-            () => $"Success: {_value}",
-            () => $"Failure: {Error}");
+        public override string ToString() => IsSuccess
+            ? $"Success: {_value}"
+            : $"Failure: {Error}";
     }
 
     public class Result : ISerializable
@@ -342,8 +342,8 @@ namespace Common
             return Combine(errorMessagesSeparator, untyped);
         }
 		
-        public override string ToString() => IsSuccess.OnBoth(
-            () => $"Success",
-            () => $"Failure: {Error}");
+        public override string ToString() => IsSuccess
+            ? $"Success"
+            : $"Failure: {Error}";
     }
 }

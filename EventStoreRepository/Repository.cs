@@ -17,12 +17,11 @@ namespace EventStoreRepository
             _eventStore = eventStore;
         }
         
-        public async Task<Result> Create<T>(Func<T> aggregateCreator) where T : AggregateRoot, new()
+        public async Task<Result> InsertNew<T>(T newAggregate) where T : AggregateRoot, new()
         {
             try
             {
-                var aggregateRoot = aggregateCreator();
-                await _eventStore.AppendAsync(aggregateRoot.Id, aggregateRoot.DomainEvents, -1);
+                await _eventStore.AppendAsync(newAggregate.Id, newAggregate.DomainEvents, -1);
                 return Ok();
             }
             catch (VersionMismatchException e)

@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp2.2</TargetFramework>
+        <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.App" />
+        <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+        <PackageReference Include="Microsoft.AspNetCore.Hosting.WindowsServices" Version="2.1.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Common\Common.csproj" />
+      <ProjectReference Include="..\DomainServices\DomainServices.csproj" />
+      <ProjectReference Include="..\EventStoreAdapter\EventStoreAdapter.csproj" />
+      <ProjectReference Include="..\EventStoreRepository\EventStoreRepository.csproj" />
+    </ItemGroup>
+
+</Project>

@@ -1,5 +1,10 @@
 namespace Common.Messaging
 {
+    public interface ICommandHandler<T> where T : ICommand
+    {
+        
+    }
+    
     public abstract class MessageHandler<T> : IMessageHandler<T>, IMessageHandler
         where T : IMessage
     {

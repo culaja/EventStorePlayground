@@ -7,12 +7,12 @@ namespace Ports
     public interface IRepository
     {
         /// <summary>
-        /// Creates an aggregate by calling <see cref="aggregateCreator"/> and inserting created aggregate to the repository.
+        /// Inserts an aggregate to the repository.
         /// </summary>
-        /// <param name="aggregateCreator">Generic creator function which builds an aggregate.</param>
+        /// <param name="newAggregate">New aggregate to add to the repository.</param>
         /// <typeparam name="T"></typeparam>
-        /// <returns>Returns success if aggregate has been created and inserted to the repository; otherwise, if aggregate already exists, returns failure.</returns>
-        Task<Result> Create<T>(Func<T> aggregateCreator) where T : AggregateRoot, new();
+        /// <returns>Returns success if aggregate has been inserted to the repository; otherwise, if aggregate already exists, returns failure.</returns>
+        Task<Result> InsertNew<T>(T newAggregate) where T : AggregateRoot, new();
         
         /// <summary>
         /// Retrieves existing aggregate from the repository and executes the <see cref="aggregateTransformer"/> in

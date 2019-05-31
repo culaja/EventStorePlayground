@@ -288,13 +288,13 @@ namespace Common
 
         public static Result<T> ToFailResult<T>(this T t, string error) => Result.Fail<T>(error);
 
-        public static Result<T> ToTypedResult<T>(this Result result, T t) => result.IsSuccess.OnBoth(
-            () => Result.Ok(t),
-            () => Result.Fail<T>(result.Error));
+        public static Result<T> ToTypedResult<T>(this Result result, T t) => result.IsSuccess
+            ? Result.Ok(t)
+            : Result.Fail<T>(result.Error);
         
-        public static Result<TK> ToTypedResult<T, TK>(this Result<T> result, TK tk) => result.IsSuccess.OnBoth(
-            () => Result.Ok(tk),
-            () => Result.Fail<TK>(result.Error));
+        public static Result<TK> ToTypedResult<T, TK>(this Result<T> result, TK tk) => result.IsSuccess
+            ? Result.Ok(tk)
+            : Result.Fail<TK>(result.Error);
 
         public static Maybe<string> ToMaybeError(this Result result)
         {
