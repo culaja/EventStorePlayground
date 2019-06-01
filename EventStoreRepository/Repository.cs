@@ -21,7 +21,7 @@ namespace EventStoreRepository
         {
             try
             {
-                await _eventStore.AppendAsync(newAggregate.Id, newAggregate.DomainEvents, -1);
+                await _eventStore.AppendAsync<T>(newAggregate.Id, newAggregate.DomainEvents, -1);
                 return Ok();
             }
             catch (VersionMismatchException e)
@@ -30,15 +30,15 @@ namespace EventStoreRepository
             }
         }
 
-        public async Task<Result> BorrowBy<T>(AggregateId aggregateId, Func<T, Result<T>> aggregateTransformer) where T : AggregateRoot, new()
+        public async Task<Result> Borrow<T>(AggregateId aggregateId, Func<T, Result<T>> aggregateTransformer) where T : AggregateRoot, new()
         {
-            var aggregateEvents = await _eventStore.LoadAllEventsForAsync(aggregateId);
+            var aggregateEvents = await _eventStore.LoadAllEventsForAsync<T>(aggregateId);
 
             if (aggregateEvents.Count > 0)
             {
                 var aggregateRoot = ReconstructAggregateFrom<T>(aggregateEvents);
                 return await aggregateTransformer(aggregateRoot)
-                    .OnSuccess(a => CommitUncommittedDomainEventsFrom(a));
+                    .OnSuccess(a => CommitUncommittedDomainEventsFrom<T>(a));
             }
 
             return Fail($"Aggregate {typeof(T).Name} with Id '{aggregateId}' doesn't exist.");
@@ -51,11 +51,11 @@ namespace EventStoreRepository
             return aggregateRoot;
         }
 
-        private async Task<Result> CommitUncommittedDomainEventsFrom(AggregateRoot aggregateRoot)
+        private async Task<Result> CommitUncommittedDomainEventsFrom<T>(AggregateRoot aggregateRoot) where T : AggregateRoot, new()
         {
             try
             {
-                await _eventStore.AppendAsync(
+                await _eventStore.AppendAsync<T>(
                     aggregateRoot.Id,
                     aggregateRoot.DomainEvents,
                     aggregateRoot.OriginalVersion);

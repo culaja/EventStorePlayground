@@ -23,6 +23,6 @@ namespace Ports
         /// <param name="aggregateTransformer">Generic transformer function that will be called if aggregate exists.</param>
         /// <typeparam name="T"></typeparam>
         /// <returns>Returns success if aggregate has been found and transformer executed without errors.</returns>
-        Task<Result> BorrowBy<T>(AggregateId aggregateId, Func<T, Result<T>> aggregateTransformer) where T : AggregateRoot, new();
+        Task<Result> Borrow<T>(AggregateId aggregateId, Func<T, Result<T>> aggregateTransformer) where T : AggregateRoot, new();
     }
 }

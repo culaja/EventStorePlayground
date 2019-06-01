@@ -29,6 +29,6 @@ namespace DomainServices
             c => repository.InsertNew(NewBallWith(c.BallId, c.Size));
 
         private static Func<PassBall, Task<Result>> PassBallExecutorWith(IRepository repository) =>
-            c => repository.BorrowBy<Ball>(c.BallId, ball => ball.PassTo(c.Destination));
+            c => repository.Borrow<Ball>(c.BallId, ball => ball.PassTo(c.Destination));
     }
 }
