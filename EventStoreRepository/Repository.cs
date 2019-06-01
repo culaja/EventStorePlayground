@@ -24,9 +24,9 @@ namespace EventStoreRepository
                 await _eventStore.AppendAsync<T>(newAggregate.Id, newAggregate.DomainEvents, -1);
                 return Ok();
             }
-            catch (VersionMismatchException e)
+            catch (VersionMismatchException)
             {
-                return Fail(e.Message);
+                return Fail($"Aggregate '{typeof(T).Name}' with Id '{newAggregate.Id}' already exists in repository.");
             }
         }
 
@@ -61,9 +61,9 @@ namespace EventStoreRepository
                     aggregateRoot.OriginalVersion);
                 return Ok();
             }
-            catch (VersionMismatchException e)
+            catch (VersionMismatchException)
             {
-                return Fail(e.Message);
+                return Fail($"Race condition occurred during commiting transaction for aggregate '{typeof(T).Name}' with Id '{aggregateRoot.Id}'. Execute the command again.");
             }
         }
     }
