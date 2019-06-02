@@ -16,13 +16,16 @@ namespace EventStoreAdapter
     {
         private readonly string _connectionString;
         private readonly string _eventStoreName;
+        private readonly ILocalMessageBus _localMessageBus;
 
         public MyEventStore(
             string connectionString,
-            string eventStoreName)
+            string eventStoreName,
+            ILocalMessageBus localMessageBus)
         {
             _connectionString = connectionString;
             _eventStoreName = eventStoreName;
+            _localMessageBus = localMessageBus;
         }
         
         public async Task<IReadOnlyList<IDomainEvent>> LoadAllEventsForAsync<T>(AggregateId aggregateId) where T : AggregateRoot, new()
@@ -48,7 +51,7 @@ namespace EventStoreAdapter
                 switch (results.Status)
                 {
                     case Succeeded:
-                        return NotAtAll;
+                        break;
                     case VersionMismatch:
                         throw new VersionMismatchException(aggregateId.ToStreamName<T>(_eventStoreName), expectedVersion);
                     case StreamDeleted:
@@ -56,6 +59,8 @@ namespace EventStoreAdapter
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
+
+                _localMessageBus.DispatchAll(domainEvents);
             }
             
             return NotAtAll;

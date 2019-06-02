@@ -4,8 +4,8 @@ namespace Common.Messaging
 {
     public interface ILocalMessageBus
     {
-        IReadOnlyList<IMessage> DispatchAll(IReadOnlyList<IMessage> messages);
+        Nothing DispatchAll(IReadOnlyList<IMessage> messages);
 
-        IMessage Dispatch(IMessage message);
+        Nothing Dispatch(IMessage message);
     }
 }

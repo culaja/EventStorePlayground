@@ -16,6 +16,7 @@
       <ProjectReference Include="..\DomainServices\DomainServices.csproj" />
       <ProjectReference Include="..\EventStoreAdapter\EventStoreAdapter.csproj" />
       <ProjectReference Include="..\EventStoreRepository\EventStoreRepository.csproj" />
+      <ProjectReference Include="..\LocalMessageBusAdapter\LocalMessageBusAdapter.csproj" />
     </ItemGroup>
 
 </Project>
