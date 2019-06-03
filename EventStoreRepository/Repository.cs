@@ -26,7 +26,7 @@ namespace EventStoreRepository
             }
             catch (VersionMismatchException)
             {
-                return Fail($"Aggregate '{typeof(T).Name}' with Id '{newAggregate.Id}' already exists in repository.");
+                return Fail($"Aggregate '{typeof(T).Name}' with Id '{newAggregate.Id}' already exists in the repository.");
             }
         }
 
