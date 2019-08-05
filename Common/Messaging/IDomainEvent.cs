@@ -2,5 +2,6 @@
 {
     public interface IDomainEvent : IMessage
     {
+        string AggregateType { get; }
     }
 }

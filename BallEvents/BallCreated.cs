@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using Common.Messaging;
 
 namespace BallEvents
 {
-    public sealed class BallCreated : DomainEvent
+    public sealed class BallCreated : BallEvent
     {
         public string Name { get; }
         public int Size { get; }
@@ -16,6 +15,7 @@ namespace BallEvents
         
         protected override IEnumerable<object> GetEqualityComponents()
         {
+            foreach (var item in GetEqualityComponents()) yield return item;
             yield return Name;
             yield return Size;
         }

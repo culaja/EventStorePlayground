@@ -32,7 +32,7 @@ namespace EventStoreAdapter
         {
             var connection = await GrabSingleEventStoreConnectionFor(_connectionString);
             var resolvedEvents = await connection.ReadAllStreamEventsForward(aggregateId.ToStreamName<T>(_eventStoreName));
-            return resolvedEvents.Select(e => e.Deserialize()).ToList();
+            return resolvedEvents.Select(e => e.Event.ToDomainEvent()).ToList();
         }
 
         public async Task<Nothing> AppendAsync<T>(
@@ -46,7 +46,7 @@ namespace EventStoreAdapter
                 var results = await connection.ConditionalAppendToStreamAsync(
                     aggregateId.ToStreamName<T>(_eventStoreName),
                     expectedVersion,
-                    domainEvents.Select(e => e.Serialize()));
+                    domainEvents.Select(e => e.ToEventData()));
 
                 switch (results.Status)
                 {

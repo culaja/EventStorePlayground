@@ -3,37 +3,19 @@ using System.Text;
 using Common.Messaging;
 using EventStore.ClientAPI;
 using Newtonsoft.Json;
+using static EventStoreAdapter.Serialization.EventMetaData;
 
 namespace EventStoreAdapter.Serialization
 {
-    public static class EventSerializer
+
+    public static class IDomainEventExtensions
     {
-        public static EventData Serialize(this IDomainEvent e) =>
+        public static EventData ToEventData(this IDomainEvent e) =>
             new EventData(
                 Guid.NewGuid(), 
-                e.GetType().AssemblyQualifiedName,
+                e.GetType().Name,
                 true,
                 Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(e)),
-                null);
-
-        public static IDomainEvent Deserialize(this ResolvedEvent resolvedEvent)
-        {
-            var serializedEventString = Encoding.UTF8.GetString(resolvedEvent.Event.Data);
-            try
-            {
-                return (IDomainEvent)JsonConvert
-                    .DeserializeObject(
-                        serializedEventString,
-                        Type.GetType(resolvedEvent.Event.EventType));
-            }
-            catch (Exception ex)
-            {
-                throw new EventDeserializationException(
-                    resolvedEvent.Event.EventType,
-                    serializedEventString,
-                    resolvedEvent.Event.EventNumber,
-                    ex);
-            }
-        }
+                EventMetaDataFrom(e).ToByteArray());
     }
 }
