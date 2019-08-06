@@ -26,7 +26,7 @@ namespace EventStoreAdapter.Reading
                 throw new ArgumentException($"Invalid EventStore connection string passed: {connectionString}");
             }
             
-            return new IPEndPoint(ipAddress, port);
+            return new IPEndPoint(ipAddress, 2113);
         }
 
         public void CreateAggregateTypeProjectionFor<T>() where T : AggregateRoot
