@@ -16,16 +16,13 @@ namespace EventStoreAdapter
     {
         private readonly string _connectionString;
         private readonly string _eventStoreName;
-        private readonly ILocalMessageBus _localMessageBus;
 
         public EventStoreAppender(
             string connectionString,
-            string eventStoreName,
-            ILocalMessageBus localMessageBus)
+            string eventStoreName)
         {
             _connectionString = connectionString;
             _eventStoreName = eventStoreName;
-            _localMessageBus = localMessageBus;
         }
         
         public async Task<IReadOnlyList<IDomainEvent>> AsyncLoadAllEventsFor<T>(AggregateId aggregateId) where T : AggregateRoot, new()
@@ -59,8 +56,6 @@ namespace EventStoreAdapter
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
-
-                _localMessageBus.DispatchAll(domainEvents);
             }
             
             return NotAtAll;

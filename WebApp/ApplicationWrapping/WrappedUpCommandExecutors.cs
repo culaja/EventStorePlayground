@@ -4,11 +4,9 @@ using Common;
 using Common.Messaging;
 using EventStoreAdapter;
 using EventStoreRepository;
-using LocalMessageBusAdapter;
 using Microsoft.Extensions.Configuration;
 using Ports;
 using static DomainServices.DomainCommandExecutors;
-using static DomainServices.DomainEventHandlers;
 using static WebApp.ApplicationWrapping.ConfigurationReader;
 
 namespace WebApp.ApplicationWrapping
@@ -24,11 +22,6 @@ namespace WebApp.ApplicationWrapping
             new Repository(
                 new EventStoreAppender(
                     configurationReader.EventStoreConnectionString,
-                    configurationReader.EventStoreName,
-                    LocalMessageBusWith()));
-        
-        private static ILocalMessageBus LocalMessageBusWith() =>
-            new LocalMessageBus(
-                m => DomainEventHandlersWith()(m as IDomainEvent));
+                    configurationReader.EventStoreName));
     }
 }
