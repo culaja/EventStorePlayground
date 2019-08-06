@@ -11,22 +11,17 @@ namespace EventStoreAdapter.Reading
     {
         private readonly string _connectionString;
         private readonly string _eventStoreName;
-        private readonly AggregateTypeProjectionCreator _aggregateTypeProjectionCreator;
 
         public EventStoreSubscriber(string connectionString, string eventStoreName)
         {
             _connectionString = connectionString;
             _eventStoreName = eventStoreName;
-            _aggregateTypeProjectionCreator = new AggregateTypeProjectionCreator(connectionString, eventStoreName);
         }
         
-        public IEventStoreSubscription SubscribeToAggregateTypeEvents<T>(long lastCheckpoint = 0) where T : AggregateRoot
-        {
-            _aggregateTypeProjectionCreator.CreateAggregateTypeProjectionFor<T>();
-            return EventStoreSubscriptionFrom(
+        public IEventStoreSubscription SubscribeToAggregateTypeEvents<T>(long lastCheckpoint = 0) where T : AggregateRoot =>
+            EventStoreSubscriptionFrom(
                 AggregateTypeProjection<T>.AggregateTypeProjectionFor(_eventStoreName).StreamName,
                 lastCheckpoint);
-        }
 
         public IEventStoreSubscription SubscribeToAggregateEvents<T>(AggregateId aggregateId, long lastCheckpoint = 0) where T : AggregateRoot => 
             EventStoreSubscriptionFrom(aggregateId.ToStreamName<T>(_eventStoreName), lastCheckpoint);

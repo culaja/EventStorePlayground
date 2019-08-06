@@ -15,7 +15,7 @@ namespace EventStoreSubscriptionsTestApp
 
             var ballCreatedEventsSubscription = eventStoreSubscriber.SubscribeToEventsOfType<BallCreated>();
             var allBallEventsSubscription = eventStoreSubscriber.SubscribeToAggregateTypeEvents<Ball>();
-            var ball5Events = eventStoreSubscriber.SubscribeToAggregateEvents<Ball>(BallIdFrom("5"));
+            var ball5Events = eventStoreSubscriber.SubscribeToAggregateEvents<Ball>(BallIdFrom("1"));
             
             using (new DomainEventStreamConsoleConsumer(nameof(ballCreatedEventsSubscription), ballCreatedEventsSubscription.Stream, ""))
             using (new DomainEventStreamConsoleConsumer(nameof(allBallEventsSubscription), allBallEventsSubscription.Stream, "\t\t\t\t\t\t\t\t\t"))

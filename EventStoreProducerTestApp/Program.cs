@@ -18,7 +18,7 @@ namespace EventStoreProducerTestApp
                 var eventStore = new EventStoreAppender("tcp://localhost:1113", "Football", localMessageBus);
                 var repository = new Repository(eventStore);
 
-                var result = repository.InsertNew(NewBallWith(BallIdFrom("112"), 10)
+                var result = repository.InsertNew(NewBallWith(BallIdFrom("2"), 10)
                     .PassTo("Stanko")
                     .Value).Result;
                 Console.WriteLine(result.IsSuccess);
