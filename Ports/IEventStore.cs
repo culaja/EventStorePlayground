@@ -7,7 +7,7 @@ namespace Ports
 {
     public interface IEventStore
     {
-        Task<IReadOnlyList<IDomainEvent>> LoadAllEventsForAsync<T>(AggregateId aggregateId) where T : AggregateRoot, new();
+        Task<IReadOnlyList<IDomainEvent>> AsyncLoadAllEventsFor<T>(AggregateId aggregateId) where T : AggregateRoot, new();
 
         Task<Nothing> AppendAsync<T>(
             AggregateId aggregateId, 

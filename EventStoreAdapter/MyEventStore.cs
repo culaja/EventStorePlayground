@@ -28,7 +28,7 @@ namespace EventStoreAdapter
             _localMessageBus = localMessageBus;
         }
         
-        public async Task<IReadOnlyList<IDomainEvent>> LoadAllEventsForAsync<T>(AggregateId aggregateId) where T : AggregateRoot, new()
+        public async Task<IReadOnlyList<IDomainEvent>> AsyncLoadAllEventsFor<T>(AggregateId aggregateId) where T : AggregateRoot, new()
         {
             var connection = await GrabSingleEventStoreConnectionFor(_connectionString);
             var resolvedEvents = await connection.ReadAllStreamEventsForward(aggregateId.ToStreamName<T>(_eventStoreName));

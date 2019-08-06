@@ -32,7 +32,7 @@ namespace EventStoreRepository
 
         public async Task<Result> Borrow<T>(AggregateId aggregateId, Func<T, Result<T>> aggregateTransformer) where T : AggregateRoot, new()
         {
-            var aggregateEvents = await _eventStore.LoadAllEventsForAsync<T>(aggregateId);
+            var aggregateEvents = await _eventStore.AsyncLoadAllEventsFor<T>(aggregateId);
 
             if (aggregateEvents.Count > 0)
             {
