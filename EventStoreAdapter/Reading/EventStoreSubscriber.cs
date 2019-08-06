@@ -4,10 +4,8 @@ using Common.Messaging;
 using EventStore.ClientAPI;
 using EventStoreAdapter.Serialization;
 using Ports;
-using static EventStore.ClientAPI.CatchUpSubscriptionSettings;
-using static EventStoreAdapter.EventStoreConnectionProvider;
 
-namespace EventStoreAdapter
+namespace EventStoreAdapter.Reading
 {
     public sealed class EventStoreSubscriber : IEventStoreSubscriber
     {
@@ -31,13 +29,13 @@ namespace EventStoreAdapter
 
         private IEventStoreSubscription EventStoreSubscriptionFrom(string streamName, long lastCheckpoint)
         {
-            var connection = GrabSingleEventStoreConnectionFor(_connectionString).Result;
+            var connection = EventStoreConnectionProvider.GrabSingleEventStoreConnectionFor(_connectionString).Result;
             var eventStream = new BlockingCollection<IDomainEvent>();
             
             var catchUpSubscription = connection.SubscribeToStreamFrom(
                 streamName, 
                 lastCheckpoint == 0 ? (long?)null : lastCheckpoint, 
-                Default,
+                CatchUpSubscriptionSettings.Default,
                 (_, x) => eventStream.Add(x.Event.ToDomainEvent()));
             
             return new EventStoreSubscription(catchUpSubscription, eventStream);

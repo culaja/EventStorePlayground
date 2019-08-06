@@ -5,7 +5,7 @@ using Common.Messaging;
 using EventStore.ClientAPI;
 using Ports;
 
-namespace EventStoreAdapter
+namespace EventStoreAdapter.Reading
 {
     internal sealed class EventStoreSubscription : IEventStoreSubscription
     {

@@ -2,6 +2,7 @@
 using BallEvents;
 using Domain;
 using EventStoreAdapter;
+using EventStoreAdapter.Reading;
 using static Domain.BallId;
 
 namespace EventStoreSubscriptionsTestApp
