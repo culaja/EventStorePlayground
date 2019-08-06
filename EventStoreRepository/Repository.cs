@@ -10,9 +10,9 @@ namespace EventStoreRepository
 {
     public sealed class Repository : IRepository
     {
-        private readonly IEventStore _eventStore;
+        private readonly IEventStoreAppender _eventStore;
 
-        public Repository(IEventStore eventStore)
+        public Repository(IEventStoreAppender eventStore)
         {
             _eventStore = eventStore;
         }

@@ -24,6 +24,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocalMessageBusAdapter", "L
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectionsTestApp", "ProjectionsTestApp\ProjectionsTestApp.csproj", "{ED5EE772-9230-4791-9E33-53A3D0DF5D42}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventStoreSubscriptionsTestApp", "EventStoreSubscriptionsTestApp\EventStoreSubscriptionsTestApp.csproj", "{731849E8-ADE3-4EA1-BB3C-02743B0EB6B8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -74,9 +76,14 @@ Global
 		{ED5EE772-9230-4791-9E33-53A3D0DF5D42}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED5EE772-9230-4791-9E33-53A3D0DF5D42}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED5EE772-9230-4791-9E33-53A3D0DF5D42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{731849E8-ADE3-4EA1-BB3C-02743B0EB6B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{731849E8-ADE3-4EA1-BB3C-02743B0EB6B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{731849E8-ADE3-4EA1-BB3C-02743B0EB6B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{731849E8-ADE3-4EA1-BB3C-02743B0EB6B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{49B631AB-D08D-4749-8C24-D53ABEC42BF7} = {AFDEE8F6-4195-4542-89F8-485A165DA6F4}
 		{ED5EE772-9230-4791-9E33-53A3D0DF5D42} = {AFDEE8F6-4195-4542-89F8-485A165DA6F4}
+		{731849E8-ADE3-4EA1-BB3C-02743B0EB6B8} = {AFDEE8F6-4195-4542-89F8-485A165DA6F4}
 	EndGlobalSection
 EndGlobal

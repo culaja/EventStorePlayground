@@ -12,13 +12,13 @@ using static EventStoreAdapter.EventStoreConnectionProvider;
 
 namespace EventStoreAdapter
 {
-    public sealed class MyEventStore : IEventStore
+    public sealed class EventStoreAppender : IEventStoreAppender
     {
         private readonly string _connectionString;
         private readonly string _eventStoreName;
         private readonly ILocalMessageBus _localMessageBus;
 
-        public MyEventStore(
+        public EventStoreAppender(
             string connectionString,
             string eventStoreName,
             ILocalMessageBus localMessageBus)

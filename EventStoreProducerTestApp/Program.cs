@@ -15,10 +15,10 @@ namespace EventStoreProducerTestApp
         {
             using (var localMessageBus = new LocalMessageBus(WriteMessageHandler))
             {
-                var eventStore = new MyEventStore("tcp://localhost:1113", "Tenis", localMessageBus);
+                var eventStore = new EventStoreAppender("tcp://localhost:1113", "Football", localMessageBus);
                 var repository = new Repository(eventStore);
 
-                var result = repository.InsertNew(NewBallWith(BallIdFrom("2"), 5)
+                var result = repository.InsertNew(NewBallWith(BallIdFrom("112"), 10)
                     .PassTo("Stanko")
                     .Value).Result;
                 Console.WriteLine(result.IsSuccess);

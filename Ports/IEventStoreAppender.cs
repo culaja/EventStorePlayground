@@ -5,7 +5,7 @@ using Common.Messaging;
 
 namespace Ports
 {
-    public interface IEventStore
+    public interface IEventStoreAppender
     {
         Task<IReadOnlyList<IDomainEvent>> AsyncLoadAllEventsFor<T>(AggregateId aggregateId) where T : AggregateRoot, new();
 

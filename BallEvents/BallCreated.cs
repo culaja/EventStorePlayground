@@ -19,5 +19,7 @@ namespace BallEvents
             yield return Name;
             yield return Size;
         }
+
+        public override string ToString() => $"{nameof(BallCreated)}, {Name}, {Size}";
     }
 }

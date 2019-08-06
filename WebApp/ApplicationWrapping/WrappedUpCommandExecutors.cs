@@ -22,7 +22,7 @@ namespace WebApp.ApplicationWrapping
         
         private static IRepository BuildRepositoryUsing(ConfigurationReader configurationReader) =>
             new Repository(
-                new MyEventStore(
+                new EventStoreAppender(
                     configurationReader.EventStoreConnectionString,
                     configurationReader.EventStoreName,
                     LocalMessageBusWith()));

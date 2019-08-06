@@ -22,5 +22,7 @@ namespace BallEvents
             yield return PassFrom;
             yield return PassTo;
         }
+        
+        public override string ToString() => $"{nameof(BallPassed)}, {Name}, {PassFrom}, {PassTo}";
     }
 }
