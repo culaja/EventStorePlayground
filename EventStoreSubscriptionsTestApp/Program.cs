@@ -10,7 +10,7 @@ namespace EventStoreSubscriptionsTestApp
     {
         static void Main(string[] args)
         {
-            var eventStoreSubscriber = new EventStoreSubscriber("tcp://127.0.0.1:1113", "Football");
+            var eventStoreSubscriber = new EventStoreSubscriber("tcp://localhost:1113", "Football");
 
             var ballCreatedEventsSubscription = eventStoreSubscriber.SubscribeToEventsOfType<BallCreated>();
             var allBallEventsSubscription = eventStoreSubscriber.SubscribeToAggregateTypeEvents<Ball>();
