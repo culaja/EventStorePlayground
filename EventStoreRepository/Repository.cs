@@ -38,7 +38,7 @@ namespace EventStoreRepository
             {
                 var aggregateRoot = ReconstructAggregateFrom<T>(aggregateEvents);
                 return await aggregateTransformer(aggregateRoot)
-                    .OnSuccess(a => CommitUncommittedDomainEventsFrom<T>(a));
+                    .OnSuccess(CommitUncommittedDomainEventsFromAggregate<T>);
             }
 
             return Fail($"Aggregate {typeof(T).Name} with Id '{aggregateId}' doesn't exist.");
@@ -51,7 +51,7 @@ namespace EventStoreRepository
             return aggregateRoot;
         }
 
-        private async Task<Result> CommitUncommittedDomainEventsFrom<T>(AggregateRoot aggregateRoot) where T : AggregateRoot, new()
+        private async Task<Result> CommitUncommittedDomainEventsFromAggregate<T>(AggregateRoot aggregateRoot) where T : AggregateRoot, new()
         {
             try
             {
