@@ -36,9 +36,8 @@ namespace EventStoreRepository
 
             if (aggregateEvents.Count > 0)
             {
-                var aggregateRoot = ReconstructAggregateFrom<T>(aggregateEvents);
-                return await aggregateTransformer(aggregateRoot)
-                    .OnSuccess(CommitUncommittedDomainEventsFromAggregate<T>);
+                return await aggregateTransformer(ReconstructAggregateFrom<T>(aggregateEvents))
+                    .OnSuccess(aggregateRoot => CommitUncommittedDomainEventsFromAggregate<T>(aggregateRoot));
             }
 
             return Fail($"Aggregate {typeof(T).Name} with Id '{aggregateId}' doesn't exist.");
