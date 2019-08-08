@@ -6,7 +6,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventStoreAdapter", "EventS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ports", "Ports\Ports.csproj", "{02FA5D3A-B868-49C7-B3A9-CD395CB95785}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BallEvents", "BallEvents\BallEvents.csproj", "{B4462D70-4BC3-4510-AB33-E203406F5B69}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryEvents", "LibraryEvents\LibraryEvents.csproj", "{B4462D70-4BC3-4510-AB33-E203406F5B69}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{AFDEE8F6-4195-4542-89F8-485A165DA6F4}"
 EndProject

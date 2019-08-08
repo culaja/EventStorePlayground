@@ -1,4 +1,4 @@
-using BallEvents.BookEvents;
+using LibraryEvents.BookEvents;
 using Common;
 using static Domain.Book.BookId;
 

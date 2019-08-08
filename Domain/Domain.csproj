@@ -5,8 +5,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\BallEvents\BallEvents.csproj" />
       <ProjectReference Include="..\Common\Common.csproj" />
+      <ProjectReference Include="..\LibraryEvents\LibraryEvents.csproj" />
     </ItemGroup>
 
 </Project>

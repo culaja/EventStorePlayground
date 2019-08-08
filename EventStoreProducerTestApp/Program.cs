@@ -1,8 +1,9 @@
 ﻿using System;
 using EventStoreAdapter;
 using EventStoreRepository;
-using static Domain.Ball;
-using static Domain.BallId;
+using static Domain.Book.Book;
+using static Domain.Book.BookId;
+using static Domain.Book.YearOfPrint;
 
 namespace EventStoreProducerTestApp
 {
@@ -13,9 +14,7 @@ namespace EventStoreProducerTestApp
             var repository = new Repository(
                 new EventStoreAppender("tcp://localhost:1113", "Football"));
 
-            var result = repository.InsertNew(NewBallWith(BallIdFrom("2"), 10)
-                .PassTo("Stanko")
-                .Value).Result;
+            var result = repository.InsertNew(NewBookFrom(BookIdFrom("Lord of the rings"), YearOfPrintFrom(2010))).Result;
             Console.WriteLine(result.IsSuccess);
         }
     }

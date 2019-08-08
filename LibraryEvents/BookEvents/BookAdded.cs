@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace BallEvents.BookEvents
+namespace LibraryEvents.BookEvents
 {
     public sealed class BookAdded : BookEvent
     {
@@ -17,7 +17,7 @@ namespace BallEvents.BookEvents
 
         protected override IEnumerable<object> GetEqualityComponents()
         {
-            foreach (var item in GetEqualityComponents()) yield return item;
+            foreach (var item in base.GetEqualityComponents()) yield return item;
             yield return Name;
             yield return DateOfPrint;
         }

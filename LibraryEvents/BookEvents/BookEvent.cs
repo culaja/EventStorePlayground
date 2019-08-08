@@ -1,6 +1,6 @@
 using Common.Messaging;
 
-namespace BallEvents.BookEvents
+namespace LibraryEvents.BookEvents
 {
     public abstract class BookEvent : DomainEvent
     {
