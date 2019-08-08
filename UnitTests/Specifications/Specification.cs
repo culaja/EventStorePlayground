@@ -7,7 +7,6 @@ using Common.Messaging;
 using EventStoreRepository;
 using Ports;
 using static Common.AggregateId;
-using ICommand = System.Windows.Input.ICommand;
 
 namespace UnitTests.Specifications
 {

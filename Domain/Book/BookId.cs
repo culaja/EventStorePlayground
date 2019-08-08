@@ -8,7 +8,7 @@ namespace Domain.Book
         {
         }
 
-        public static BookId BookIdFrom(string name) => new BookId(name);
+        public static BookId BookIdFrom(string id) => new BookId(id);
 
         public static implicit operator string(BookId bookId) => bookId.ToString();
     }
