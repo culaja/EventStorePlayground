@@ -13,7 +13,7 @@ namespace Domain.Book
 
         private void Apply(BookAdded e)
         {
-            SetAggregateId(e.Id.ToBookId());
+            SetAggregateId(e.AggregateId.ToBookId());
             _name = e.Name.ToBookName();
             _yearOfPrint = e.YearOfPrint.ToYearOfPrint();
         }

@@ -7,7 +7,7 @@ namespace Ports
     {
         IEventStoreSubscription SubscribeToAggregateTypeEvents<T>(long lastCheckpoint = 0) where T : AggregateRoot;
 
-        IEventStoreSubscription SubscribeToAggregateEvents<T>(AggregateId aggregateId, long lastCheckpoint = 0) where T : AggregateRoot;
+        IEventStoreSubscription SubscribeToAggregateEvents(AggregateId aggregateId, long lastCheckpoint = 0);
 
         IEventStoreSubscription SubscribeToEventsOfType<T>(long lastCheckpoint = 0) where T : IDomainEvent;
     }

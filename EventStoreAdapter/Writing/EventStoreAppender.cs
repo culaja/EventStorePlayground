@@ -23,23 +23,23 @@ namespace EventStoreAdapter.Writing
             _eventStoreName = eventStoreName;
         }
         
-        public async Task<IReadOnlyList<IDomainEvent>> AsyncLoadAllEventsFor<T>(AggregateId aggregateId) where T : AggregateRoot, new()
+        public async Task<IReadOnlyList<IDomainEvent>> AsyncLoadAllEventsFor(AggregateId aggregateId)
         {
             var connection = await EventStoreConnectionProvider.GrabSingleEventStoreConnectionFor(_connectionString);
-            var resolvedEvents = await connection.ReadAllStreamEventsForward(aggregateId.ToStreamName<T>(_eventStoreName));
+            var resolvedEvents = await connection.ReadAllStreamEventsForward(aggregateId.ToStreamName(_eventStoreName));
             return resolvedEvents.Select(e => e.Event.ToDomainEvent()).ToList();
         }
 
-        public async Task<Nothing> AppendAsync<T>(
+        public async Task<Nothing> AppendAsync(
             AggregateId aggregateId,
             IReadOnlyList<IDomainEvent> domainEvents,
-            long expectedVersion) where T : AggregateRoot, new()
+            long expectedVersion)
         {
             if (domainEvents.Count > 0)
             {
                 var connection = await EventStoreConnectionProvider.GrabSingleEventStoreConnectionFor(_connectionString);
                 var results = await connection.ConditionalAppendToStreamAsync(
-                    aggregateId.ToStreamName<T>(_eventStoreName),
+                    aggregateId.ToStreamName(_eventStoreName),
                     expectedVersion,
                     domainEvents.Select(e => e.ToEventData()));
 
@@ -48,9 +48,9 @@ namespace EventStoreAdapter.Writing
                     case ConditionalWriteStatus.Succeeded:
                         break;
                     case ConditionalWriteStatus.VersionMismatch:
-                        throw new VersionMismatchException(aggregateId.ToStreamName<T>(_eventStoreName), expectedVersion);
+                        throw new VersionMismatchException(aggregateId.ToStreamName(_eventStoreName), expectedVersion);
                     case ConditionalWriteStatus.StreamDeleted:
-                        throw new StreamDeletedException(aggregateId.ToStreamName<T>(_eventStoreName));
+                        throw new StreamDeletedException(aggregateId.ToStreamName(_eventStoreName));
                     default:
                         throw new ArgumentOutOfRangeException();
                 }

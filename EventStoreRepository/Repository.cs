@@ -21,7 +21,7 @@ namespace EventStoreRepository
         {
             try
             {
-                await _eventStore.AppendAsync<T>(newAggregate.Id, newAggregate.DomainEvents, -1);
+                await _eventStore.AppendAsync(newAggregate.Id, newAggregate.DomainEvents, -1);
                 return Ok();
             }
             catch (VersionMismatchException)
@@ -32,7 +32,7 @@ namespace EventStoreRepository
 
         public async Task<Result> Borrow<T>(AggregateId aggregateId, Func<T, Result<T>> aggregateTransformer) where T : AggregateRoot, new()
         {
-            var aggregateEvents = await _eventStore.AsyncLoadAllEventsFor<T>(aggregateId);
+            var aggregateEvents = await _eventStore.AsyncLoadAllEventsFor(aggregateId);
 
             if (aggregateEvents.Count > 0)
             {
@@ -54,7 +54,7 @@ namespace EventStoreRepository
         {
             try
             {
-                await _eventStore.AppendAsync<T>(
+                await _eventStore.AppendAsync(
                     aggregateRoot.Id,
                     aggregateRoot.DomainEvents,
                     aggregateRoot.OriginalVersion);

@@ -23,8 +23,8 @@ namespace EventStoreAdapter.Reading
                 AggregateTypeProjection<T>.AggregateTypeProjectionFor(_eventStoreName).StreamName,
                 lastCheckpoint);
 
-        public IEventStoreSubscription SubscribeToAggregateEvents<T>(AggregateId aggregateId, long lastCheckpoint = 0) where T : AggregateRoot => 
-            EventStoreSubscriptionFrom(aggregateId.ToStreamName<T>(_eventStoreName), lastCheckpoint);
+        public IEventStoreSubscription SubscribeToAggregateEvents(AggregateId aggregateId, long lastCheckpoint = 0) => 
+            EventStoreSubscriptionFrom(aggregateId.ToStreamName(_eventStoreName), lastCheckpoint);
 
         public IEventStoreSubscription SubscribeToEventsOfType<T>(long lastCheckpoint = 0) where T : IDomainEvent => 
             EventStoreSubscriptionFrom($"$et-{typeof(T).Name}", lastCheckpoint);

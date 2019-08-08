@@ -6,14 +6,18 @@ namespace Common.Messaging
     {
         public string AggregateType { get; }
         
-        public DomainEvent(string aggregateType)
+        public string AggregateId { get; }
+        
+        public DomainEvent(string aggregateType, string aggregateId)
         {
             AggregateType = aggregateType;
+            AggregateId = aggregateId;
         }
         
         protected override IEnumerable<object> GetEqualityComponents()
         {
             yield return AggregateType;
+            yield return AggregateId;
         }
     }
 }

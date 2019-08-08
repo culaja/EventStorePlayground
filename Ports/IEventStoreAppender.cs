@@ -7,11 +7,11 @@ namespace Ports
 {
     public interface IEventStoreAppender
     {
-        Task<IReadOnlyList<IDomainEvent>> AsyncLoadAllEventsFor<T>(AggregateId aggregateId) where T : AggregateRoot, new();
+        Task<IReadOnlyList<IDomainEvent>> AsyncLoadAllEventsFor(AggregateId aggregateId);
 
-        Task<Nothing> AppendAsync<T>(
+        Task<Nothing> AppendAsync(
             AggregateId aggregateId, 
             IReadOnlyList<IDomainEvent> domainEvents,
-            long expectedVersion)  where T : AggregateRoot, new();
+            long expectedVersion);
     }
 }

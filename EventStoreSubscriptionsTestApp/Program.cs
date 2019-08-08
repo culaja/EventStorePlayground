@@ -13,7 +13,7 @@ namespace EventStoreSubscriptionsTestApp
 
             var bookAddedEventsSubscription = eventStoreSubscriber.SubscribeToEventsOfType<BookAdded>();
             var allBooksEventsSubscription = eventStoreSubscriber.SubscribeToAggregateTypeEvents<Book>();
-            var book1Events = eventStoreSubscriber.SubscribeToAggregateEvents<Book>(BookId.BookIdFrom("1"));
+            var book1Events = eventStoreSubscriber.SubscribeToAggregateEvents(BookId.BookIdFrom("1"));
             
             using (new DomainEventStreamConsoleConsumer(nameof(bookAddedEventsSubscription), bookAddedEventsSubscription.Stream, ""))
             using (new DomainEventStreamConsoleConsumer(nameof(allBooksEventsSubscription), allBooksEventsSubscription.Stream, "\t\t\t\t\t\t\t\t\t"))
