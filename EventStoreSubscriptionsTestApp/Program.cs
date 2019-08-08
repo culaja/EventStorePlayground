@@ -9,20 +9,20 @@ namespace EventStoreSubscriptionsTestApp
     {
         static void Main(string[] args)
         {
-            var eventStoreSubscriber = new EventStoreSubscriber("tcp://localhost:1113", "Football");
+            var eventStoreSubscriber = new EventStoreSubscriber("tcp://localhost:1113", "Library");
 
-            var ballCreatedEventsSubscription = eventStoreSubscriber.SubscribeToEventsOfType<BookAdded>();
-            var allBallEventsSubscription = eventStoreSubscriber.SubscribeToAggregateTypeEvents<Book>();
-            var lordOfTheRingsEvents = eventStoreSubscriber.SubscribeToAggregateEvents<Book>(BookId.BookIdFrom("Lord of the rings"));
+            var bookAddedEventsSubscription = eventStoreSubscriber.SubscribeToEventsOfType<BookAdded>();
+            var allBooksEventsSubscription = eventStoreSubscriber.SubscribeToAggregateTypeEvents<Book>();
+            var book1Events = eventStoreSubscriber.SubscribeToAggregateEvents<Book>(BookId.BookIdFrom("1"));
             
-            using (new DomainEventStreamConsoleConsumer(nameof(ballCreatedEventsSubscription), ballCreatedEventsSubscription.Stream, ""))
-            using (new DomainEventStreamConsoleConsumer(nameof(allBallEventsSubscription), allBallEventsSubscription.Stream, "\t\t\t\t\t\t\t\t\t"))
-            using (new DomainEventStreamConsoleConsumer(nameof(lordOfTheRingsEvents), lordOfTheRingsEvents.Stream, "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"))
+            using (new DomainEventStreamConsoleConsumer(nameof(bookAddedEventsSubscription), bookAddedEventsSubscription.Stream, ""))
+            using (new DomainEventStreamConsoleConsumer(nameof(allBooksEventsSubscription), allBooksEventsSubscription.Stream, "\t\t\t\t\t\t\t\t\t"))
+            using (new DomainEventStreamConsoleConsumer(nameof(book1Events), book1Events.Stream, "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"))
             {
                 Console.ReadLine();
-                ballCreatedEventsSubscription.Stop();
-                allBallEventsSubscription.Stop();
-                lordOfTheRingsEvents.Stop();
+                bookAddedEventsSubscription.Stop();
+                allBooksEventsSubscription.Stop();
+                book1Events.Stop();
             }
         }
     }

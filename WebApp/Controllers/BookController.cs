@@ -3,6 +3,7 @@ using Domain.Book.Commands;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using static Domain.Book.BookId;
+using static Domain.Book.BookName;
 using static Domain.Book.YearOfPrint;
 
 namespace WebApp.Controllers
@@ -16,9 +17,13 @@ namespace WebApp.Controllers
         
         [HttpPost]
         [Route(nameof(Add))]
-        public Task<IActionResult> Add(string name, int yearOfPrint) => 
+        public Task<IActionResult> Add(
+            string id,
+            string name,
+            int yearOfPrint) => 
             CommandExecutors(new AddBook(
-                BookIdFrom(name), 
+                BookIdFrom(id), 
+                BookNameFrom(name), 
                 YearOfPrintFrom(yearOfPrint)))
                 .ToActionResult();
     }

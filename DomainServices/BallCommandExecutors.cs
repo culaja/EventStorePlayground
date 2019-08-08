@@ -23,6 +23,6 @@ namespace DomainServices
             };
         
         private static Func<AddBook, Task<Result>> CreateBookExecutorWith(IRepository repository) => 
-            c => repository.InsertNew(Book.NewBookFrom(c.BookId, c.YearOfPrint));
+            c => repository.InsertNew(Book.NewBookFrom(c.BookId, c.BookName, c.YearOfPrint));
     }
 }

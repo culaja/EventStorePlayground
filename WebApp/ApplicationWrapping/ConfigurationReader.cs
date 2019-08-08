@@ -22,7 +22,7 @@ namespace WebApp.ApplicationWrapping
             GetStringAppConfigItemOrUseDefaultIfDoesntExist(nameof(EventStoreConnectionString), "tcp://localhost:1113");
         
         public string EventStoreName =>
-            GetStringAppConfigItemOrUseDefaultIfDoesntExist(nameof(EventStoreName), "Football");
+            GetStringAppConfigItemOrUseDefaultIfDoesntExist(nameof(EventStoreName), "Library");
         
         private string GetStringAppConfigItemOrUseDefaultIfDoesntExist(string key, string defaultValue) =>
             _maybeConfiguration
