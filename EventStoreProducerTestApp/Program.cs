@@ -1,6 +1,7 @@
 ﻿using System;
 using Domain.Book;
 using EventStoreAdapter;
+using EventStoreAdapter.Writing;
 using EventStoreRepository;
 using static Domain.Book.Book;
 using static Domain.Book.BookId;

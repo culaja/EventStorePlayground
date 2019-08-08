@@ -1,6 +1,7 @@
 using Common.Messaging;
+using Domain.Book;
 
-namespace Domain.Book.Commands
+namespace Domain.Commands
 {
     public abstract class BookCommand : ICommand
     {

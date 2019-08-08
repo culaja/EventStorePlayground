@@ -2,7 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Common;
 using Common.Messaging;
-using Domain.Book.Commands;
+using Domain.Commands;
 using Ports;
 using static DomainServices.BookCommandExecutors;
 

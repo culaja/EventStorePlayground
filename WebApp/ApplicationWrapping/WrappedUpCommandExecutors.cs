@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Common;
 using Common.Messaging;
 using EventStoreAdapter;
+using EventStoreAdapter.Writing;
 using EventStoreRepository;
 using Microsoft.Extensions.Configuration;
 using Ports;

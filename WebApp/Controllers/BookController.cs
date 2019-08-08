@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Domain.Book.Commands;
+using Domain.Commands;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using static Domain.Book.BookId;
