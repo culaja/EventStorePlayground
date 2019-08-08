@@ -2,33 +2,27 @@
 using System.Threading.Tasks;
 using Common;
 using Common.Messaging;
-using Domain;
-using Domain.Commands;
+using Domain.Book;
+using Domain.Book.Commands;
 using Ports;
-using static Domain.Ball;
 
 namespace DomainServices
 {
-    internal static class BallCommandExecutors
+    internal static class BookCommandExecutors
     {
-        public static Func<ICommand, Task<Result>> BallCommandExecutorsWith(IRepository repository) =>
+        public static Func<ICommand, Task<Result>> BookCommandExecutorsWith(IRepository repository) =>
             c =>
             {
                 switch (c)
                 {
-                    case CreateBall createBall:
-                        return CreateBallExecutorWith(repository)(createBall);
-                    case PassBall passBall:
-                        return PassBallExecutorWith(repository)(passBall);
+                    case AddBook addBook:
+                        return CreateBookExecutorWith(repository)(addBook);
                     default:
-                        throw new NotSupportedException($"Command '{c}' can't be handled by {nameof(Ball)} aggregate.");
+                        throw new NotSupportedException($"Command '{c}' can't be handled by {nameof(Book)} aggregate.");
                 }
             };
         
-        private static Func<CreateBall, Task<Result>> CreateBallExecutorWith(IRepository repository) => 
-            c => repository.InsertNew(NewBallWith(c.BallId, c.Size));
-
-        private static Func<PassBall, Task<Result>> PassBallExecutorWith(IRepository repository) =>
-            c => repository.Borrow<Ball>(c.BallId, ball => ball.PassTo(c.Destination));
+        private static Func<AddBook, Task<Result>> CreateBookExecutorWith(IRepository repository) => 
+            c => repository.InsertNew(Book.NewBookFrom(c.BookId, c.YearOfPrint));
     }
 }

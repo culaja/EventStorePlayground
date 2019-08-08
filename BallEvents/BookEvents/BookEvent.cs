@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Common.Messaging;
 
 namespace BallEvents.BookEvents
@@ -9,6 +8,4 @@ namespace BallEvents.BookEvents
         {
         }
     }
-    
-    public sealed class BookCreated
 }

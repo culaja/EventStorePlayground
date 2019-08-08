@@ -2,9 +2,9 @@ using System;
 using System.Threading.Tasks;
 using Common;
 using Common.Messaging;
-using Domain.Commands;
+using Domain.Book.Commands;
 using Ports;
-using static DomainServices.BallCommandExecutors;
+using static DomainServices.BookCommandExecutors;
 
 namespace DomainServices
 {
@@ -15,8 +15,8 @@ namespace DomainServices
             {
                 switch (c)
                 {
-                    case BallCommand ballCommand:
-                        return BallCommandExecutorsWith(repository)(c);
+                    case BookCommand bookCommand:
+                        return BookCommandExecutorsWith(repository)(c);
                     default:
                         throw new NotSupportedException($"Command '{c}' is not supported by the system.");
                 }
