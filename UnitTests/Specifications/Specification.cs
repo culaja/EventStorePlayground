@@ -6,7 +6,7 @@ using Common;
 using Common.Messaging;
 using EventStoreRepository;
 using Ports;
-using static UnitTests.Specifications.PreparedEventStoreAppendEvent;
+using static UnitTests.Specifications.GivenAggregateEvents;
 
 namespace UnitTests.Specifications
 {
@@ -28,20 +28,20 @@ namespace UnitTests.Specifications
 
         private void ApplyGivenEventsToTheEventStore()
         {
-            foreach (var preparedEventStoreAppendEvent in GroupGivenEventsPerAggregate())
+            foreach (var givenAggregateEvents in GroupGivenEventsPerAggregate())
             {
                 _eventStoreAppender.AppendAsync(
-                    preparedEventStoreAppendEvent.AggregateId,
-                    preparedEventStoreAppendEvent.EventsToAppend,
-                    preparedEventStoreAppendEvent.ExpectedVersion);
+                    givenAggregateEvents.AggregateId,
+                    givenAggregateEvents.EventsToAppend,
+                    -1);
             }
         }
         
         private void ExecuteCommandAndStoreResult() => 
             Result = When()(CommandToExecute).Result;
 
-        private IReadOnlyList<PreparedEventStoreAppendEvent> GroupGivenEventsPerAggregate() =>
-            PrepareEventsForEventStoreAppend(_givenDomainEvents);
+        private IReadOnlyList<GivenAggregateEvents> GroupGivenEventsPerAggregate() => 
+            PrepareGivenAggregateEvents(_givenDomainEvents);
 
         protected abstract T CommandToExecute { get; }
 

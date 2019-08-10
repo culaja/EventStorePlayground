@@ -5,8 +5,10 @@ using Common;
 using Common.Messaging;
 using Domain.Commands;
 using FluentAssertions;
+using LibraryEvents.BookEvents;
 using Xunit;
 using static DomainServices.DomainCommandExecutors;
+using static UnitTests.AssertionsHelpers;
 using static UnitTests.TestValues;
 
 namespace UnitTests.Specifications.BookSpecifications.LendBookSpecifications
@@ -25,5 +27,8 @@ namespace UnitTests.Specifications.BookSpecifications.LendBookSpecifications
 
         [Fact]
         public void returns_failure() => Result.IsFailure.Should().BeTrue();
+
+        [Fact]
+        public void book_is_not_lend() => ProducedEvents.Should().NotContain(EventOf<BookLendToUser>());
     }
 }

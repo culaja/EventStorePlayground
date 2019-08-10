@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Common;
 using Common.Messaging;
@@ -53,6 +54,6 @@ namespace UnitTests.Specifications
         }
 
         public IReadOnlyList<IDomainEvent> GetAllEventsStartingFrom(int position) =>
-            _allDomainEvents.GetRange(position, _allDomainEvents.Count - 1);
+            _allDomainEvents.Skip(position).ToList();
     }
 }
