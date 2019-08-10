@@ -1,6 +1,6 @@
 ﻿using System;
+using Domain;
 using LibraryEvents.BookEvents;
-using Domain.Book;
 using EventStoreAdapter.Reading;
 
 namespace EventStoreSubscriptionsTestApp

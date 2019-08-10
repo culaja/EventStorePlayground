@@ -1,12 +1,15 @@
-using LibraryEvents.BookEvents;
 using Common;
+using LibraryEvents.BookEvents;
+using static Common.Result;
 
-namespace Domain.Book
+namespace Domain
 {
     public sealed class Book : AggregateRoot
     {
         private YearOfPrint _yearOfPrint;
         private BookName _name;
+
+        private bool _isLend = false;
 
         public static Book NewBookFrom(BookId id, BookName bookName, YearOfPrint yearOfPrint) => 
             (Book)new Book().ApplyChange(new BookAdded(id, bookName, yearOfPrint));
@@ -19,5 +22,18 @@ namespace Domain.Book
         }
         
         public override string ToString() => $"{Id}: {_yearOfPrint}";
+
+        public Result<Book> LendTo(UserId borrowerUserId)
+        {
+            if (_isLend) return Fail<Book>($"Book {Id} is already lend.");
+            
+            ApplyChange(new BookLendToUser(Id, _name, borrowerUserId));
+            return Ok(this);
+        }
+
+        private void Apply(BookLendToUser e)
+        {
+            _isLend = true;
+        }
     }
 }

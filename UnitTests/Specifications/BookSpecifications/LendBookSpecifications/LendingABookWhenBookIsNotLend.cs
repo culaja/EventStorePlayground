@@ -9,24 +9,23 @@ using Xunit;
 using static DomainServices.DomainCommandExecutors;
 using static UnitTests.TestValues;
 
-namespace UnitTests.Specifications.BookSpecifications.AddBookSpecifications
+namespace UnitTests.Specifications.BookSpecifications.LendBookSpecifications
 {
-    public sealed class AddingABookWhenAnotherBookIsAdded : Specification<AddBook>
+    public sealed class LendingABookWhenBookIsNotLend : Specification<LendBook>
     {
-        protected override AddBook CommandToExecute => 
-            new AddBook(WarAndPeace2Id, WarAndPeaceName, YearOfPrint2010);
+        protected override LendBook CommandToExecute => new LendBook(WarAndPeace1Id, JohnDoeId);
+        
         protected override IEnumerable<IDomainEvent> Given()
         {
             yield return WarAndPeace1Added;
         }
 
-        protected override Func<AddBook, Task<Result>> When() => CommandExecutorsWith(Repository);
+        protected override Func<LendBook, Task<Result>> When() => CommandExecutorsWith(Repository);
 
         [Fact]
         public void returns_success() => Result.IsSuccess.Should().BeTrue();
 
         [Fact]
-        public void book_is_added() => 
-            ProducedEvents.Should().Contain(WarAndPeace2Added);
+        public void book_is_lend_to_JohnDoe() => ProducedEvents.Should().Contain(WarAndPeaceLendToJohnDoe);
     }
 }

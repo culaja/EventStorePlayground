@@ -1,18 +1,14 @@
-using static Domain.Book.BookId;
-using static Domain.Book.BookName;
-using static Domain.Book.YearOfPrint;
-
-namespace Domain.Book
+namespace Domain
 {
     public static class ToDomainObjectExtensions
     {
         public static BookId ToBookId(this string bookIdString) =>
-            BookIdFrom(bookIdString);
+            BookId.BookIdFrom(bookIdString);
         
         public static BookName ToBookName(this string bookNameString) =>
-            BookNameFrom(bookNameString);
+            BookName.BookNameFrom(bookNameString);
         
         public static YearOfPrint ToYearOfPrint(this int yearOfPrintInt) =>
-            YearOfPrintFrom(yearOfPrintInt);
+            YearOfPrint.YearOfPrintFrom(yearOfPrintInt);
     }
 }

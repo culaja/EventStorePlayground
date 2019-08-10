@@ -1,6 +1,6 @@
 using Common;
 
-namespace Domain.Book
+namespace Domain
 {
     public sealed class BookId : AggregateId
     {

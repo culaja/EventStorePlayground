@@ -1,5 +1,4 @@
 using Common.Messaging;
-using Domain.Book;
 
 namespace Domain.Commands
 {

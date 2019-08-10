@@ -1,5 +1,3 @@
-using Domain.Book;
-
 namespace Domain.Commands
 {
     public sealed class AddBook : BookCommand

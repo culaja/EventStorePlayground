@@ -9,18 +9,19 @@ using Xunit;
 using static DomainServices.DomainCommandExecutors;
 using static UnitTests.TestValues;
 
-namespace UnitTests.Specifications.BookSpecifications.AddBookSpecifications
+namespace UnitTests.Specifications.BookSpecifications.LendBookSpecifications
 {
-    public sealed class AddingABookWhenTheBookWithTheSameIdExists : Specification<AddBook>
+    public sealed class LendingABookWhenBookIsAlreadyLend : Specification<LendBook>
     {
-        protected override AddBook CommandToExecute => new AddBook(WarAndPeace1Id, WarAndPeaceName, YearOfPrint2010);
+        protected override LendBook CommandToExecute => new LendBook(WarAndPeace1Id, JohnDoeId);
         
         protected override IEnumerable<IDomainEvent> Given()
         {
             yield return WarAndPeace1Added;
+            yield return WarAndPeaceLendToJohnDoe;
         }
 
-        protected override Func<AddBook, Task<Result>> When() => CommandExecutorsWith(Repository);
+        protected override Func<LendBook, Task<Result>> When() => CommandExecutorsWith(Repository);
 
         [Fact]
         public void returns_failure() => Result.IsFailure.Should().BeTrue();

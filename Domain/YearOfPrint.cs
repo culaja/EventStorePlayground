@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Common;
 
-namespace Domain.Book
+namespace Domain
 {
     public sealed class YearOfPrint : ValueObject<YearOfPrint>
     {

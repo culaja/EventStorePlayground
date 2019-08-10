@@ -2,9 +2,9 @@
 using Domain.Commands;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using static Domain.Book.BookId;
-using static Domain.Book.BookName;
-using static Domain.Book.YearOfPrint;
+using static Domain.BookId;
+using static Domain.BookName;
+using static Domain.YearOfPrint;
 
 namespace WebApp.Controllers
 {

@@ -15,6 +15,8 @@ namespace DomainServices
             {
                 switch (c)
                 {
+                    case SagaCommand sagaCommand:
+                        return SagaCommandExecutors.SagaCommandExecutorsWith(repository)(c);
                     case BookCommand bookCommand:
                         return BookCommandExecutorsWith(repository)(c);
                     default:

@@ -1,10 +1,10 @@
 ﻿using System;
-using Domain.Book;
+using Domain;
 using EventStoreAdapter.Writing;
 using EventStoreRepository;
-using static Domain.Book.Book;
-using static Domain.Book.BookId;
-using static Domain.Book.YearOfPrint;
+using static Domain.Book;
+using static Domain.BookId;
+using static Domain.YearOfPrint;
 
 namespace EventStoreProducerTestApp
 {
