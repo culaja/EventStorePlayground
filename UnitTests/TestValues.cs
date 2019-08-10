@@ -18,7 +18,7 @@ namespace UnitTests
         public static readonly UserId JohnDoeId = UserId.UserIdFrom("johndoe@gmail.com");
         
         public static readonly BookAdded WarAndPeace1Added = new BookAdded(WarAndPeace1Id, WarAndPeaceName, YearOfPrint2010);
-        public static readonly BookLendToUser WarAndPeaceLendToJohnDoe = new BookLendToUser(WarAndPeace1Id, WarAndPeaceName, JohnDoeId);
+        public static readonly BookLentToUser WarAndPeaceLentToJohnDoe = new BookLentToUser(WarAndPeace1Id, WarAndPeaceName, JohnDoeId);
         
         public static readonly BookAdded WarAndPeace2Added = new BookAdded(WarAndPeace2Id, WarAndPeaceName, YearOfPrint2010);
     }

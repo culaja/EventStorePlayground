@@ -3,12 +3,12 @@ using System.Collections.Generic;
 namespace LibraryEvents.BookEvents
 {
     [ToString]
-    public sealed class BookLendToUser : BookEvent
+    public sealed class BookLentToUser : BookEvent
     {
         public string BookName { get; }
         public string UserId { get; }
 
-        public BookLendToUser(
+        public BookLentToUser(
             string bookId,
             string bookName,
             string userId) : base(bookId)

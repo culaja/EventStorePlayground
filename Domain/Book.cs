@@ -9,7 +9,7 @@ namespace Domain
         private YearOfPrint _yearOfPrint;
         private BookName _name;
 
-        private bool _isLend = false;
+        private bool _isLent = false;
 
         public static Book NewBookFrom(BookId id, BookName bookName, YearOfPrint yearOfPrint) => 
             (Book)new Book().ApplyChange(new BookAdded(id, bookName, yearOfPrint));
@@ -25,15 +25,15 @@ namespace Domain
 
         public Result<Book> LendTo(UserId borrowerUserId)
         {
-            if (_isLend) return Fail<Book>($"Book {Id} is already lend.");
+            if (_isLent) return Fail<Book>($"Book {Id} is already lent.");
             
-            ApplyChange(new BookLendToUser(Id, _name, borrowerUserId));
+            ApplyChange(new BookLentToUser(Id, _name, borrowerUserId));
             return Ok(this);
         }
 
-        private void Apply(BookLendToUser e)
+        private void Apply(BookLentToUser e)
         {
-            _isLend = true;
+            _isLent = true;
         }
     }
 }
