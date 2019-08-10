@@ -5,6 +5,7 @@ using Common.Messaging;
 using Domain.Commands;
 using Ports;
 using static DomainServices.BookCommandExecutors;
+using static DomainServices.UserCommandExecutors;
 
 namespace DomainServices
 {
@@ -19,6 +20,8 @@ namespace DomainServices
                         return SagaCommandExecutors.SagaCommandExecutorsWith(repository)(c);
                     case BookCommand bookCommand:
                         return BookCommandExecutorsWith(repository)(c);
+                    case UserCommand userCommand:
+                        return UserCommandExecutorsWith(repository)(c);
                     default:
                         throw new NotSupportedException($"Command '{c}' is not supported by the system.");
                 }
