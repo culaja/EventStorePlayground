@@ -34,7 +34,9 @@ namespace UnitTests.Specifications
         
         protected override IEnumerable<object> GetEqualityComponents()
         {
-            throw new NotImplementedException();
+            yield return AggregateId;
+            yield return EventsToAppend;
+            yield return ExpectedVersion;
         }
     }
 }

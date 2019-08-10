@@ -22,6 +22,12 @@ namespace UnitTests.Specifications
             Repository = new Repository(_eventStoreAppender);
             _givenDomainEvents = Given().ToList();
 
+            ApplyGivenEventsToTheEventStore();
+            ExecuteCommandAndStoreResult();
+        }
+
+        private void ApplyGivenEventsToTheEventStore()
+        {
             foreach (var preparedEventStoreAppendEvent in GroupGivenEventsPerAggregate())
             {
                 _eventStoreAppender.AppendAsync(
@@ -29,14 +35,10 @@ namespace UnitTests.Specifications
                     preparedEventStoreAppendEvent.EventsToAppend,
                     preparedEventStoreAppendEvent.ExpectedVersion);
             }
-
-            When()(CommandToExecute).Result
-                .OnBoth(r =>
-                {
-                    Result = r;
-                    return r;
-                });
         }
+        
+        private void ExecuteCommandAndStoreResult() => 
+            Result = When()(CommandToExecute).Result;
 
         private IReadOnlyList<PreparedEventStoreAppendEvent> GroupGivenEventsPerAggregate() =>
             PrepareEventsForEventStoreAppend(_givenDomainEvents);
