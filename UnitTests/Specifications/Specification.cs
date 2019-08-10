@@ -6,7 +6,7 @@ using Common;
 using Common.Messaging;
 using EventStoreRepository;
 using Ports;
-using static Common.AggregateId;
+using static UnitTests.Specifications.PreparedEventStoreAppendEvent;
 
 namespace UnitTests.Specifications
 {
@@ -22,11 +22,13 @@ namespace UnitTests.Specifications
             Repository = new Repository(_eventStoreAppender);
             _givenDomainEvents = Given().ToList();
 
-            _givenDomainEvents.GroupBy(
-                ExtractAggregateIdFromDomainEvent,
-                e => e,
-                (aggregateId, events) => _eventStoreAppender.AppendAsync(aggregateId, events.ToList(), 0).Result)
-                .ToList();
+            foreach (var preparedEventStoreAppendEvent in GroupGivenEventsPerAggregate())
+            {
+                _eventStoreAppender.AppendAsync(
+                    preparedEventStoreAppendEvent.AggregateId,
+                    preparedEventStoreAppendEvent.EventsToAppend,
+                    preparedEventStoreAppendEvent.ExpectedVersion);
+            }
 
             When()(CommandToExecute).Result
                 .OnBoth(r =>
@@ -35,7 +37,10 @@ namespace UnitTests.Specifications
                     return r;
                 });
         }
-        
+
+        private IReadOnlyList<PreparedEventStoreAppendEvent> GroupGivenEventsPerAggregate() =>
+            PrepareEventsForEventStoreAppend(_givenDomainEvents);
+
         protected abstract T CommandToExecute { get; }
 
         protected abstract IEnumerable<IDomainEvent> Given();
