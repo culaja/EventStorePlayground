@@ -5,21 +5,19 @@ using Common;
 using Common.Messaging;
 using Domain.Commands;
 using FluentAssertions;
-using LibraryEvents.BookEvents;
 using Xunit;
-using static Domain.Book.BookId;
-using static Domain.Book.BookName;
-using static Domain.Book.YearOfPrint;
 using static DomainServices.DomainCommandExecutors;
+using static UnitTests.BookTestValues;
 
-namespace UnitTests.Specifications.BookSpecifications
+namespace UnitTests.Specifications.BookSpecifications.AddBookSpecifications
 {
     public sealed class AddingABookWhenTheBookWithTheSameIdExists : Specification<AddBook>
     {
-        protected override AddBook CommandToExecute => new AddBook(BookIdFrom("1"), BookNameFrom("Lord of the rings"), YearOfPrintFrom(2010));
+        protected override AddBook CommandToExecute => new AddBook(WarAndPeace1Id, WarAndPeaceName, YearOfPrint2010);
+        
         protected override IEnumerable<IDomainEvent> Given()
         {
-            yield return new BookAdded(BookIdFrom("1"), BookNameFrom("Lord of the rings"), YearOfPrintFrom(2010));
+            yield return WarAndPeace1Added;
         }
 
         protected override Func<AddBook, Task<Result>> When() => CommandExecutorsWith(Repository);

@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Common;
 using Common.Messaging;
-using Domain.Book;
 using Domain.Commands;
 using FluentAssertions;
-using LibraryEvents.BookEvents;
 using Xunit;
 using static DomainServices.DomainCommandExecutors;
+using static UnitTests.BookTestValues;
 
-namespace UnitTests.Specifications.BookSpecifications
+namespace UnitTests.Specifications.BookSpecifications.AddBookSpecifications
 {
     public sealed class AddingABookWhenAnotherBookIsAdded : Specification<AddBook>
     {
-        protected override AddBook CommandToExecute => new AddBook(BookId.BookIdFrom("2"), BookName.BookNameFrom("Lord of the rings"), YearOfPrint.YearOfPrintFrom(2010));
+        protected override AddBook CommandToExecute => 
+            new AddBook(WarAndPeace2Id, WarAndPeaceName, YearOfPrint2010);
         protected override IEnumerable<IDomainEvent> Given()
         {
-            yield return new BookAdded(BookId.BookIdFrom("1"), BookName.BookNameFrom("Lord of the rings"), YearOfPrint.YearOfPrintFrom(2010));
+            yield return WarAndPeace1Added;
         }
 
         protected override Func<AddBook, Task<Result>> When() => CommandExecutorsWith(Repository);
@@ -27,6 +27,6 @@ namespace UnitTests.Specifications.BookSpecifications
 
         [Fact]
         public void book_is_added() => 
-            ProducedEvents.Should().Contain(new BookAdded("2", "Lord of the rings", 2010));
+            ProducedEvents.Should().Contain(WarAndPeace2Added);
     }
 }
