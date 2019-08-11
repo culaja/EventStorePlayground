@@ -2,6 +2,8 @@ using System;
 using System.Threading.Tasks;
 using Common;
 using Common.Messaging;
+using Domain.Commands;
+using DomainServices;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using static WebApp.ApplicationWrapping.WrappedUpCommandExecutors;
@@ -10,11 +12,14 @@ namespace WebApp.Controllers
 {
     public abstract class CommandController : ControllerBase
     {
-        protected Func<ICommand, Task<Result>> CommandExecutors { get; }
+        protected Func<BookCommand, Task<Result>> BookCommandExecutors { get; }
+        
+        protected Func<UserCommand, Task<Result>> UserCommandExecutors { get; }
 
         protected CommandController(IConfiguration configuration)
         {
-            CommandExecutors = DomainCommandExecutorsWith(configuration);
+            BookCommandExecutors = BookCommandExecutorsWith(configuration);
+            UserCommandExecutors = UserCommandExecutorsWith(configuration);
         }
     }
 }

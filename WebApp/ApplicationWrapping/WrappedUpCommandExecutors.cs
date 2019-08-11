@@ -2,19 +2,24 @@ using System;
 using System.Threading.Tasks;
 using Common;
 using Common.Messaging;
+using DomainServices;
 using EventStoreAdapter.Writing;
 using EventStoreRepository;
 using Microsoft.Extensions.Configuration;
 using Ports;
-using static DomainServices.DomainCommandExecutors;
 using static WebApp.ApplicationWrapping.ConfigurationReader;
 
 namespace WebApp.ApplicationWrapping
 {
     public static class WrappedUpCommandExecutors
     {
-        public static Func<ICommand, Task<Result>> DomainCommandExecutorsWith(IConfiguration configuration) => 
-            CommandExecutorsWith(
+        public static Func<ICommand, Task<Result>> BookCommandExecutorsWith(IConfiguration configuration) => 
+            BookCommandExecutors.BookCommandExecutorsWith(
+                BuildRepositoryUsing(
+                    AConfigurationReaderWith(configuration)));
+        
+        public static Func<ICommand, Task<Result>> UserCommandExecutorsWith(IConfiguration configuration) => 
+            UserCommandExecutors.UserCommandExecutorsWith(
                 BuildRepositoryUsing(
                     AConfigurationReaderWith(configuration)));
         

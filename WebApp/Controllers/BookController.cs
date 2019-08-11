@@ -21,7 +21,7 @@ namespace WebApp.Controllers
             string id,
             string name,
             int yearOfPrint) => 
-            CommandExecutors(new AddBook(
+            BookCommandExecutors(new AddBook(
                 BookIdFrom(id), 
                 BookNameFrom(name), 
                 YearOfPrintFrom(yearOfPrint)))
