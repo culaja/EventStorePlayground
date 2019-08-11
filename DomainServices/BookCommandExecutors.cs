@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Common;
 using Common.Messaging;
@@ -19,11 +20,16 @@ namespace DomainServices
                         return CreateBookExecutorWith(repository)(addBook);
                     case LendBook lendBook:
                         return LendBookExecutorWith(repository)(lendBook);
+                    case ReturnBook returnBook:
+                        return ReturnBookExecutorWith(repository)(returnBook);
                     default:
                         throw new NotSupportedException($"Command '{c}' can't be handled by {nameof(Book)} aggregate.");
                 }
             };
-        
+
+        private static Func<ReturnBook, Task<Result>> ReturnBookExecutorWith(IRepository repository) =>
+            c => repository.Borrow<Book>(c.BookId, book => book.ReturnFrom(c.UserId));
+
         private static Func<AddBook, Task<Result>> CreateBookExecutorWith(IRepository repository) => 
             c => repository.InsertNew(Book.NewBookFrom(c.BookId, c.BookName, c.YearOfPrint));
 

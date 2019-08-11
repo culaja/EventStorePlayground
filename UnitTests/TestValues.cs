@@ -1,3 +1,4 @@
+using System.Collections;
 using Domain;
 using LibraryEvents.BookEvents;
 using LibraryEvents.UserEvents;
@@ -26,6 +27,7 @@ namespace UnitTests
         
         public static readonly BookAdded WarAndPeace1Added = new BookAdded(WarAndPeace1Id, WarAndPeaceName, YearOfPrint2010);
         public static readonly BookLentToUser WarAndPeace1LentToJohnDoe = new BookLentToUser(WarAndPeace1Id, WarAndPeaceName, JohnDoeId);
+        public static readonly BookReturned WarAndPeace1IsReturnedByJohnDoe = new BookReturned(WarAndPeace1Id, WarAndPeaceName, JohnDoeId);
         
         public static readonly BookAdded WarAndPeace2Added = new BookAdded(WarAndPeace2Id, WarAndPeaceName, YearOfPrint2010);
         public static readonly BookLentToUser WarAndPeace2LentToJohnDoe = new BookLentToUser(WarAndPeace2Id, WarAndPeaceName, JohnDoeId);
@@ -34,5 +36,6 @@ namespace UnitTests
         public static readonly UserBorrowedBook JohnDoeBorrowedWarAndPeace1 = new UserBorrowedBook(JohnDoeId, JohnDoeFullName, WarAndPeace1Id);
         
         public static readonly UserAdded StankoUserAdded = new UserAdded(StankoId, StankoFullName);
+        
     }
 }

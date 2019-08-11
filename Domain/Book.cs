@@ -1,5 +1,6 @@
 using Common;
 using LibraryEvents.BookEvents;
+using static Common.Maybe<Domain.UserId>;
 using static Common.Result;
 
 namespace Domain
@@ -8,10 +9,14 @@ namespace Domain
     {
         private YearOfPrint _yearOfPrint;
         private BookName _name;
+        private Maybe<UserId> _maybeBorrowerId = None;
 
-        private bool _isLent = false;
+        private bool IsLent => _maybeBorrowerId.HasValue;
 
-        public static Book NewBookFrom(BookId id, BookName bookName, YearOfPrint yearOfPrint) => 
+        public static Book NewBookFrom(
+            BookId id, 
+            BookName bookName, 
+            YearOfPrint yearOfPrint) => 
             (Book)new Book().ApplyChange(new BookAdded(id, bookName, yearOfPrint));
 
         private void Apply(BookAdded e)
@@ -25,7 +30,7 @@ namespace Domain
 
         public Result<Book> LendTo(UserId borrowerUserId)
         {
-            if (_isLent) return Fail<Book>($"Book {Id} is already lent.");
+            if (IsLent) return Fail<Book>($"Book {Id} is already lent.");
             
             ApplyChange(new BookLentToUser(Id, _name, borrowerUserId));
             return Ok(this);
@@ -33,7 +38,23 @@ namespace Domain
 
         private void Apply(BookLentToUser e)
         {
-            _isLent = true;
+            _maybeBorrowerId = e.UserId.ToUserId();
+        }
+
+        public Result<Book> ReturnFrom(UserId borrowerId)
+        {
+            if (IsLent && _maybeBorrowerId.Value == borrowerId)
+            {
+                ApplyChange(new BookReturned(Id, _name, borrowerId));
+                return Ok(this);
+            }
+            
+            return Fail<Book>($"Book {Id} is not lent to {borrowerId}.");
+        }
+
+        private void Apply(BookReturned e)
+        {
+            _maybeBorrowerId = None;
         }
     }
 }
