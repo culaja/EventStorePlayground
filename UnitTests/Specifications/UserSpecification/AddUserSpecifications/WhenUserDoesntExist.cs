@@ -6,7 +6,7 @@ using Common.Messaging;
 using Domain.Commands;
 using FluentAssertions;
 using Xunit;
-using static DomainServices.DomainCommandExecutors;
+using static DomainServices.UserCommandExecutors;
 using static UnitTests.TestValues;
 
 namespace UnitTests.Specifications.UserSpecification.AddUserSpecifications
@@ -20,7 +20,7 @@ namespace UnitTests.Specifications.UserSpecification.AddUserSpecifications
             yield break;
         }
 
-        protected override Func<AddUser, Task<Result>> When() => CommandExecutorsWith(Repository);
+        protected override Func<AddUser, Task<Result>> When() => UserCommandExecutorsWith(Repository);
 
         [Fact]
         public void returns_failure() => Result.IsSuccess.Should().BeTrue();

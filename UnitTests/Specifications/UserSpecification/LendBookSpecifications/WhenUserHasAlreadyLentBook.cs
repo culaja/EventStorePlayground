@@ -5,30 +5,31 @@ using Common;
 using Common.Messaging;
 using Domain.Commands;
 using FluentAssertions;
-using LibraryEvents.BookEvents;
+using LibraryEvents.UserEvents;
 using Xunit;
-using static DomainServices.BookCommandExecutors;
+using static DomainServices.UserCommandExecutors;
 using static UnitTests.AssertionsHelpers;
 using static UnitTests.TestValues;
 
-namespace UnitTests.Specifications.BookSpecifications.LendBookSpecifications
+namespace UnitTests.Specifications.UserSpecification.LendBookSpecifications
 {
-    public sealed class LendingABookWhenBookIsAlreadyLent : Specification<LendBook>
+    public sealed class WhenUserHasAlreadyLentBook : Specification<LendBook>
     {
         protected override LendBook CommandToExecute => new LendBook(WarAndPeace1Id, JohnDoeId);
         
         protected override IEnumerable<IDomainEvent> Given()
         {
-            yield return WarAndPeace1Added;
-            yield return WarAndPeaceLentToJohnDoe;
+            yield return JohnDoeUserAdded;
+            yield return JohnDoeBorrowedWarAndPeace1;
         }
 
-        protected override Func<LendBook, Task<Result>> When() => BookCommandExecutorsWith(Repository);
+        protected override Func<LendBook, Task<Result>> When() => UserCommandExecutorsWith(Repository);
 
         [Fact]
         public void returns_failure() => Result.IsFailure.Should().BeTrue();
 
         [Fact]
-        public void book_is_not_lent() => ProducedEvents.Should().NotContain(EventOf<BookLentToUser>());
+        public void user_has_not_borrowed_book() =>
+            ProducedEvents.Should().NotContain(EventOf<UserBorrowedBook>());
     }
 }

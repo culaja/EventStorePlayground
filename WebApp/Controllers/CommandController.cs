@@ -4,7 +4,7 @@ using Common;
 using Common.Messaging;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using WebApp.ApplicationWrapping;
+using static WebApp.ApplicationWrapping.WrappedUpCommandExecutors;
 
 namespace WebApp.Controllers
 {
@@ -14,7 +14,7 @@ namespace WebApp.Controllers
 
         protected CommandController(IConfiguration configuration)
         {
-            CommandExecutors = WrappedUpCommandExecutors.DomainCommandExecutorsWith(configuration);
+            CommandExecutors = DomainCommandExecutorsWith(configuration);
         }
     }
 }

@@ -305,5 +305,16 @@ namespace Common
             
             return Maybe<string>.None;
         }
+
+        public static async Task<Result> OnSuccess(this Task<Result> resultTask, Func<Task<Result>> transformer)
+        {
+            var result = await resultTask;
+            if (result.IsSuccess)
+            {
+                return await transformer();
+            }
+
+            return result;
+        }
     }
 }

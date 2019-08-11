@@ -8,7 +8,7 @@ using Ports;
 
 namespace DomainServices
 {
-    internal static class UserCommandExecutors
+    public static class UserCommandExecutors
     {
         public static Func<ICommand, Task<Result>> UserCommandExecutorsWith(IRepository repository) =>
             c =>
@@ -17,6 +17,8 @@ namespace DomainServices
                 {
                     case AddUser addUser:
                         return AddUserExecutorWith(repository)(addUser);
+                    case LendBook lendBook:
+                        return LendBookExecutorWith(repository)(lendBook);
                     default:
                         throw new NotSupportedException($"Command '{c}' can't be handled by {nameof(User)} aggregate.");
                 }
@@ -24,5 +26,8 @@ namespace DomainServices
         
         private static Func<AddUser, Task<Result>> AddUserExecutorWith(IRepository repository) => 
             c => repository.InsertNew(User.NewUserFrom(c.UserId, c.FullName));
+        
+        private static Func<LendBook, Task<Result>> LendBookExecutorWith(IRepository repository) => 
+            c => repository.Borrow<User>(c.BorrowerUserId, user => user.BorrowBook(c.BookToLendId));
     }
 }
