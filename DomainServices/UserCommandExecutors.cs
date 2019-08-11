@@ -30,6 +30,4 @@ namespace DomainServices
         private static Func<LendBook, Task<Result>> LendBookExecutorWith(IRepository repository) => 
             c => repository.Borrow<User>(c.BorrowerUserId, user => user.BorrowBook(c.BookToLendId));
     }
-    
-    public static class SagaCommandE
 }

@@ -20,7 +20,7 @@ namespace UnitTests.Specifications.BookSpecifications.LendBookSpecifications
         protected override IEnumerable<IDomainEvent> Given()
         {
             yield return WarAndPeace1Added;
-            yield return WarAndPeaceLentToJohnDoe;
+            yield return WarAndPeace1LentToJohnDoe;
         }
 
         protected override Func<LendBook, Task<Result>> When() => BookCommandExecutorsWith(Repository);

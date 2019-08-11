@@ -26,6 +26,6 @@ namespace UnitTests.Specifications.BookSpecifications.LendBookSpecifications
         public void returns_success() => Result.IsSuccess.Should().BeTrue();
 
         [Fact]
-        public void book_is_lent_to_JohnDoe() => ProducedEvents.Should().Contain(WarAndPeaceLentToJohnDoe);
+        public void book_is_lent_to_JohnDoe() => ProducedEvents.Should().Contain(WarAndPeace1LentToJohnDoe);
     }
 }
