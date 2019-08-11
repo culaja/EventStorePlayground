@@ -15,6 +15,8 @@ namespace WebApp.Controllers
         protected Func<BookCommand, Task<Result>> BookCommandExecutors { get; }
         
         protected Func<UserCommand, Task<Result>> UserCommandExecutors { get; }
+        
+        protected Func<SagaCommand, Task<Result>> SagaCommandExecutors { get; }
 
         protected CommandController(IConfiguration configuration)
         {
