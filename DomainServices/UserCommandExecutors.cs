@@ -19,6 +19,8 @@ namespace DomainServices
                         return AddUserExecutorWith(repository)(addUser);
                     case LendBook lendBook:
                         return LendBookExecutorWith(repository)(lendBook);
+                    case ReturnBook returnBook:
+                        return ReturnBookExecutorWith(repository)(returnBook);
                     default:
                         throw new NotSupportedException($"Command '{c}' can't be handled by {nameof(User)} aggregate.");
                 }
@@ -29,5 +31,8 @@ namespace DomainServices
         
         private static Func<LendBook, Task<Result>> LendBookExecutorWith(IRepository repository) => 
             c => repository.Borrow<User>(c.BorrowerUserId, user => user.BorrowBook(c.BookToLendId));
+        
+        private static Func<ReturnBook, Task<Result>> ReturnBookExecutorWith(IRepository repository) => 
+            c => repository.Borrow<User>(c.UserId, user => user.FinishBorrowOf(c.BookId));
     }
 }

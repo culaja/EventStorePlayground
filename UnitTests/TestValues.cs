@@ -34,6 +34,7 @@ namespace UnitTests
         
         public static readonly UserAdded JohnDoeUserAdded = new UserAdded(JohnDoeId, JohnDoeFullName);
         public static readonly UserBorrowedBook JohnDoeBorrowedWarAndPeace1 = new UserBorrowedBook(JohnDoeId, JohnDoeFullName, WarAndPeace1Id);
+        public static readonly UserFinishedBookBorrow JohDoeFinishedWarAndPeace1Borrow = new UserFinishedBookBorrow(JohnDoeId, JohnDoeFullName, WarAndPeace1Id);
         
         public static readonly UserAdded StankoUserAdded = new UserAdded(StankoId, StankoFullName);
         
