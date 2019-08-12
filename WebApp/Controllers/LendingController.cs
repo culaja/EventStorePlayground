@@ -23,5 +23,15 @@ namespace WebApp.Controllers
                     BookIdFrom(bookToLendId),
                     UserIdFrom(userId)))
                 .ToActionResult();
+
+        [HttpPost]
+        [Route(nameof(ReturnBook))]
+        public Task<IActionResult> ReturnBook(
+            string bookToReturnId,
+            string borrowerUserId) =>
+            SagaCommandExecutors(new ReturnBook(
+                    BookIdFrom(bookToReturnId),
+                    UserIdFrom(borrowerUserId)))
+                .ToActionResult();
     }
 }

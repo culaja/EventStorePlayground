@@ -1,4 +1,3 @@
-using System.Collections;
 using Domain;
 using LibraryEvents.BookEvents;
 using LibraryEvents.UserEvents;

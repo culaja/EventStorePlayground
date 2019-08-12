@@ -18,12 +18,18 @@ namespace DomainServices
                 {
                     case LendBook lendBook:
                         return LendBookExecutorWith(repository)(lendBook);
+                    case ReturnBook returnBook:
+                        return ReturnBookExecutorWith(repository)(returnBook);
                     default:
                         throw new NotSupportedException($"Command '{c}' can't be handled by {nameof(SagaCommandExecutors)}.");
                 }
             };
 
         private static Func<LendBook, Task<Result>> LendBookExecutorWith(IRepository repository) =>
+            c => BookCommandExecutorsWith(repository)(c)
+                .OnSuccess(() => UserCommandExecutorsWith(repository)(c));
+
+        private static Func<ReturnBook, Task<Result>> ReturnBookExecutorWith(IRepository repository) =>
             c => BookCommandExecutorsWith(repository)(c)
                 .OnSuccess(() => UserCommandExecutorsWith(repository)(c));
     }

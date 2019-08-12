@@ -22,6 +22,11 @@ namespace WebApp.ApplicationWrapping
             UserCommandExecutors.UserCommandExecutorsWith(
                 BuildRepositoryUsing(
                     AConfigurationReaderWith(configuration)));
+
+        public static Func<ICommand, Task<Result>> SagaCommandExecutorsWith(IConfiguration configuration) =>
+            SagaCommandExecutors.SagaCommandExecutorsWith(
+                BuildRepositoryUsing(
+                    AConfigurationReaderWith(configuration)));
         
         private static IRepository BuildRepositoryUsing(ConfigurationReader configurationReader) =>
             new Repository(

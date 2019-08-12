@@ -20,6 +20,7 @@ namespace WebApp.Controllers
         {
             BookCommandExecutors = BookCommandExecutorsWith(configuration);
             UserCommandExecutors = UserCommandExecutorsWith(configuration);
+            SagaCommandExecutors = SagaCommandExecutorsWith(configuration);
         }
     }
 }

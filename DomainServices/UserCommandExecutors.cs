@@ -30,7 +30,7 @@ namespace DomainServices
             c => repository.InsertNew(User.NewUserFrom(c.UserId, c.FullName));
         
         private static Func<LendBook, Task<Result>> LendBookExecutorWith(IRepository repository) => 
-            c => repository.Borrow<User>(c.BorrowerUserId, user => user.BorrowBook(c.BookToLendId));
+            c => repository.Borrow<User>(c.UserId, user => user.BorrowBook(c.BookId));
         
         private static Func<ReturnBook, Task<Result>> ReturnBookExecutorWith(IRepository repository) => 
             c => repository.Borrow<User>(c.UserId, user => user.FinishBorrowOf(c.BookId));

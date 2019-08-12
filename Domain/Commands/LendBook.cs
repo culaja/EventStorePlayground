@@ -2,15 +2,15 @@ namespace Domain.Commands
 {
     public sealed class LendBook : SagaCommand
     {
-        public BookId BookToLendId { get; }
-        public UserId BorrowerUserId { get; }
+        public BookId BookId { get; }
+        public UserId UserId { get; }
 
         public LendBook(
-            BookId bookToLendId,
-            UserId borrowerUserId)
+            BookId bookId,
+            UserId userId)
         {
-            BookToLendId = bookToLendId;
-            BorrowerUserId = borrowerUserId;
+            BookId = bookId;
+            UserId = userId;
         }
     }
 }

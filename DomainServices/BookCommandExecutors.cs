@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Common;
 using Common.Messaging;
@@ -34,6 +33,6 @@ namespace DomainServices
             c => repository.InsertNew(Book.NewBookFrom(c.BookId, c.BookName, c.YearOfPrint));
 
         private static Func<LendBook, Task<Result>> LendBookExecutorWith(IRepository repository) =>
-            c => repository.Borrow<Book>(c.BookToLendId, book => book.LendTo(c.BorrowerUserId));
+            c => repository.Borrow<Book>(c.BookId, book => book.LendTo(c.UserId));
     }
 }
