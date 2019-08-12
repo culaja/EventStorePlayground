@@ -1,3 +1,5 @@
+using Common.Messaging;
+
 namespace Domain.Commands
 {
     public sealed class LendBook : SagaCommand
@@ -12,5 +14,10 @@ namespace Domain.Commands
             BookId = bookId;
             UserId = userId;
         }
+
+        public ReturnBook ToReturnBook() =>
+            new ReturnBook(
+                BookId,
+                UserId);
     }
 }

@@ -27,7 +27,8 @@ namespace DomainServices
 
         private static Func<LendBook, Task<Result>> LendBookExecutorWith(IRepository repository) =>
             c => BookCommandExecutorsWith(repository)(c)
-                .OnSuccess(() => UserCommandExecutorsWith(repository)(c));
+                .OnSuccess(() => UserCommandExecutorsWith(repository)(c)
+                    .OnFailure(() => BookCommandExecutorsWith(repository)(c.ToReturnBook())));
 
         private static Func<ReturnBook, Task<Result>> ReturnBookExecutorWith(IRepository repository) =>
             c => BookCommandExecutorsWith(repository)(c)

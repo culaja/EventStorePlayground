@@ -30,6 +30,7 @@ namespace UnitTests
         
         public static readonly BookAdded WarAndPeace2Added = new BookAdded(WarAndPeace2Id, WarAndPeaceName, YearOfPrint2010);
         public static readonly BookLentToUser WarAndPeace2LentToJohnDoe = new BookLentToUser(WarAndPeace2Id, WarAndPeaceName, JohnDoeId);
+        public static readonly BookReturned WarAndPeace2IsReturnedByJohnDoe = new BookReturned(WarAndPeace2Id, WarAndPeaceName, JohnDoeId);
         
         public static readonly UserAdded JohnDoeUserAdded = new UserAdded(JohnDoeId, JohnDoeFullName);
         public static readonly UserBorrowedBook JohnDoeBorrowedWarAndPeace1 = new UserBorrowedBook(JohnDoeId, JohnDoeFullName, WarAndPeace1Id);

@@ -316,5 +316,16 @@ namespace Common
 
             return result;
         }
+
+        public static async Task<Result> OnFailure(this Task<Result> resultTask, Func<Task<Result>> transformer)
+        {
+            var result = await resultTask;
+            if (result.IsFailure)
+            {
+                return Result.Combine(result, await transformer());
+            }
+
+            return result;
+        }
     }
 }
