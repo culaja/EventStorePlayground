@@ -1,5 +1,5 @@
 new Vue({
-    el: '#library_commanding_app',
+    el: '#command_side_app',
     data: {
         bookToAddId: '',
         bookToAddName: '',
@@ -9,9 +9,9 @@ new Vue({
     methods: {
         addNewBook: function () {
             axios
-                .post('http://localhost:5000/api/Book/Add?id=' + this.bookToAddId + '&name=' + this.bookToAddName + '&yearOfPrint=' + this.yearOfPrint)
+                .post('http://localhost:7320/api/Book/Add?id=' + this.bookToAddId + '&name=' + this.bookToAddName + '&yearOfPrint=' + this.yearOfPrint)
                 .then(response => (this.info = 'Book ' + this.bookToAddId + ' added!'))
-                .catch(error => this.info = error)
+        .catch(error => this.info = error)
         }
     }
 })

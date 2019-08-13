@@ -38,6 +38,7 @@ namespace WebApp
 
         private static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseUrls("http://localhost:7320")
                 .UseStartup<Startup>();
     }
 }
