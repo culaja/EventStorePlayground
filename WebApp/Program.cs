@@ -1,11 +1,12 @@
-﻿using System.Diagnostics;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Hosting.WindowsServices;
-using static System.AppDomain;
-using static System.Environment;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace WebApp
 {
@@ -13,32 +14,13 @@ namespace WebApp
     {
         public static void Main(string[] args)
         {
-            var isService = !(Debugger.IsAttached || args.Contains("--console"));
-            var builder = CreateWebHostBuilder(args.Where(arg => arg != "--console").ToArray());
-
-            if (isService)
-            {
-                var pathToExe = Process.GetCurrentProcess().MainModule.FileName;
-                var pathToContentRoot = Path.GetDirectoryName(pathToExe);
-                builder.UseContentRoot(pathToContentRoot);
-                CurrentDirectory = CurrentDomain.BaseDirectory;
-            }
-
-            var host = builder.Build();
-
-            if (isService)
-            {
-                host.RunAsService();
-            }
-            else
-            {
-                host.Run();
-            }
+            BuildWebHost(args).Run();
         }
 
-        private static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+        public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseUrls("http://localhost:7320")
-                .UseStartup<Startup>();
+                .UseUrls("http://localhost:7230")
+                .UseStartup<Startup>()
+                .Build();
     }
 }

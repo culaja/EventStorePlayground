@@ -4,7 +4,7 @@ using Common;
 using Domain.Commands;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using static WebApp.ApplicationWrapping.WrappedUpCommandExecutors;
+using static WebApp.Controllers.ApplicationWrapping.WrappedUpCommandExecutors;
 
 namespace WebApp.Controllers
 {
