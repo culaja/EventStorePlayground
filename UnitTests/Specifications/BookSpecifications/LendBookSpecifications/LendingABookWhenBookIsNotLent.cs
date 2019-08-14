@@ -11,7 +11,7 @@ using static UnitTests.TestValues;
 
 namespace UnitTests.Specifications.BookSpecifications.LendBookSpecifications
 {
-    public sealed class LendingABookWhenBookIsNotLend : Specification<LendBook>
+    public sealed class LendingABookWhenBookIsNotLent : Specification<LendBook>
     {
         protected override LendBook CommandToExecute => new LendBook(WarAndPeace1Id, JohnDoeId);
         
