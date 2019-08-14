@@ -21,7 +21,7 @@ namespace UnitTests.Specifications.BookSpecifications.LendBookSpecifications
             yield return WarAndPeace1LentToJohnDoe;
         }
         
-        protected override LendBook AfterExecutingCommand => new LendBook(WarAndPeace1Id, JohnDoeId);
+        protected override LendBook AfterExecuting => new LendBook(WarAndPeace1Id, JohnDoeId);
 
         protected override Func<LendBook, Task<Result>> Through() => BookCommandExecutorsWith(Repository);
 

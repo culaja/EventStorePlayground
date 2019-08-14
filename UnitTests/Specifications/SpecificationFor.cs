@@ -38,14 +38,14 @@ namespace UnitTests.Specifications
         }
         
         private void ExecuteCommandAndStoreResult() => 
-            Result = Through()(AfterExecutingCommand).Result;
+            Result = Through()(AfterExecuting).Result;
 
         private IReadOnlyList<GivenAggregateEvents> GroupGivenEventsPerAggregate() => 
             PrepareGivenAggregateEvents(_givenDomainEvents);
 
         protected abstract IEnumerable<IDomainEvent> WhenGiven();
         
-        protected abstract T AfterExecutingCommand { get; }
+        protected abstract T AfterExecuting { get; }
 
         protected abstract Func<T, Task<Result>> Through();
         

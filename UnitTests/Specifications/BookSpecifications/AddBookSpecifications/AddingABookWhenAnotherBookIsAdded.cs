@@ -18,7 +18,7 @@ namespace UnitTests.Specifications.BookSpecifications.AddBookSpecifications
             yield return WarAndPeace1Added;
         }
         
-        protected override AddBook AfterExecutingCommand => new AddBook(WarAndPeace2Id, WarAndPeaceName, YearOfPrint2010);
+        protected override AddBook AfterExecuting => new AddBook(WarAndPeace2Id, WarAndPeaceName, YearOfPrint2010);
 
         protected override Func<AddBook, Task<Result>> Through() => BookCommandExecutorsWith(Repository);
 

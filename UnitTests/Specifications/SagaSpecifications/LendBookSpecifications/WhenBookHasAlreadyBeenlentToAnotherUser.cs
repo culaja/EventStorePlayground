@@ -25,7 +25,7 @@ namespace UnitTests.Specifications.SagaSpecifications.LendBookSpecifications
             yield return StankoUserAdded;
         }
         
-        protected override LendBook AfterExecutingCommand => new LendBook(WarAndPeace1Id, StankoId);
+        protected override LendBook AfterExecuting => new LendBook(WarAndPeace1Id, StankoId);
 
         protected override Func<LendBook, Task<Result>> Through() => SagaCommandExecutorsWith(Repository);
 

@@ -21,7 +21,7 @@ namespace UnitTests.Specifications.SagaSpecifications.ReturnBookSpecifications
             yield return JohnDoeBorrowedWarAndPeace1;
         }
         
-        protected override ReturnBook AfterExecutingCommand => new ReturnBook(WarAndPeace1Id, JohnDoeId);
+        protected override ReturnBook AfterExecuting => new ReturnBook(WarAndPeace1Id, JohnDoeId);
 
         protected override Func<ReturnBook, Task<Result>> Through() => SagaCommandExecutorsWith(Repository);
 

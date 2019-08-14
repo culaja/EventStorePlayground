@@ -21,7 +21,7 @@ namespace UnitTests.Specifications.UserSpecification.ReturnBookSpecifications
             yield return JohnDoeBorrowedWarAndPeace1;
         }
         
-        protected override ReturnBook AfterExecutingCommand => new ReturnBook(WarAndPeace2Id, JohnDoeId);
+        protected override ReturnBook AfterExecuting => new ReturnBook(WarAndPeace2Id, JohnDoeId);
 
         protected override Func<ReturnBook, Task<Result>> Through() => UserCommandExecutorsWith(Repository);
 

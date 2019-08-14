@@ -18,7 +18,7 @@ namespace UnitTests.Specifications.UserSpecification.AddUserSpecifications
             yield return JohnDoeUserAdded;
         }
         
-        protected override AddUser AfterExecutingCommand => new AddUser(JohnDoeId, JohnDoeFullName);
+        protected override AddUser AfterExecuting => new AddUser(JohnDoeId, JohnDoeFullName);
 
         protected override Func<AddUser, Task<Result>> Through() => UserCommandExecutorsWith(Repository);
 
