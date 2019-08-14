@@ -11,7 +11,7 @@ using static UnitTests.TestValues;
 
 namespace UnitTests.Specifications.BookSpecifications.AddBookSpecifications
 {
-    public sealed class AddingABookWhenTheBookWithTheSameIdExists : Specification<AddBook>
+    public sealed class AddingABookWhenTheBookWithTheSameIdExists : SpecificationFor<AddBook>
     {
         protected override IEnumerable<IDomainEvent> WhenGiven()
         {

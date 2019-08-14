@@ -11,7 +11,7 @@ using static UnitTests.TestValues;
 
 namespace UnitTests.Specifications.UserSpecification.AddUserSpecifications
 {
-    public sealed class WhenUserDoesntExist : Specification<AddUser>
+    public sealed class WhenUserDoesntExist : SpecificationFor<AddUser>
     {
         protected override IEnumerable<IDomainEvent> WhenGiven()
         {

@@ -13,7 +13,7 @@ using static UnitTests.TestValues;
 
 namespace UnitTests.Specifications.UserSpecification.ReturnBookSpecifications
 {
-    public sealed class WhenBorrowOfTheBookIsAlreadyFinished : Specification<ReturnBook>
+    public sealed class WhenBorrowOfTheBookIsAlreadyFinished : SpecificationFor<ReturnBook>
     {
         protected override IEnumerable<IDomainEvent> WhenGiven()
         {

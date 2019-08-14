@@ -11,7 +11,7 @@ using static UnitTests.TestValues;
 
 namespace UnitTests.Specifications.UserSpecification.LendBookSpecifications
 {
-    public sealed class WhenUserHasNotLentBook : Specification<LendBook>
+    public sealed class WhenUserHasNotLentBook : SpecificationFor<LendBook>
     {
         protected override IEnumerable<IDomainEvent> WhenGiven()
         {

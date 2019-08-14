@@ -11,7 +11,7 @@ using static UnitTests.TestValues;
 
 namespace UnitTests.Specifications.UserSpecification.AddUserSpecifications
 {
-    public sealed class WhenTheSameUserIsAlreadyAdded : Specification<AddUser>
+    public sealed class WhenTheSameUserIsAlreadyAdded : SpecificationFor<AddUser>
     {
         protected override IEnumerable<IDomainEvent> WhenGiven()
         {

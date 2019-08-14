@@ -14,7 +14,7 @@ using static UnitTests.TestValues;
 
 namespace UnitTests.Specifications.SagaSpecifications.LendBookSpecifications
 {
-    public sealed class WhenBookHasAlreadyBeenLentToAnotherUser : Specification<LendBook>
+    public sealed class WhenBookHasAlreadyBeenLentToAnotherUser : SpecificationFor<LendBook>
     {
         protected override IEnumerable<IDomainEvent> WhenGiven()
         {

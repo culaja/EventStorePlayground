@@ -10,14 +10,14 @@ using static UnitTests.Specifications.GivenAggregateEvents;
 
 namespace UnitTests.Specifications
 {
-    public abstract class Specification<T> where T : ICommand
+    public abstract class SpecificationFor<T> where T : ICommand
     {
         private readonly InMemoryEventStore _eventStoreAppender = new InMemoryEventStore();
         private readonly IReadOnlyList<IDomainEvent> _givenDomainEvents;
 
         protected IRepository Repository { get; }
         
-        protected Specification()
+        protected SpecificationFor()
         {
             Repository = new Repository(_eventStoreAppender);
             _givenDomainEvents = WhenGiven().ToList();
