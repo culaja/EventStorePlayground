@@ -16,9 +16,7 @@ namespace UnitTests.Specifications.SagaSpecifications.LendBookSpecifications
 {
     public sealed class WhenBookHasAlreadyBeenLentToAnotherUser : Specification<LendBook>
     {
-        protected override LendBook CommandToExecute => new LendBook(WarAndPeace1Id, StankoId);
-        
-        protected override IEnumerable<IDomainEvent> Given()
+        protected override IEnumerable<IDomainEvent> WhenGiven()
         {
             yield return WarAndPeace1Added;
             yield return JohnDoeUserAdded;
@@ -26,8 +24,10 @@ namespace UnitTests.Specifications.SagaSpecifications.LendBookSpecifications
             yield return JohnDoeBorrowedWarAndPeace1;
             yield return StankoUserAdded;
         }
+        
+        protected override LendBook AfterExecutingCommand => new LendBook(WarAndPeace1Id, StankoId);
 
-        protected override Func<LendBook, Task<Result>> When() => SagaCommandExecutorsWith(Repository);
+        protected override Func<LendBook, Task<Result>> Through() => SagaCommandExecutorsWith(Repository);
 
         [Fact]
         public void returns_failure() => Result.IsFailure.Should().BeTrue();

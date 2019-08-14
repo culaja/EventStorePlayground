@@ -15,15 +15,15 @@ namespace UnitTests.Specifications.UserSpecification.LendBookSpecifications
 {
     public sealed class WhenUserHasAlreadyLentBook : Specification<LendBook>
     {
-        protected override LendBook CommandToExecute => new LendBook(WarAndPeace1Id, JohnDoeId);
-        
-        protected override IEnumerable<IDomainEvent> Given()
+        protected override IEnumerable<IDomainEvent> WhenGiven()
         {
             yield return JohnDoeUserAdded;
             yield return JohnDoeBorrowedWarAndPeace1;
         }
+        
+        protected override LendBook AfterExecutingCommand => new LendBook(WarAndPeace1Id, JohnDoeId);
 
-        protected override Func<LendBook, Task<Result>> When() => UserCommandExecutorsWith(Repository);
+        protected override Func<LendBook, Task<Result>> Through() => UserCommandExecutorsWith(Repository);
 
         [Fact]
         public void returns_failure() => Result.IsFailure.Should().BeTrue();

@@ -13,14 +13,14 @@ namespace UnitTests.Specifications.UserSpecification.LendBookSpecifications
 {
     public sealed class WhenUserHasNotLentBook : Specification<LendBook>
     {
-        protected override LendBook CommandToExecute => new LendBook(WarAndPeace1Id, JohnDoeId);
-        
-        protected override IEnumerable<IDomainEvent> Given()
+        protected override IEnumerable<IDomainEvent> WhenGiven()
         {
             yield return JohnDoeUserAdded;
         }
+        
+        protected override LendBook AfterExecutingCommand => new LendBook(WarAndPeace1Id, JohnDoeId);
 
-        protected override Func<LendBook, Task<Result>> When() => UserCommandExecutorsWith(Repository);
+        protected override Func<LendBook, Task<Result>> Through() => UserCommandExecutorsWith(Repository);
 
         [Fact]
         public void returns_success() => Result.IsSuccess.Should().BeTrue();

@@ -20,7 +20,7 @@ namespace UnitTests.Specifications
         protected Specification()
         {
             Repository = new Repository(_eventStoreAppender);
-            _givenDomainEvents = Given().ToList();
+            _givenDomainEvents = WhenGiven().ToList();
 
             ApplyGivenEventsToTheEventStore();
             ExecuteCommandAndStoreResult();
@@ -38,16 +38,16 @@ namespace UnitTests.Specifications
         }
         
         private void ExecuteCommandAndStoreResult() => 
-            Result = When()(CommandToExecute).Result;
+            Result = Through()(AfterExecutingCommand).Result;
 
         private IReadOnlyList<GivenAggregateEvents> GroupGivenEventsPerAggregate() => 
             PrepareGivenAggregateEvents(_givenDomainEvents);
 
-        protected abstract T CommandToExecute { get; }
+        protected abstract IEnumerable<IDomainEvent> WhenGiven();
+        
+        protected abstract T AfterExecutingCommand { get; }
 
-        protected abstract IEnumerable<IDomainEvent> Given();
-
-        protected abstract Func<T, Task<Result>> When();
+        protected abstract Func<T, Task<Result>> Through();
         
         protected Result Result { get; private set; }
 

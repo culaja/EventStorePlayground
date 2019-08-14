@@ -13,14 +13,14 @@ namespace UnitTests.Specifications.UserSpecification.AddUserSpecifications
 {
     public sealed class WhenTheSameUserIsAlreadyAdded : Specification<AddUser>
     {
-        protected override AddUser CommandToExecute => new AddUser(JohnDoeId, JohnDoeFullName);
-        
-        protected override IEnumerable<IDomainEvent> Given()
+        protected override IEnumerable<IDomainEvent> WhenGiven()
         {
             yield return JohnDoeUserAdded;
         }
+        
+        protected override AddUser AfterExecutingCommand => new AddUser(JohnDoeId, JohnDoeFullName);
 
-        protected override Func<AddUser, Task<Result>> When() => UserCommandExecutorsWith(Repository);
+        protected override Func<AddUser, Task<Result>> Through() => UserCommandExecutorsWith(Repository);
 
         [Fact]
         public void returns_failure() => Result.IsFailure.Should().BeTrue();

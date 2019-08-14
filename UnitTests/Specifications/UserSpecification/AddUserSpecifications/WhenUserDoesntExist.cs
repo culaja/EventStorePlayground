@@ -13,14 +13,14 @@ namespace UnitTests.Specifications.UserSpecification.AddUserSpecifications
 {
     public sealed class WhenUserDoesntExist : Specification<AddUser>
     {
-        protected override AddUser CommandToExecute => new AddUser(JohnDoeId, JohnDoeFullName);
-        
-        protected override IEnumerable<IDomainEvent> Given()
+        protected override IEnumerable<IDomainEvent> WhenGiven()
         {
             yield break;
         }
+        
+        protected override AddUser AfterExecutingCommand => new AddUser(JohnDoeId, JohnDoeFullName);
 
-        protected override Func<AddUser, Task<Result>> When() => UserCommandExecutorsWith(Repository);
+        protected override Func<AddUser, Task<Result>> Through() => UserCommandExecutorsWith(Repository);
 
         [Fact]
         public void returns_failure() => Result.IsSuccess.Should().BeTrue();

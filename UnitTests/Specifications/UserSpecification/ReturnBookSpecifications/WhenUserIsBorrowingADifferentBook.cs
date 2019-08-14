@@ -15,15 +15,15 @@ namespace UnitTests.Specifications.UserSpecification.ReturnBookSpecifications
 {
     public sealed class WhenUserIsBorrowingADifferentBook : Specification<ReturnBook>
     {
-        protected override ReturnBook CommandToExecute => new ReturnBook(WarAndPeace2Id, JohnDoeId);
-        
-        protected override IEnumerable<IDomainEvent> Given()
+        protected override IEnumerable<IDomainEvent> WhenGiven()
         {
             yield return JohnDoeUserAdded;
             yield return JohnDoeBorrowedWarAndPeace1;
         }
+        
+        protected override ReturnBook AfterExecutingCommand => new ReturnBook(WarAndPeace2Id, JohnDoeId);
 
-        protected override Func<ReturnBook, Task<Result>> When() => UserCommandExecutorsWith(Repository);
+        protected override Func<ReturnBook, Task<Result>> Through() => UserCommandExecutorsWith(Repository);
 
         [Fact]
         public void returns_failure() => Result.IsFailure.Should().BeTrue();

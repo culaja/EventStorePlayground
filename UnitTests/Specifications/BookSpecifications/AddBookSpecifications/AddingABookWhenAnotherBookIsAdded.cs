@@ -13,14 +13,14 @@ namespace UnitTests.Specifications.BookSpecifications.AddBookSpecifications
 {
     public sealed class AddingABookWhenAnotherBookIsAdded : Specification<AddBook>
     {
-        protected override AddBook CommandToExecute => 
-            new AddBook(WarAndPeace2Id, WarAndPeaceName, YearOfPrint2010);
-        protected override IEnumerable<IDomainEvent> Given()
+        protected override IEnumerable<IDomainEvent> WhenGiven()
         {
             yield return WarAndPeace1Added;
         }
+        
+        protected override AddBook AfterExecutingCommand => new AddBook(WarAndPeace2Id, WarAndPeaceName, YearOfPrint2010);
 
-        protected override Func<AddBook, Task<Result>> When() => BookCommandExecutorsWith(Repository);
+        protected override Func<AddBook, Task<Result>> Through() => BookCommandExecutorsWith(Repository);
 
         [Fact]
         public void returns_success() => Result.IsSuccess.Should().BeTrue();
