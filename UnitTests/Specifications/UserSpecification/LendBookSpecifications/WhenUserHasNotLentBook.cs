@@ -14,7 +14,7 @@ namespace UnitTests.Specifications.UserSpecification.LendBookSpecifications
     public sealed class WhenUserHasNotLentBook : SpecificationFor<LendBook>
     {
         protected override IReadOnlyList<IDomainEvent> WhenGiven => Events(
-            JohnDoeUserAdded);
+            JohnDoeUserIsAdded);
         
         protected override LendBook AfterExecuting => new LendBook(WarAndPeace1Id, JohnDoeId);
 

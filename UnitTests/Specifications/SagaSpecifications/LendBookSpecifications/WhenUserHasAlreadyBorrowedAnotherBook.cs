@@ -16,11 +16,11 @@ namespace UnitTests.Specifications.SagaSpecifications.LendBookSpecifications
     public sealed class WhenUserHasAlreadyBorrowedAnotherBook : SpecificationFor<LendBook>
     {
         protected override IReadOnlyList<IDomainEvent> WhenGiven => Events(
-            WarAndPeace1Added,
-            JohnDoeUserAdded,
-            WarAndPeace1LentToJohnDoe,
+            WarAndPeace1IsAdded,
+            JohnDoeUserIsAdded,
+            WarAndPeace1IsLentToJohnDoe,
             JohnDoeBorrowedWarAndPeace1,
-            WarAndPeace2Added);
+            WarAndPeace2IsAdded);
         
         protected override LendBook AfterExecuting => new LendBook(WarAndPeace2Id, JohnDoeId);
 
@@ -28,7 +28,7 @@ namespace UnitTests.Specifications.SagaSpecifications.LendBookSpecifications
         
         protected override IReadOnlyList<Action> Outcome => Is(
             () => Result.IsFailure.Should().BeTrue(),
-            () => ProducedEvents.Should().Contain(WarAndPeace2LentToJohnDoe),
+            () => ProducedEvents.Should().Contain(WarAndPeace2IsLentToJohnDoe),
             () => ProducedEvents.Should().Contain(WarAndPeace2IsReturnedByJohnDoe),
             () => ProducedEvents.Should().NotContain(EventOf<UserBorrowedBook>()));
     }

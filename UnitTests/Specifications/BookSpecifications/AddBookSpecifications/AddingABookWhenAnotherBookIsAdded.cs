@@ -14,7 +14,7 @@ namespace UnitTests.Specifications.BookSpecifications.AddBookSpecifications
     public sealed class AddingABookWhenAnotherBookIsAdded : SpecificationFor<AddBook>
     {
         protected override IReadOnlyList<IDomainEvent> WhenGiven => Events(
-            WarAndPeace1Added);
+            WarAndPeace1IsAdded);
         
         protected override AddBook AfterExecuting => new AddBook(WarAndPeace2Id, WarAndPeaceName, YearOfPrint2010);
 
@@ -22,6 +22,6 @@ namespace UnitTests.Specifications.BookSpecifications.AddBookSpecifications
         
         protected override IReadOnlyList<Action> Outcome => Is(
             () => Result.IsSuccess.Should().BeTrue(),
-            () => ProducedEvents.Should().Contain(WarAndPeace2Added));
+            () => ProducedEvents.Should().Contain(WarAndPeace2IsAdded));
     }
 }

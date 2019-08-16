@@ -16,8 +16,8 @@ namespace UnitTests.Specifications.BookSpecifications.ReturnBookSpecifications
     public sealed class WhenBookIsLentToUserButAnotherUserWantsToReturnIt : SpecificationFor<ReturnBook>
     {
         protected override IReadOnlyList<IDomainEvent> WhenGiven => Events(
-            WarAndPeace1Added,
-            WarAndPeace1LentToJohnDoe);
+            WarAndPeace1IsAdded,
+            WarAndPeace1IsLentToJohnDoe);
         
         protected override ReturnBook AfterExecuting => new ReturnBook(WarAndPeace1Id, StankoId);
 

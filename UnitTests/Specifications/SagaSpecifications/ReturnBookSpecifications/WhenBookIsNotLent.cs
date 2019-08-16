@@ -17,8 +17,8 @@ namespace UnitTests.Specifications.SagaSpecifications.ReturnBookSpecifications
     public sealed class WhenBookIsNotLent : SpecificationFor<ReturnBook>
     {
         protected override IReadOnlyList<IDomainEvent> WhenGiven => Events(
-            WarAndPeace1Added,
-            JohnDoeUserAdded);
+            WarAndPeace1IsAdded,
+            JohnDoeUserIsAdded);
         
         protected override ReturnBook AfterExecuting => new ReturnBook(WarAndPeace1Id, JohnDoeId);
 

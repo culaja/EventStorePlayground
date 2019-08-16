@@ -14,7 +14,7 @@ namespace UnitTests.Specifications.BookSpecifications.AddBookSpecifications
     public sealed class AddingABookWhenTheBookWithTheSameIdExists : SpecificationFor<AddBook>
     {
         protected override IReadOnlyList<IDomainEvent> WhenGiven => Events(
-            WarAndPeace1Added);
+            WarAndPeace1IsAdded);
         
         protected override AddBook AfterExecuting => new AddBook(WarAndPeace1Id, WarAndPeaceName, YearOfPrint2010);
 

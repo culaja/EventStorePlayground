@@ -24,19 +24,19 @@ namespace UnitTests
         public static readonly UserId StankoId = UserIdFrom("culaja@gmail.com");
         public static readonly FullName StankoFullName = FullNameFrom("Stanko Culaja");
         
-        public static readonly BookAdded WarAndPeace1Added = new BookAdded(WarAndPeace1Id, WarAndPeaceName, YearOfPrint2010);
-        public static readonly BookLentToUser WarAndPeace1LentToJohnDoe = new BookLentToUser(WarAndPeace1Id, WarAndPeaceName, JohnDoeId);
+        public static readonly BookAdded WarAndPeace1IsAdded = new BookAdded(WarAndPeace1Id, WarAndPeaceName, YearOfPrint2010);
+        public static readonly BookLentToUser WarAndPeace1IsLentToJohnDoe = new BookLentToUser(WarAndPeace1Id, WarAndPeaceName, JohnDoeId);
         public static readonly BookReturned WarAndPeace1IsReturnedByJohnDoe = new BookReturned(WarAndPeace1Id, WarAndPeaceName, JohnDoeId);
         
-        public static readonly BookAdded WarAndPeace2Added = new BookAdded(WarAndPeace2Id, WarAndPeaceName, YearOfPrint2010);
-        public static readonly BookLentToUser WarAndPeace2LentToJohnDoe = new BookLentToUser(WarAndPeace2Id, WarAndPeaceName, JohnDoeId);
+        public static readonly BookAdded WarAndPeace2IsAdded = new BookAdded(WarAndPeace2Id, WarAndPeaceName, YearOfPrint2010);
+        public static readonly BookLentToUser WarAndPeace2IsLentToJohnDoe = new BookLentToUser(WarAndPeace2Id, WarAndPeaceName, JohnDoeId);
         public static readonly BookReturned WarAndPeace2IsReturnedByJohnDoe = new BookReturned(WarAndPeace2Id, WarAndPeaceName, JohnDoeId);
         
-        public static readonly UserAdded JohnDoeUserAdded = new UserAdded(JohnDoeId, JohnDoeFullName);
+        public static readonly UserAdded JohnDoeUserIsAdded = new UserAdded(JohnDoeId, JohnDoeFullName);
         public static readonly UserBorrowedBook JohnDoeBorrowedWarAndPeace1 = new UserBorrowedBook(JohnDoeId, JohnDoeFullName, WarAndPeace1Id);
         public static readonly UserFinishedBookBorrow JohDoeFinishedWarAndPeace1Borrow = new UserFinishedBookBorrow(JohnDoeId, JohnDoeFullName, WarAndPeace1Id);
         
-        public static readonly UserAdded StankoUserAdded = new UserAdded(StankoId, StankoFullName);
+        public static readonly UserAdded StankoUserIsAdded = new UserAdded(StankoId, StankoFullName);
         
     }
 }

@@ -21,6 +21,6 @@ namespace UnitTests.Specifications.UserSpecification.AddUserSpecifications
 
         protected override IReadOnlyList<Action> Outcome => Is(
             () => Result.IsSuccess.Should().BeTrue(),
-            () => ProducedEvents.Should().Contain(JohnDoeUserAdded));
+            () => ProducedEvents.Should().Contain(JohnDoeUserIsAdded));
     }
 }

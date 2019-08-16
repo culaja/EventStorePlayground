@@ -14,8 +14,8 @@ namespace UnitTests.Specifications.SagaSpecifications.LendBookSpecifications
     public sealed class WhenBothUserAndBookExistAndBookIsNotLentToUser : SpecificationFor<LendBook>
     {
         protected override IReadOnlyList<IDomainEvent> WhenGiven => Events(
-            WarAndPeace1Added,
-            JohnDoeUserAdded);
+            WarAndPeace1IsAdded,
+            JohnDoeUserIsAdded);
         
         protected override LendBook AfterExecuting => new LendBook(WarAndPeace1Id, JohnDoeId);
 
@@ -23,7 +23,7 @@ namespace UnitTests.Specifications.SagaSpecifications.LendBookSpecifications
         
         protected override IReadOnlyList<Action> Outcome => Is(
             () => Result.IsSuccess.Should().BeTrue(),
-            () => ProducedEvents.Should().Contain(WarAndPeace1LentToJohnDoe),
+            () => ProducedEvents.Should().Contain(WarAndPeace1IsLentToJohnDoe),
             () => ProducedEvents.Should().Contain(JohnDoeBorrowedWarAndPeace1));
     }
 }

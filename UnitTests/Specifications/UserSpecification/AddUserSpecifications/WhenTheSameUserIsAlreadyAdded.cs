@@ -14,7 +14,7 @@ namespace UnitTests.Specifications.UserSpecification.AddUserSpecifications
     public sealed class WhenTheSameUserIsAlreadyAdded : SpecificationFor<AddUser>
     {
         protected override IReadOnlyList<IDomainEvent> WhenGiven => Events(
-            JohnDoeUserAdded);
+            JohnDoeUserIsAdded);
         
         protected override AddUser AfterExecuting => new AddUser(JohnDoeId, JohnDoeFullName);
 

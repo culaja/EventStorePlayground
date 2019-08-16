@@ -14,7 +14,7 @@ namespace UnitTests.Specifications.BookSpecifications.LendBookSpecifications
     public sealed class LendingABookWhenBookIsNotLent : SpecificationFor<LendBook>
     {
         protected override IReadOnlyList<IDomainEvent> WhenGiven => Events(
-            WarAndPeace1Added);
+            WarAndPeace1IsAdded);
         
         protected override LendBook AfterExecuting => new LendBook(WarAndPeace1Id, JohnDoeId);
 
@@ -22,6 +22,6 @@ namespace UnitTests.Specifications.BookSpecifications.LendBookSpecifications
         
         protected override IReadOnlyList<Action> Outcome => Is(
             () => Result.IsSuccess.Should().BeTrue(),
-            () => ProducedEvents.Should().Contain(WarAndPeace1LentToJohnDoe));
+            () => ProducedEvents.Should().Contain(WarAndPeace1IsLentToJohnDoe));
     }
 }

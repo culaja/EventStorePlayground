@@ -16,7 +16,7 @@ namespace UnitTests.Specifications.UserSpecification.ReturnBookSpecifications
     public sealed class WhenUserDoesntBorrowTheBook : SpecificationFor<ReturnBook>
     {
         protected override IReadOnlyList<IDomainEvent> WhenGiven => Events(
-            JohnDoeUserAdded);
+            JohnDoeUserIsAdded);
         
         protected override ReturnBook AfterExecuting => new ReturnBook(WarAndPeace1Id, JohnDoeId);
 
