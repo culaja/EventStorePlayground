@@ -21,11 +21,9 @@ namespace UnitTests.Specifications.UserSpecification.LendBookSpecifications
         protected override LendBook AfterExecuting => new LendBook(WarAndPeace1Id, JohnDoeId);
 
         protected override Func<LendBook, Task<Result>> By() => UserCommandExecutorsWith(Repository);
-
-        [Fact]
-        public void returns_success() => Result.IsSuccess.Should().BeTrue();
-
-        [Fact]
-        public void user_borrowed_book() => ProducedEvents.Should().Contain(JohnDoeBorrowedWarAndPeace1);
+        
+        protected override IReadOnlyList<Action> Outcome => Is(
+            () => Result.IsSuccess.Should().BeTrue(),
+            () => ProducedEvents.Should().Contain(JohnDoeBorrowedWarAndPeace1));
     }
 }

@@ -25,11 +25,9 @@ namespace UnitTests.Specifications.BookSpecifications.ReturnBookSpecifications
         protected override ReturnBook AfterExecuting => new ReturnBook(WarAndPeace1Id, JohnDoeId);
 
         protected override Func<ReturnBook, Task<Result>> By() => BookCommandExecutorsWith(Repository);
-
-        [Fact]
-        public void returns_failure() => Result.IsFailure.Should().BeTrue();
-
-        [Fact]
-        public void book_is_not_returned() => ProducedEvents.Should().NotContain(EventOf<BookReturned>());
+        
+        protected override IReadOnlyList<Action> Outcome => Is(
+            () => Result.IsFailure.Should().BeTrue(),
+            () => ProducedEvents.Should().NotContain(EventOf<BookReturned>()));
     }
 }

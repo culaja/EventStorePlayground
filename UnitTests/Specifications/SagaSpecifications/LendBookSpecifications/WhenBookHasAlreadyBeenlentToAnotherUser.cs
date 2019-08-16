@@ -28,14 +28,10 @@ namespace UnitTests.Specifications.SagaSpecifications.LendBookSpecifications
         protected override LendBook AfterExecuting => new LendBook(WarAndPeace1Id, StankoId);
 
         protected override Func<LendBook, Task<Result>> By() => SagaCommandExecutorsWith(Repository);
-
-        [Fact]
-        public void returns_failure() => Result.IsFailure.Should().BeTrue();
-
-        [Fact]
-        public void book_is_not_lent_again() => ProducedEvents.Should().NotContain(EventOf<BookLentToUser>());
-
-        [Fact]
-        public void user_has_not_borrowed_book() => ProducedEvents.Should().NotContain(EventOf<UserBorrowedBook>());
+        
+        protected override IReadOnlyList<Action> Outcome => Is(
+            () => Result.IsFailure.Should().BeTrue(),
+            () => ProducedEvents.Should().NotContain(EventOf<BookLentToUser>()),
+            () => ProducedEvents.Should().NotContain(EventOf<UserBorrowedBook>()));
     }
 }

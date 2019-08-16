@@ -25,14 +25,10 @@ namespace UnitTests.Specifications.SagaSpecifications.ReturnBookSpecifications
         protected override ReturnBook AfterExecuting => new ReturnBook(WarAndPeace1Id, JohnDoeId);
 
         protected override Func<ReturnBook, Task<Result>> By() => SagaCommandExecutorsWith(Repository);
-
-        [Fact]
-        public void returns_failure() => Result.IsFailure.Should().BeTrue();
-
-        [Fact]
-        public void book_is_not_returned() => ProducedEvents.Should().NotContain(EventOf<BookReturned>());
         
-        [Fact]
-        public void borrow_is_not_finished() => ProducedEvents.Should().NotContain(EventOf<UserFinishedBookBorrow>());
+        protected override IReadOnlyList<Action> Outcome => Is(
+            () => Result.IsFailure.Should().BeTrue(),
+            () => ProducedEvents.Should().NotContain(EventOf<BookReturned>()),
+            () => ProducedEvents.Should().NotContain(EventOf<UserFinishedBookBorrow>()));
     }
 }

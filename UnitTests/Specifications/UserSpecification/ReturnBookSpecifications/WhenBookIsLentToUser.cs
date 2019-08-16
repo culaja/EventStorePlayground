@@ -22,11 +22,9 @@ namespace UnitTests.Specifications.UserSpecification.ReturnBookSpecifications
         protected override ReturnBook AfterExecuting => new ReturnBook(WarAndPeace1Id, JohnDoeId);
 
         protected override Func<ReturnBook, Task<Result>> By() => UserCommandExecutorsWith(Repository);
-
-        [Fact]
-        public void returns_success() => Result.IsSuccess.Should().BeTrue();
-
-        [Fact]
-        public void book_is_returned() => ProducedEvents.Should().Contain(JohDoeFinishedWarAndPeace1Borrow);
+        
+        protected override IReadOnlyList<Action> Outcome => Is(
+            () => Result.IsSuccess.Should().BeTrue(),
+            () => ProducedEvents.Should().Contain(JohDoeFinishedWarAndPeace1Borrow));
     }
 }

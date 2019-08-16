@@ -21,8 +21,8 @@ namespace UnitTests.Specifications.BookSpecifications.AddBookSpecifications
         protected override AddBook AfterExecuting => new AddBook(WarAndPeace1Id, WarAndPeaceName, YearOfPrint2010);
 
         protected override Func<AddBook, Task<Result>> By() => BookCommandExecutorsWith(Repository);
-
-        [Fact]
-        public void returns_failure() => Result.IsFailure.Should().BeTrue();
+        
+        protected override IReadOnlyList<Action> Outcome => Is(
+            () => Result.IsFailure.Should().BeTrue());
     }
 }

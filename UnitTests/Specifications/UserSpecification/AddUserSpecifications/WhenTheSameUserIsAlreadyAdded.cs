@@ -22,7 +22,7 @@ namespace UnitTests.Specifications.UserSpecification.AddUserSpecifications
 
         protected override Func<AddUser, Task<Result>> By() => UserCommandExecutorsWith(Repository);
 
-        [Fact]
-        public void returns_failure() => Result.IsFailure.Should().BeTrue();
+        protected override IReadOnlyList<Action> Outcome => Is(
+            () => Result.IsFailure.Should().BeTrue());
     }
 }

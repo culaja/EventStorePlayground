@@ -21,12 +21,9 @@ namespace UnitTests.Specifications.BookSpecifications.AddBookSpecifications
         protected override AddBook AfterExecuting => new AddBook(WarAndPeace2Id, WarAndPeaceName, YearOfPrint2010);
 
         protected override Func<AddBook, Task<Result>> By() => BookCommandExecutorsWith(Repository);
-
-        [Fact]
-        public void returns_success() => Result.IsSuccess.Should().BeTrue();
-
-        [Fact]
-        public void book_is_added() => 
-            ProducedEvents.Should().Contain(WarAndPeace2Added);
+        
+        protected override IReadOnlyList<Action> Outcome => Is(
+            () => Result.IsSuccess.Should().BeTrue(),
+            () => ProducedEvents.Should().Contain(WarAndPeace2Added));
     }
 }
