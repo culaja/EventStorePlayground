@@ -23,7 +23,7 @@ namespace UnitTests.Specifications.SagaSpecifications.ReturnBookSpecifications
         
         protected override ReturnBook AfterExecuting => new ReturnBook(WarAndPeace1Id, JohnDoeId);
 
-        protected override Func<ReturnBook, Task<Result>> Through() => SagaCommandExecutorsWith(Repository);
+        protected override Func<ReturnBook, Task<Result>> By() => SagaCommandExecutorsWith(Repository);
 
         [Fact]
         public void returns_success() => Result.IsSuccess.Should().BeTrue();

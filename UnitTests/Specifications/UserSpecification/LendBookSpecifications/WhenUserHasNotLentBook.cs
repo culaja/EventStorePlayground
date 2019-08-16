@@ -20,7 +20,7 @@ namespace UnitTests.Specifications.UserSpecification.LendBookSpecifications
         
         protected override LendBook AfterExecuting => new LendBook(WarAndPeace1Id, JohnDoeId);
 
-        protected override Func<LendBook, Task<Result>> Through() => UserCommandExecutorsWith(Repository);
+        protected override Func<LendBook, Task<Result>> By() => UserCommandExecutorsWith(Repository);
 
         [Fact]
         public void returns_success() => Result.IsSuccess.Should().BeTrue();

@@ -21,7 +21,7 @@ namespace UnitTests.Specifications.UserSpecification.ReturnBookSpecifications
         
         protected override ReturnBook AfterExecuting => new ReturnBook(WarAndPeace1Id, JohnDoeId);
 
-        protected override Func<ReturnBook, Task<Result>> Through() => UserCommandExecutorsWith(Repository);
+        protected override Func<ReturnBook, Task<Result>> By() => UserCommandExecutorsWith(Repository);
 
         [Fact]
         public void returns_success() => Result.IsSuccess.Should().BeTrue();

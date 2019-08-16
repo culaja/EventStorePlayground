@@ -22,7 +22,7 @@ namespace UnitTests.Specifications.BookSpecifications.ReturnBookSpecifications
         
         protected override ReturnBook AfterExecuting => new ReturnBook(WarAndPeace1Id, JohnDoeId);
 
-        protected override Func<ReturnBook, Task<Result>> Through() => BookCommandExecutorsWith(Repository);
+        protected override Func<ReturnBook, Task<Result>> By() => BookCommandExecutorsWith(Repository);
 
         [Fact]
         public void returns_failure() => Result.IsFailure.Should().BeTrue();

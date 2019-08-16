@@ -20,7 +20,7 @@ namespace UnitTests.Specifications.BookSpecifications.AddBookSpecifications
         
         protected override AddBook AfterExecuting => new AddBook(WarAndPeace2Id, WarAndPeaceName, YearOfPrint2010);
 
-        protected override Func<AddBook, Task<Result>> Through() => BookCommandExecutorsWith(Repository);
+        protected override Func<AddBook, Task<Result>> By() => BookCommandExecutorsWith(Repository);
 
         [Fact]
         public void returns_success() => Result.IsSuccess.Should().BeTrue();

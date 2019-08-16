@@ -20,7 +20,7 @@ namespace UnitTests.Specifications.UserSpecification.AddUserSpecifications
         
         protected override AddUser AfterExecuting => new AddUser(JohnDoeId, JohnDoeFullName);
 
-        protected override Func<AddUser, Task<Result>> Through() => UserCommandExecutorsWith(Repository);
+        protected override Func<AddUser, Task<Result>> By() => UserCommandExecutorsWith(Repository);
 
         [Fact]
         public void returns_failure() => Result.IsFailure.Should().BeTrue();

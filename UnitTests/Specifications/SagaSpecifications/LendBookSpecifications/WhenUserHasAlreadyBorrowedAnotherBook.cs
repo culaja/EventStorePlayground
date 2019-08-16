@@ -26,7 +26,7 @@ namespace UnitTests.Specifications.SagaSpecifications.LendBookSpecifications
         
         protected override LendBook AfterExecuting => new LendBook(WarAndPeace2Id, JohnDoeId);
 
-        protected override Func<LendBook, Task<Result>> Through() => SagaCommandExecutorsWith(Repository);
+        protected override Func<LendBook, Task<Result>> By() => SagaCommandExecutorsWith(Repository);
 
         [Fact]
         public void returns_failure() => Result.IsFailure.Should().BeTrue();

@@ -20,12 +20,10 @@ namespace UnitTests.Specifications.UserSpecification.AddUserSpecifications
         
         protected override AddUser AfterExecuting => new AddUser(JohnDoeId, JohnDoeFullName);
 
-        protected override Func<AddUser, Task<Result>> Through() => UserCommandExecutorsWith(Repository);
+        protected override Func<AddUser, Task<Result>> By() => UserCommandExecutorsWith(Repository);
 
-        [Fact]
-        public void returns_failure() => Result.IsSuccess.Should().BeTrue();
-
-        [Fact]
-        public void user_added() => ProducedEvents.Should().Contain(JohnDoeUserAdded);
+        protected override IReadOnlyList<Action> Outcome => Is(
+            () => Result.IsSuccess.Should().BeTrue(),
+            () => ProducedEvents.Should().Contain(JohnDoeUserAdded));
     }
 }

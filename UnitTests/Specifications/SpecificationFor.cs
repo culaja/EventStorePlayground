@@ -6,6 +6,7 @@ using Common;
 using Common.Messaging;
 using EventStoreRepository;
 using Ports;
+using Xunit;
 using static UnitTests.Specifications.GivenAggregateEvents;
 
 namespace UnitTests.Specifications
@@ -38,8 +39,8 @@ namespace UnitTests.Specifications
         }
         
         private void ExecuteCommandAndStoreResult() => 
-            Result = Through()(AfterExecuting).Result;
-
+            Result = By()(AfterExecuting).Result;
+        
         private IReadOnlyList<GivenAggregateEvents> GroupGivenEventsPerAggregate() => 
             PrepareGivenAggregateEvents(_givenDomainEvents);
 
@@ -47,11 +48,24 @@ namespace UnitTests.Specifications
         
         protected abstract T AfterExecuting { get; }
 
-        protected abstract Func<T, Task<Result>> Through();
+        protected abstract Func<T, Task<Result>> By();
         
         protected Result Result { get; private set; }
 
         protected IReadOnlyList<IDomainEvent> ProducedEvents => 
             _eventStoreAppender.GetAllEventsStartingFrom(_givenDomainEvents.Count);
+        
+        [Fact]
+        public void Checks()
+        {
+            foreach (var assert in Outcome)
+            {
+                assert();
+            }
+        }
+
+        protected virtual IReadOnlyList<Action> Outcome { get; } = new List<Action>();
+
+        protected IReadOnlyList<Action> Is(params Action[] asserts) => asserts.ToList();
     }
 }
