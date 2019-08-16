@@ -112,14 +112,11 @@ namespace Common
         public static Result ToResult<T>(this Maybe<Result<T>> maybeResult) =>
             maybeResult.HasValue ? maybeResult.Value : Result.Ok();
 
-        public static Result<T> ToFailResultIfNoValue<T>(this Maybe<T> maybe, Func<string> errorSupplier)
-        {
-            if (maybe.HasValue)
-            {
-                return Result.Ok<T>(maybe.Value);
-            }
-
-            return Result.Fail<T>(errorSupplier());
-        }
+        public static Maybe<string> IfNullOrWhitespace(this Maybe<string> maybeString, Func<string> supplier) =>
+            maybeString.HasNoValue
+                ? supplier()
+                : string.IsNullOrWhiteSpace(maybeString.Value)
+                    ? supplier()
+                    : maybeString;
     }
 }
