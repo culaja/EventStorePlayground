@@ -13,10 +13,7 @@ namespace UnitTests.Specifications.UserSpecification.AddUserSpecifications
 {
     public sealed class WhenUserDoesntExist : SpecificationFor<AddUser>
     {
-        protected override IEnumerable<IDomainEvent> WhenGiven()
-        {
-            yield break;
-        }
+        protected override IReadOnlyList<IDomainEvent> WhenGiven => NoEvents;
         
         protected override AddUser AfterExecuting => new AddUser(JohnDoeId, JohnDoeFullName);
 

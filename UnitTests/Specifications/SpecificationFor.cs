@@ -14,14 +14,12 @@ namespace UnitTests.Specifications
     public abstract class SpecificationFor<T> where T : ICommand
     {
         private readonly InMemoryEventStore _eventStoreAppender = new InMemoryEventStore();
-        private readonly IReadOnlyList<IDomainEvent> _givenDomainEvents;
 
         protected IRepository Repository { get; }
         
         protected SpecificationFor()
         {
             Repository = new Repository(_eventStoreAppender);
-            _givenDomainEvents = WhenGiven().ToList();
 
             ApplyGivenEventsToTheEventStore();
             ExecuteCommandAndStoreResult();
@@ -42,9 +40,12 @@ namespace UnitTests.Specifications
             Result = By()(AfterExecuting).Result;
         
         private IReadOnlyList<GivenAggregateEvents> GroupGivenEventsPerAggregate() => 
-            PrepareGivenAggregateEvents(_givenDomainEvents);
+            PrepareGivenAggregateEvents(WhenGiven);
+        
+        protected abstract IReadOnlyList<IDomainEvent> WhenGiven { get; }
 
-        protected abstract IEnumerable<IDomainEvent> WhenGiven();
+        protected IReadOnlyList<IDomainEvent> Events(params IDomainEvent[] domainEvents) => domainEvents;
+        protected IReadOnlyList<IDomainEvent> NoEvents => new List<IDomainEvent>();
         
         protected abstract T AfterExecuting { get; }
 
@@ -53,7 +54,7 @@ namespace UnitTests.Specifications
         protected Result Result { get; private set; }
 
         protected IReadOnlyList<IDomainEvent> ProducedEvents => 
-            _eventStoreAppender.GetAllEventsStartingFrom(_givenDomainEvents.Count);
+            _eventStoreAppender.GetAllEventsStartingFrom(WhenGiven.Count);
         
         [Fact]
         public void Checks()
@@ -64,7 +65,7 @@ namespace UnitTests.Specifications
             }
         }
 
-        protected virtual IReadOnlyList<Action> Outcome { get; } = new List<Action>();
+        protected abstract IReadOnlyList<Action> Outcome { get; }
 
         protected IReadOnlyList<Action> Is(params Action[] asserts) => asserts.ToList();
     }

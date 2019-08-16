@@ -13,10 +13,8 @@ namespace UnitTests.Specifications.BookSpecifications.AddBookSpecifications
 {
     public sealed class AddingABookWhenTheBookWithTheSameIdExists : SpecificationFor<AddBook>
     {
-        protected override IEnumerable<IDomainEvent> WhenGiven()
-        {
-            yield return WarAndPeace1Added;
-        }
+        protected override IReadOnlyList<IDomainEvent> WhenGiven => Events(
+            WarAndPeace1Added);
         
         protected override AddBook AfterExecuting => new AddBook(WarAndPeace1Id, WarAndPeaceName, YearOfPrint2010);
 

@@ -13,11 +13,9 @@ namespace UnitTests.Specifications.BookSpecifications.ReturnBookSpecifications
 {
     public sealed class WhenBookIsLentToUser : SpecificationFor<ReturnBook>
     {
-        protected override IEnumerable<IDomainEvent> WhenGiven()
-        {
-            yield return WarAndPeace1Added;
-            yield return WarAndPeace1LentToJohnDoe;
-        }
+        protected override IReadOnlyList<IDomainEvent> WhenGiven => Events(
+            WarAndPeace1Added,
+            WarAndPeace1LentToJohnDoe);
         
         protected override ReturnBook AfterExecuting => new ReturnBook(WarAndPeace1Id, JohnDoeId);
 

@@ -15,11 +15,9 @@ namespace UnitTests.Specifications.BookSpecifications.LendBookSpecifications
 {
     public sealed class LendingABookWhenBookIsAlreadyLent : SpecificationFor<LendBook>
     {
-        protected override IEnumerable<IDomainEvent> WhenGiven()
-        {
-            yield return WarAndPeace1Added;
-            yield return WarAndPeace1LentToJohnDoe;
-        }
+        protected override IReadOnlyList<IDomainEvent> WhenGiven => Events(
+            WarAndPeace1Added,
+            WarAndPeace1LentToJohnDoe);
         
         protected override LendBook AfterExecuting => new LendBook(WarAndPeace1Id, JohnDoeId);
 

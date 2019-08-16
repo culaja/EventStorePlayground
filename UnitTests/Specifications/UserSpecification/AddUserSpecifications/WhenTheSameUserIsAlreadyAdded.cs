@@ -13,10 +13,8 @@ namespace UnitTests.Specifications.UserSpecification.AddUserSpecifications
 {
     public sealed class WhenTheSameUserIsAlreadyAdded : SpecificationFor<AddUser>
     {
-        protected override IEnumerable<IDomainEvent> WhenGiven()
-        {
-            yield return JohnDoeUserAdded;
-        }
+        protected override IReadOnlyList<IDomainEvent> WhenGiven => Events(
+            JohnDoeUserAdded);
         
         protected override AddUser AfterExecuting => new AddUser(JohnDoeId, JohnDoeFullName);
 

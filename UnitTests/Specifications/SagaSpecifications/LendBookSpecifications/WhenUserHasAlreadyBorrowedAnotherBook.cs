@@ -15,14 +15,12 @@ namespace UnitTests.Specifications.SagaSpecifications.LendBookSpecifications
 {
     public sealed class WhenUserHasAlreadyBorrowedAnotherBook : SpecificationFor<LendBook>
     {
-        protected override IEnumerable<IDomainEvent> WhenGiven()
-        {
-            yield return WarAndPeace1Added;
-            yield return JohnDoeUserAdded;
-            yield return WarAndPeace1LentToJohnDoe;
-            yield return JohnDoeBorrowedWarAndPeace1;
-            yield return WarAndPeace2Added;
-        }
+        protected override IReadOnlyList<IDomainEvent> WhenGiven => Events(
+            WarAndPeace1Added,
+            JohnDoeUserAdded,
+            WarAndPeace1LentToJohnDoe,
+            JohnDoeBorrowedWarAndPeace1,
+            WarAndPeace2Added);
         
         protected override LendBook AfterExecuting => new LendBook(WarAndPeace2Id, JohnDoeId);
 
