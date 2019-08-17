@@ -1,0 +1,15 @@
+<template>
+    <div>
+        <h1>Adding a book</h1>
+
+        <p>Add a book to the library ....</p>
+        
+        <div class="row"><input v-model="bookToAddId" placeholder="Book Id"></div>
+        <div class="row"><input v-model="bookToAddName" placeholder="Book Name"></div>
+        <div class="row"><input v-model="bookToAddYearOfPrint" type="number" placeholder="Book Year of print"></div>
+        <div class="row"><button @click="addBook">Add Book</button></div>
+        <div class="row"><p>{{ info }}</p></div>
+    </div>
+</template>
+
+<script src="./bookManagement.ts"></script>

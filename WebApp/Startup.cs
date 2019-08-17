@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using WebApp.RestMiddlewares;
 
 namespace WebApp
 {
@@ -38,7 +39,7 @@ namespace WebApp
             }
 
             app.UseStaticFiles();
-
+            app.UseMiddleware<ExceptionToHttpResponseMiddleware>();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
