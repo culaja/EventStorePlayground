@@ -6,15 +6,30 @@ import axios from 'axios';
 export default class BookManagementComponent extends Vue {
     bookToAddId = '';
     bookToAddName = '';
-    bookToAddYearOfPrint = 2010;
-    info = '';
+    bookToAddYearOfPrint = null;
+    
+    isSuccess = false;
+    isError = false;
+    errorMessage = '';
 
     addBook() {
         axios.post('http://localhost:7230/api/Book/Add' + 
             '?id=' + this.bookToAddId + 
             '&name=' + this.bookToAddName +
             '&yearOfPrint=' + this.bookToAddYearOfPrint)
-            .then(r => this.info = 'Book ' + this.bookToAddId + ' added.')
-            .catch(e => this.info = e.response.data);
+            .then(r => this.handleSuccess())
+            .catch(e => this.handleError(e.response.data));
+    }
+    
+    handleSuccess() {
+        this.isSuccess = true;
+        this.isError = false;
+        this.errorMessage = '';
+    }
+    
+    handleError(errorMessage: string) {
+        this.isSuccess = false;
+        this.isError = true;
+        this.errorMessage = errorMessage;
     }
 }

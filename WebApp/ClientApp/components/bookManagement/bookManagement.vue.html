@@ -1,15 +1,53 @@
 <template>
-    <div>
-        <h1>Adding a book</h1>
+    <div style="width: 500px">
+        <div style="text-align:center">
+            <h3>Book Management</h3>
+            <p>Add a book to the library</p>
+            
+            <div class="row">
+                <label for="inp1" class="inp">
+                    <input type="text" id="inp1" v-model="bookToAddId" placeholder=" ">
+                    <span class="label">Book ID</span>
+                    <span class="border"></span>
+                </label>
+            </div>
+            
+            <div class="row">
+                <label for="inp2" class="inp">
+                    <input type="text" id="inp2" v-model="bookToAddName" placeholder=" ">
+                    <span class="label">Book Name</span>
+                    <span class="border"></span>
+                </label>
+            </div>
 
-        <p>Add a book to the library ....</p>
-        
-        <div class="row"><input v-model="bookToAddId" placeholder="Book Id"></div>
-        <div class="row"><input v-model="bookToAddName" placeholder="Book Name"></div>
-        <div class="row"><input v-model="bookToAddYearOfPrint" type="number" placeholder="Book Year of print"></div>
-        <div class="row"><button @click="addBook">Add Book</button></div>
-        <div class="row"><p>{{ info }}</p></div>
+            <div class="row">
+                <label for="inp3" class="inp">
+                    <input type="number" id="inp3" v-model="bookToAddYearOfPrint" placeholder=" " min="1900" max="2019" step="1">
+                    <span class="label">Year of print</span>
+                    <span class="border"></span>
+                </label>
+            </div>
+
+            <div class="row">
+                <button @click="addBook" class="submitButton">Add a book</button>
+            </div>
+
+            <template v-if="isSuccess">
+                <div class="alert alert-success alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    Book successfully added.
+                </div>
+            </template>
+
+            <template v-if="isError">
+                <div class="alert alert-danger alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    {{ errorMessage }}
+                </div>
+            </template>
+        </div>
     </div>
 </template>
 
 <script src="./bookManagement.ts"></script>
+<style src="./bookManagement.css" />
