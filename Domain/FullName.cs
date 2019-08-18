@@ -12,8 +12,9 @@ namespace Domain
             _fullName = fullName;
         }
 
-        public static FullName FullNameFrom(string fullName) =>
-            new FullName(fullName);
+        public static FullName FullNameFrom(Maybe<string> maybeFullName) => maybeFullName
+            .IfNullOrWhitespace(() => throw new InvalidFullNameException($"{nameof(FullName)} can't be null, empty or white space string."))
+            .Map(fullName => new FullName(fullName)).Value;
         
         protected override IEnumerable<object> GetEqualityComponents()
         {

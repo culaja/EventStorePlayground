@@ -13,8 +13,8 @@ export default class UserManagementComponent extends Vue {
             '?id=' + this.userToAddId + 
             '&fullName=' + this.userToAddFullName)
             .then(r => {
-                this.prepareFieldsForNextEntry(r);
                 toast.onSuccess(r, `User ${this.userToAddId}' added to library.`);
+                this.prepareFieldsForNextEntry(r);
             });
     }
     
