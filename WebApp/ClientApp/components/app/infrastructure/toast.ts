@@ -1,6 +1,7 @@
 import 'izitoast/dist/css/iziToast.min.css'
 import iZToast from "izitoast";
 
+// Motivated by https://www.qcode.in/api-error-handling-in-vue-with-axios/
 const toast = {
     error: (message : string, title = 'Error') => {
         return iZToast.error({
