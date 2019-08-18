@@ -1,0 +1,31 @@
+<template>
+    <div style="width: 500px">
+        <div style="text-align:center">
+            <h3>User Management</h3>
+            <p>Add a user to the library</p>
+            
+            <div class="row">
+                <label for="inp1" class="inp">
+                    <input type="text" id="inp1" v-model="userToAddId" placeholder=" ">
+                    <span class="label">User ID</span>
+                    <span class="border"></span>
+                </label>
+            </div>
+            
+            <div class="row">
+                <label for="inp2" class="inp">
+                    <input type="text" id="inp2" v-model="userToAddFullName" placeholder=" ">
+                    <span class="label">Full Name</span>
+                    <span class="border"></span>
+                </label>
+            </div>
+
+            <div class="row">
+                <button @click="addUser" class="submitButton">Add a user</button>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script src="./userManagement.ts"></script>
+<style src="./userManagement.css" />
