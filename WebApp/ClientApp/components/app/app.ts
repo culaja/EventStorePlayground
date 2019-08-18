@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import axios from "axios";
+import toast from "./infrastructure/toast";
 
 @Component({
     components: {
@@ -17,7 +18,7 @@ export default class AppComponent extends Vue {
             response => response,
             error => {
                 if (error.response) {
-                    alert(error.response.data);
+                    toast.error(error.response.data);
                 }
             }
         )
