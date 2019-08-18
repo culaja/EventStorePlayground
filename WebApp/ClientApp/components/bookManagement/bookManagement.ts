@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import axios from 'axios';
+import toast from "../app/infrastructure/toast";
 
 @Component
 export default class BookManagementComponent extends Vue {
@@ -12,6 +13,18 @@ export default class BookManagementComponent extends Vue {
         axios.post('http://localhost:7230/api/Book/Add' + 
             '?id=' + this.bookToAddId + 
             '&name=' + this.bookToAddName +
-            '&yearOfPrint=' + this.bookToAddYearOfPrint);
+            '&yearOfPrint=' + this.bookToAddYearOfPrint)
+            .then(r => {
+                this.prepareFieldsForNextEntry(r);
+                toast.onSuccess(r, `Book ${this.bookToAddId}' added to library.`);
+            });
+    }
+    
+    prepareFieldsForNextEntry(response: any) {
+        if (response) {
+            this.bookToAddId = '';
+            this.bookToAddName = '';
+            this.bookToAddYearOfPrint = null;
+        }
     }
 }

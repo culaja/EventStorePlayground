@@ -15,6 +15,12 @@ const toast = {
             message: message,
             position: 'bottomCenter'
         });
+    },
+    
+    onSuccess: (response: any, message: string, title = 'Success') => {
+        if (response) {
+            toast.success(message, title);
+        }
     }
 };
 
