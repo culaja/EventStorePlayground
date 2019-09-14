@@ -7,7 +7,8 @@ Vue.use(VueRouter);
 const routes = [
     { path: '/', component: require('./components/home/home.vue.html') },
     { path: '/bookManagement', component: require('./components/bookManagement/bookManagement.vue.html') },
-    { path: '/userManagement', component: require('./components/userManagement/userManagement.vue.html') }
+    { path: '/userManagement', component: require('./components/userManagement/userManagement.vue.html') },
+    { path: '/borrows', component: require('./components/borrows/borrows.vue.html') }
 ];
 
 new Vue({

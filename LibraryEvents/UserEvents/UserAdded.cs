@@ -8,8 +8,8 @@ namespace LibraryEvents.UserEvents
         public string FullName { get; }
 
         public UserAdded(
-            string id,
-            string fullName) : base(id)
+            string aggregateId,
+            string fullName) : base(aggregateId)
         {
             FullName = fullName;
         }

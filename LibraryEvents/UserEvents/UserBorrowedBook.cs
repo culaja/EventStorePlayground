@@ -9,9 +9,9 @@ namespace LibraryEvents.UserEvents
         public string BookId { get; }
 
         public UserBorrowedBook(
-            string userId,
+            string aggregateId,
             string userFullName,
-            string bookId) : base(userId)
+            string bookId) : base(aggregateId)
         {
             UserFullName = userFullName;
             BookId = bookId;

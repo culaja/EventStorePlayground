@@ -15,8 +15,8 @@ export default class BookManagementComponent extends Vue {
             '&name=' + this.bookToAddName +
             '&yearOfPrint=' + this.bookToAddYearOfPrint)
             .then(r => {
-                this.prepareFieldsForNextEntry(r);
                 toast.onSuccess(r, `Book ${this.bookToAddId}' added to library.`);
+                this.prepareFieldsForNextEntry(r);
             });
     }
     

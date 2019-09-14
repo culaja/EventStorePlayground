@@ -4,7 +4,7 @@ namespace LibraryEvents.BookEvents
 {
     public abstract class BookEvent : DomainEvent
     {
-        protected BookEvent(string id) : base("Book", id)
+        protected BookEvent(string aggregateId) : base("Book", aggregateId)
         {
         }
     }

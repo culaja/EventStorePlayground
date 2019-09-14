@@ -24,7 +24,7 @@ namespace Domain
 
         public Result<User> BorrowBook(BookId bookToLendId)
         {
-            if (IsBorrowingABook) return Fail<User>($"User {Id} has already borrowed some book.");
+            if (IsBorrowingABook) return Fail<User>($"User {Id} has already borrowed book '{_maybeBorrowedBook.Value}'.");
             
             ApplyChange(new UserBorrowedBook(Id, _fullName, bookToLendId));
             return Ok(this);

@@ -9,9 +9,9 @@ namespace LibraryEvents.BookEvents
         public int YearOfPrint { get; }
 
         public BookAdded(
-            string id,
+            string aggregateId,
             string name,
-            int yearOfPrint) : base(id)
+            int yearOfPrint) : base(aggregateId)
         {
             Name = name;
             YearOfPrint = yearOfPrint;
