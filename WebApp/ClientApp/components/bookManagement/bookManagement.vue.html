@@ -3,34 +3,35 @@
         <div style="text-align:center">
             <h3>Book Management</h3>
             <p>Add a book to the library</p>
-            
-            <div class="row">
-                <label for="inp1" class="inp">
-                    <input type="text" id="inp1" v-model="bookToAddId" placeholder=" ">
-                    <span class="label">Book ID</span>
-                    <span class="border"></span>
-                </label>
-            </div>
-            
-            <div class="row">
-                <label for="inp2" class="inp">
-                    <input type="text" id="inp2" v-model="bookToAddName" placeholder=" ">
-                    <span class="label">Book Name</span>
-                    <span class="border"></span>
-                </label>
-            </div>
+            <form @submit.prevent="addBook">
+                <div class="row">
+                    <label for="inp1" class="inp">
+                        <input type="text" id="inp1" v-model="bookToAddId" placeholder=" " autofocus>
+                        <span class="label">Book ID</span>
+                        <span class="border"></span>
+                    </label>
+                </div>
 
-            <div class="row">
-                <label for="inp3" class="inp">
-                    <input type="number" id="inp3" v-model="bookToAddYearOfPrint" placeholder=" " min="1900" max="2019" step="1">
-                    <span class="label">Year of print</span>
-                    <span class="border"></span>
-                </label>
-            </div>
+                <div class="row">
+                    <label for="inp2" class="inp">
+                        <input type="text" id="inp2" v-model="bookToAddName" placeholder=" ">
+                        <span class="label">Book Name</span>
+                        <span class="border"></span>
+                    </label>
+                </div>
 
-            <div class="row">
-                <button @click="addBook" class="submitButton">Add a book</button>
-            </div>
+                <div class="row">
+                    <label for="inp3" class="inp">
+                        <input type="number" id="inp3" v-model="bookToAddYearOfPrint" placeholder=" " min="1900" max="2019" step="1">
+                        <span class="label">Year of print</span>
+                        <span class="border"></span>
+                    </label>
+                </div>
+
+                <div class="row">
+                    <button type="submit" class="submitButton">Add a book</button>
+                </div>
+            </form>
         </div>
     </div>
 </template>
