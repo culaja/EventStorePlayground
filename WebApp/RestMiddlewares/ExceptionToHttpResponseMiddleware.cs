@@ -45,6 +45,8 @@ namespace WebApp.RestMiddlewares
                         BadRequest,
                         exception.Message);
                 default:
+                    Console.WriteLine(exception.Message);
+                    Console.WriteLine(exception.StackTrace);
                     return new Tuple<HttpStatusCode, string>(
                         InternalServerError,
                         "Internal server error, please contact your administrator.");
