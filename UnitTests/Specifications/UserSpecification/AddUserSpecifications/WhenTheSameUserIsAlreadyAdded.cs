@@ -5,7 +5,6 @@ using Common;
 using Common.Messaging;
 using Domain.Commands;
 using FluentAssertions;
-using Xunit;
 using static DomainServices.UserCommandExecutors;
 using static UnitTests.TestValues;
 

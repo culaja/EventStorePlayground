@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using static Domain.BookId;
 using static Domain.UserId;
 
-namespace WebApp.Controllers
+namespace WebApp.Api.Controllers
 {
     [Route("api/[controller]")]
     public sealed class LendingController : CommandController

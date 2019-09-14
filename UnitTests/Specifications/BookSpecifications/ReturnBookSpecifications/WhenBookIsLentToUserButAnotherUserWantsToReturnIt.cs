@@ -6,7 +6,6 @@ using Common.Messaging;
 using Domain.Commands;
 using FluentAssertions;
 using LibraryEvents.BookEvents;
-using Xunit;
 using static DomainServices.BookCommandExecutors;
 using static UnitTests.AssertionsHelpers;
 using static UnitTests.TestValues;

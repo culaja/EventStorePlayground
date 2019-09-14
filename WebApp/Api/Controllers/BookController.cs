@@ -6,7 +6,7 @@ using static Domain.BookId;
 using static Domain.BookName;
 using static Domain.YearOfPrint;
 
-namespace WebApp.Controllers
+namespace WebApp.Api.Controllers
 {
     [Route("api/[controller]")]
     public sealed class BookController : CommandController

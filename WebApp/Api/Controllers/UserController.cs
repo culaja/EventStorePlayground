@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using static Domain.FullName;
 using static Domain.UserId;
 
-namespace WebApp.Controllers
+namespace WebApp.Api.Controllers
 {
     [Route("api/[controller]")]
     public sealed class UserController : CommandController

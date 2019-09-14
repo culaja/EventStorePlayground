@@ -12,10 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\ApplicationWrapping" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj" />
     <ProjectReference Include="..\DomainServices\DomainServices.csproj" />
     <ProjectReference Include="..\EventStoreAdapter\EventStoreAdapter.csproj" />

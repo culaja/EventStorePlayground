@@ -7,7 +7,6 @@ using Domain.Commands;
 using FluentAssertions;
 using LibraryEvents.BookEvents;
 using LibraryEvents.UserEvents;
-using Xunit;
 using static DomainServices.SagaCommandExecutors;
 using static UnitTests.AssertionsHelpers;
 using static UnitTests.TestValues;

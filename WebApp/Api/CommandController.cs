@@ -4,9 +4,9 @@ using Common;
 using Domain.Commands;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using static WebApp.Controllers.ApplicationWrapping.WrappedUpCommandExecutors;
+using static WebApp.Api.ApplicationWrapping.WrappedUpCommandExecutors;
 
-namespace WebApp.Controllers
+namespace WebApp.Api
 {
     public abstract class CommandController : ControllerBase
     {

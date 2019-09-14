@@ -1,5 +1,3 @@
-using Common.Messaging;
-
 namespace Domain.Commands
 {
     public sealed class LendBook : SagaCommand

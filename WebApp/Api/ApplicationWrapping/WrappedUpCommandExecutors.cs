@@ -7,9 +7,9 @@ using EventStoreAdapter.Writing;
 using EventStoreRepository;
 using Microsoft.Extensions.Configuration;
 using Ports;
-using static WebApp.Controllers.ApplicationWrapping.ConfigurationReader;
+using static WebApp.Api.ApplicationWrapping.ConfigurationReader;
 
-namespace WebApp.Controllers.ApplicationWrapping
+namespace WebApp.Api.ApplicationWrapping
 {
     public static class WrappedUpCommandExecutors
     {

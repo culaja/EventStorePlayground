@@ -3,7 +3,7 @@ using Common;
 using Microsoft.AspNetCore.Mvc;
 using static System.Net.HttpStatusCode;
 
-namespace WebApp.Controllers
+namespace WebApp.Api
 {
     public static class TaskResultExtensions
     {

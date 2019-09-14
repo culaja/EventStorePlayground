@@ -1,7 +1,7 @@
 using Common;
 using Microsoft.Extensions.Configuration;
 
-namespace WebApp.Controllers.ApplicationWrapping
+namespace WebApp.Api.ApplicationWrapping
 {
     public sealed class ConfigurationReader
     {
