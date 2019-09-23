@@ -2,27 +2,29 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{25FD620B-067D-4A86-93EA-75E87CBC42C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventStoreAdapter", "EventStoreAdapter\EventStoreAdapter.csproj", "{2F43A7EB-3C13-4512-BBEF-C4406FFA1B51}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventStoreAdapter", "Commanding\EventStoreAdapter\EventStoreAdapter.csproj", "{2F43A7EB-3C13-4512-BBEF-C4406FFA1B51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ports", "Ports\Ports.csproj", "{02FA5D3A-B868-49C7-B3A9-CD395CB95785}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ports", "Commanding\Ports\Ports.csproj", "{02FA5D3A-B868-49C7-B3A9-CD395CB95785}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryEvents", "LibraryEvents\LibraryEvents.csproj", "{B4462D70-4BC3-4510-AB33-E203406F5B69}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{AFDEE8F6-4195-4542-89F8-485A165DA6F4}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Commanding\Tests", "{AFDEE8F6-4195-4542-89F8-485A165DA6F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventStoreProducerTestApp", "EventStoreProducerTestApp\EventStoreProducerTestApp.csproj", "{49B631AB-D08D-4749-8C24-D53ABEC42BF7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventStoreProducerTestApp", "Commanding\Tests\EventStoreProducerTestApp\EventStoreProducerTestApp.csproj", "{49B631AB-D08D-4749-8C24-D53ABEC42BF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{38036222-CD31-491E-8D54-63AC5BE0D991}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Commanding\Domain\Domain.csproj", "{38036222-CD31-491E-8D54-63AC5BE0D991}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventStoreRepository", "EventStoreRepository\EventStoreRepository.csproj", "{445A8A61-6162-4C57-9BC0-EAF43194D4C3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventStoreRepository", "Commanding\EventStoreRepository\EventStoreRepository.csproj", "{445A8A61-6162-4C57-9BC0-EAF43194D4C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainServices", "DomainServices\DomainServices.csproj", "{BA5337A9-E141-43D3-9A3E-4042A86C6B0B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainServices", "Commanding\DomainServices\DomainServices.csproj", "{BA5337A9-E141-43D3-9A3E-4042A86C6B0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventStoreSubscriptionsTestApp", "EventStoreSubscriptionsTestApp\EventStoreSubscriptionsTestApp.csproj", "{731849E8-ADE3-4EA1-BB3C-02743B0EB6B8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventStoreSubscriptionsTestApp", "Commanding\Tests\EventStoreSubscriptionsTestApp\EventStoreSubscriptionsTestApp.csproj", "{731849E8-ADE3-4EA1-BB3C-02743B0EB6B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{C33F7AF9-2612-4845-84E9-EABF38C5AE24}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "Commanding\Tests\UnitTests\UnitTests.csproj", "{C33F7AF9-2612-4845-84E9-EABF38C5AE24}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApp", "WebApp\WebApp.csproj", "{B556AB3E-1587-4B6A-A689-2A9557A705F8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Commanding", "Commanding", "{73EB225C-DC0C-4D31-8B8A-A15F7DAEA4C8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -79,5 +81,11 @@ Global
 		{49B631AB-D08D-4749-8C24-D53ABEC42BF7} = {AFDEE8F6-4195-4542-89F8-485A165DA6F4}
 		{731849E8-ADE3-4EA1-BB3C-02743B0EB6B8} = {AFDEE8F6-4195-4542-89F8-485A165DA6F4}
 		{C33F7AF9-2612-4845-84E9-EABF38C5AE24} = {AFDEE8F6-4195-4542-89F8-485A165DA6F4}
+		{38036222-CD31-491E-8D54-63AC5BE0D991} = {73EB225C-DC0C-4D31-8B8A-A15F7DAEA4C8}
+		{BA5337A9-E141-43D3-9A3E-4042A86C6B0B} = {73EB225C-DC0C-4D31-8B8A-A15F7DAEA4C8}
+		{2F43A7EB-3C13-4512-BBEF-C4406FFA1B51} = {73EB225C-DC0C-4D31-8B8A-A15F7DAEA4C8}
+		{445A8A61-6162-4C57-9BC0-EAF43194D4C3} = {73EB225C-DC0C-4D31-8B8A-A15F7DAEA4C8}
+		{02FA5D3A-B868-49C7-B3A9-CD395CB95785} = {73EB225C-DC0C-4D31-8B8A-A15F7DAEA4C8}
+		{AFDEE8F6-4195-4542-89F8-485A165DA6F4} = {73EB225C-DC0C-4D31-8B8A-A15F7DAEA4C8}
 	EndGlobalSection
 EndGlobal

@@ -5,8 +5,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Common\Common.csproj" />
-      <ProjectReference Include="..\LibraryEvents\LibraryEvents.csproj" />
+      <ProjectReference Include="..\..\Common\Common.csproj" />
+      <ProjectReference Include="..\..\LibraryEvents\LibraryEvents.csproj" />
     </ItemGroup>
 
     <ItemGroup>

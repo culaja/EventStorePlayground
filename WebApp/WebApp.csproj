@@ -13,10 +13,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj" />
-    <ProjectReference Include="..\DomainServices\DomainServices.csproj" />
-    <ProjectReference Include="..\EventStoreAdapter\EventStoreAdapter.csproj" />
-    <ProjectReference Include="..\EventStoreRepository\EventStoreRepository.csproj" />
-    <ProjectReference Include="..\Ports\Ports.csproj" />
+    <ProjectReference Include="..\Commanding\DomainServices\DomainServices.csproj" />
+    <ProjectReference Include="..\Commanding\EventStoreAdapter\EventStoreAdapter.csproj" />
+    <ProjectReference Include="..\Commanding\EventStoreRepository\EventStoreRepository.csproj" />
+    <ProjectReference Include="..\Commanding\Ports\Ports.csproj" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">
